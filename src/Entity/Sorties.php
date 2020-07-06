@@ -15,7 +15,7 @@ class Sorties
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $no_sortie;
+    private $id;
 
     /**
      * @ORM\Column(type="string", length=30)
@@ -76,9 +76,9 @@ class Sorties
 
     //GETTERS AND SETTERS
 
-    public function getNoSortie(): ?int
+    public function getId(): ?int
     {
-        return $this->no_sortie;
+        return $this->id;
     }
 
 

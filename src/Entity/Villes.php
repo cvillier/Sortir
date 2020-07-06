@@ -15,7 +15,7 @@ class Villes
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $no_ville;
+    private $id;
 
     /**
      * @ORM\Column(type="string", length=30)
@@ -28,9 +28,9 @@ class Villes
     private $code_postal;
 
 
-    public function getNoVille(): ?int
+    public function getId(): ?int
     {
-        return $this->no_ville;
+        return $this->id;
     }
 
     public function getNomVille(): ?string
