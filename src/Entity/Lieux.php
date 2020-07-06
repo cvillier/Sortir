@@ -15,7 +15,7 @@ class Lieux
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $no_lieu;
+    private $id;
 
     /**
      * @ORM\Column(type="string", length=30)
@@ -43,9 +43,9 @@ class Lieux
     private $villes_no_ville;
 
 
-    public function getNoLieu(): ?int
+    public function getId(): ?int
     {
-        return $this->no_lieu;
+        return $this->id;
     }
 
     public function getNomLieu(): ?string
