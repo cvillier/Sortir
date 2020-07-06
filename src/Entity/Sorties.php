@@ -63,15 +63,19 @@ class Sorties
     private $organisateur;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Lieux",inversedBy="sorties")
      */
-    private $lieux_no_lieu;
+    private $noLieu;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Etats",inversedBy="sorties")
      */
-    private $etats_no_etat;
+    private $etat;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Campus",inversedBy="sorties")
+     */
+    private $campus;
 
 
     //GETTERS AND SETTERS
@@ -79,6 +83,30 @@ class Sorties
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNoLieu()
+    {
+        return $this->noLieu;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEtat()
+    {
+        return $this->etat;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCampus()
+    {
+        return $this->campus;
     }
 
 
@@ -190,27 +218,5 @@ class Sorties
         return $this;
     }
 
-    public function getLieuxNoLieu(): ?int
-    {
-        return $this->lieux_no_lieu;
-    }
 
-    public function setLieuxNoLieu(int $lieux_no_lieu): self
-    {
-        $this->lieux_no_lieu = $lieux_no_lieu;
-
-        return $this;
-    }
-
-    public function getEtatsNoEtat(): ?int
-    {
-        return $this->etats_no_etat;
-    }
-
-    public function setEtatsNoEtat(int $etats_no_etat): self
-    {
-        $this->etats_no_etat = $etats_no_etat;
-
-        return $this;
-    }
 }

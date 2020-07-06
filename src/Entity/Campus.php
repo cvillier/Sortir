@@ -29,10 +29,17 @@ class Campus
      */
     private $users;
 
+    /**
+     *@ORM\OneToMany(targetEntity="App\Entity\Sorties",mappedBy="campus")
+     */
+    private $sorties;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
     }
+
+
 
     /**
      * @return mixed
@@ -76,7 +83,7 @@ class Campus
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
-            $user->setCampusNoCampus($this);
+            $user->getNoCampus();
         }
 
         return $this;
@@ -87,12 +94,28 @@ class Campus
         if ($this->users->contains($user)) {
             $this->users->removeElement($user);
             // set the owning side to null (unless already changed)
-            if ($user->getCampusNoCampus() === $this) {
-                $user->setCampusNoCampus(null);
+            if ($user->getNoCampus() === $this) {
+                $user->setNoCampus(null);
             }
         }
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSorties()
+    {
+        return $this->sorties;
+    }
+
+    /**
+     * @param mixed $sorties
+     */
+    public function setSorties($sorties): void
+    {
+        $this->sorties = $sorties;
     }
 
 }

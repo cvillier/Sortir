@@ -28,6 +28,12 @@ class Villes
     private $code_postal;
 
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Lieux", mappedBy="ville")
+     */
+    private $lieux;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -56,4 +62,21 @@ class Villes
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getLieux()
+    {
+        return $this->lieux;
+    }
+
+    /**
+     * @param mixed $lieux
+     */
+    public function setLieux($lieux): void
+    {
+        $this->lieux = $lieux;
+    }
+
 }

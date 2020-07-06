@@ -38,10 +38,14 @@ class Lieux
     private $longitude;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Villes",inversedBy="lieux")
      */
-    private $villes_no_ville;
+    private $ville;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Sorties",mappedBy="noLieu");
+     */
+private $sortie;
 
     public function getId(): ?int
     {
@@ -99,10 +103,35 @@ class Lieux
     /**
      * @return mixed
      */
-    public function getVillesNoVille()
+    public function getVille()
     {
-        return $this->villes_no_ville;
+        return $this->ville;
     }
+
+    /**
+     * @param mixed $ville
+     */
+    public function setVille($ville): void
+    {
+        $this->ville = $ville;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSortie()
+    {
+        return $this->sortie;
+    }
+
+    /**
+     * @param mixed $sortie
+     */
+    public function setSortie($sortie): void
+    {
+        $this->sortie = $sortie;
+    }
+
 
 
 }

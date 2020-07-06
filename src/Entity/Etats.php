@@ -23,6 +23,11 @@ class Etats
      */
     private $libelle;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Sorties",mappedBy="etat")
+     */
+    private $sorties;
+
     public function getId()
     {
         return $this->id;
@@ -39,4 +44,21 @@ class Etats
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getSorties()
+    {
+        return $this->sorties;
+    }
+
+    /**
+     * @param mixed $sorties
+     */
+    public function setSorties($sorties): void
+    {
+        $this->sorties = $sorties;
+    }
+
 }
