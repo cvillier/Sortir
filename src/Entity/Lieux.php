@@ -40,9 +40,7 @@ class Lieux
     /**
      * @ORM\Column(type="integer")
      */
-    private $no_ville;
-
-
+    private $villes_no_ville;
 
 
     public function getNoLieu(): ?int
@@ -98,15 +96,13 @@ class Lieux
         return $this;
     }
 
-    public function getNoVille(): ?int
+    /**
+     * @return mixed
+     */
+    public function getVillesNoVille()
     {
-        return $this->no_ville;
+        return $this->villes_no_ville;
     }
 
-    public function setNoVille(int $no_ville): self
-    {
-        $this->no_ville = $no_ville;
 
-        return $this;
-    }
 }

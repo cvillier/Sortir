@@ -22,8 +22,6 @@ class Etats
      */
     private $libelle;
 
-
-
     public function getNoEtat()
     {
         return $this->no_etat;

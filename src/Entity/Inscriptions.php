@@ -21,16 +21,14 @@ class Inscriptions
      * @ORM\Id()
      * @ORM\Column(type="integer")
      */
-    private $no_sortie;
+    private $sorties_no_sortie;
 
 
     /**
      * @ORM\Id()
      * @ORM\Column(type="integer")
      */
-    private $no_participant;
-
-
+    private $participants_no_participant;
 
 
     public function getDateInscription(): ?\DateTimeInterface
@@ -45,13 +43,21 @@ class Inscriptions
         return $this;
     }
 
-    public function getNoSortie(): ?int
+    /**
+     * @return mixed
+     */
+    public function getSortiesNoSortie()
     {
-        return $this->no_sortie;
+        return $this->sorties_no_sortie;
     }
 
-    public function getNoParticipant(): ?int
+    /**
+     * @return mixed
+     */
+    public function getParticipantsNoParticipant()
     {
-        return $this->no_participant;
+        return $this->participants_no_participant;
     }
+
+
 }
