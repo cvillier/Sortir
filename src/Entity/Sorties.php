@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\SortiesRepository;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -48,19 +49,10 @@ class Sorties
     private $descriptioninfos;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $etatsortie;
-
-    /**
      * @ORM\Column(type="string", length=250, nullable=true)
      */
     private $urlPhoto;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $organisateur;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Lieux",inversedBy="sorties")
@@ -77,6 +69,29 @@ class Sorties
      */
     private $campus;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User",inversedBy="sortieOrganise")
+     */
+    private $organisateur;
+
+    /* /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User")
+     * @ORM\JoinTable(name="sortie_user")
+
+    private $sortieUser;
+    */
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Inscriptions",mappedBy="sortie")
+     */
+    private $sortieUser;
+
+
+   /* public function __construct()
+    {
+        $this->sortieUser = new ArrayCollection();
+    }
+*/
 
     //GETTERS AND SETTERS
 
@@ -178,18 +193,6 @@ class Sorties
     public function setDescriptioninfos(?string $descriptioninfos): self
     {
         $this->descriptioninfos = $descriptioninfos;
-
-        return $this;
-    }
-
-    public function getEtatsortie(): ?int
-    {
-        return $this->etatsortie;
-    }
-
-    public function setEtatsortie(?int $etatsortie): self
-    {
-        $this->etatsortie = $etatsortie;
 
         return $this;
     }

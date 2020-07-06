@@ -66,7 +66,14 @@ class User implements UserInterface
      */
     private $no_campus;
 
-
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Sorties", mappedBy="organisateur")
+     */
+    private $sortieOrganise;
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Inscriptions",mappedBy="user")
+     */
+    private $sortieUser;
 
 
     public function getId(): ?int
@@ -93,7 +100,7 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->pseudo;
+        return (string)$this->pseudo;
     }
 
     /**
@@ -120,7 +127,7 @@ class User implements UserInterface
      */
     public function getPassword(): string
     {
-        return (string) $this->password;
+        return (string)$this->password;
     }
 
     public function setPassword(string $password): self
@@ -218,5 +225,21 @@ class User implements UserInterface
 
         return $this;
     }
-    
+
+    /**
+     * @return mixed
+     */
+    public function getSortieOrganise()
+    {
+        return $this->sortieOrganise;
+    }
+
+    /**
+     * @param mixed $sortieOrganise
+     */
+    public function setSortieOrganise($sortieOrganise): void
+    {
+        $this->sortieOrganise = $sortieOrganise;
+    }
+
 }
