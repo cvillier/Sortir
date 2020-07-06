@@ -10,32 +10,28 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Inscriptions
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
 
     /**
      * @ORM\Column(type="datetime")
      */
     private $date_inscription;
 
+
     /**
+     * @ORM\Id()
      * @ORM\Column(type="integer")
      */
     private $no_sortie;
 
+
     /**
+     * @ORM\Id()
      * @ORM\Column(type="integer")
      */
     private $no_participant;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+
+
 
     public function getDateInscription(): ?\DateTimeInterface
     {
@@ -54,22 +50,8 @@ class Inscriptions
         return $this->no_sortie;
     }
 
-    public function setNoSortie(int $no_sortie): self
-    {
-        $this->no_sortie = $no_sortie;
-
-        return $this;
-    }
-
     public function getNoParticipant(): ?int
     {
         return $this->no_participant;
-    }
-
-    public function setNoParticipant(int $no_participant): self
-    {
-        $this->no_participant = $no_participant;
-
-        return $this;
     }
 }
