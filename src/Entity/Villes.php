@@ -18,7 +18,7 @@ class Villes
     private $no_ville;
 
     /**
-     * @ORM\Column(type="string", length="30")
+     * @ORM\Column(type="string", length=30)
      */
     private $nom_ville;
 

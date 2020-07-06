@@ -18,7 +18,7 @@ class Campus
     private $no_campus;
 
     /**
-     * @ORM\Column(type="string", length="30")
+     * @ORM\Column(type="string", length=30)
      */
     private $nom_campus;
 
