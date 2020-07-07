@@ -2,22 +2,34 @@
 
 {% block title %}Creation de Sorties{% endblock %}
 
-{% block body %}
+{% block main %}
 
 
     <h1>Creation de sorties</h1>
 
     {{ form_start(creationSortieForm) }}
     {{ form_row(creationSortieForm.nom) }}
+    {{ form_row(creationSortieForm.datedebut) }}
+    {{ form_row(creationSortieForm.datecloture) }}
+    {{ form_row(creationSortieForm.nbinscriptionsmax) }}
+    {{ form_row(creationSortieForm.duree) }}
+    {{ form_row(creationSortieForm.descriptioninfos) }}
+    {{ form_row(creationSortieForm.campus) }}
+    {{ form_row(creationSortieForm.nom_ville) }}
+    {{ form_row(creationSortieForm.noLieu) }}
+    {{ form_row(creationSortieForm.etat) }}
+
+
+
+    {{ form_widget(creationSortieForm) }}
+
+    <button type="submit" class="btn" value="enregistrer">Enregistrer</button>
+    <button type="submit" class="btn" value="publier">Publier la sortie</button>
+    <button type="submit" class="btn" value="annuler">Annuler</button>
+
     {{ form_end(creationSortieForm) }}
-    <p>Rue:</p>
-    <p>Code Postal:</p>
-    <p>Latitude:</p>
-    <p>Longitude:</p>
 
 
-    <button type="submit" class="btn">Enregistrer</button>
-    <button type="submit" class="btn">Publier la sortie</button>
-    <button type="submit" class="btn">Annuler</button>
+
 
 {% endblock %}

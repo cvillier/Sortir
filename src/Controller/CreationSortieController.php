@@ -19,24 +19,25 @@ class CreationSortieController extends AbstractController
         if (!$this->isGranted("ROLE_USER")) {
             throw $this->createAccessDeniedException("Interdit");
         }
+
         $sortie = new Sorties();
         $creationSortieform = $this->createForm(CreationSortieFormType::class, $sortie);
-        $data = $creationSortieform->getData();
+        $sortie->setOrganisateur($this->getUser());
+
+
+        $creationSortieform->handleRequest($request);
+
 
         if ($creationSortieform->isSubmitted() && $creationSortieform->isValid()) {
-            var_dump($data);
+
+            $em->persist($sortie);
+            $em->flush();
+            $this->addFlash("success", "Sortie ajouté avec succès !");
+            return $this->redirectToRoute("home", [
+                "id" => $sortie->getId()
+            ]);
+
         }
-
-
-
-//            $em->persist($sortie);
-//            $em->flush();
-//            $this->addFlash("success", "Sortie ajouté avec succès !");
-//            return $this->redirectToRoute("sortie_detail", [
-//                    "id" => $sortie->getId()
-//                ]
-//            );
-//        }
 
 
         return $this->render('creation_sortie/creation.html.twig', [

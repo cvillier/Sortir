@@ -113,6 +113,14 @@ class Sorties
     }
 
     /**
+     * @param mixed $noLieu
+     */
+    public function setNoLieu($noLieu): void
+    {
+        $this->noLieu = $noLieu;
+    }
+
+    /**
      * @return mixed
      */
     public function getEtat()
@@ -121,12 +129,32 @@ class Sorties
     }
 
     /**
+     * @param mixed $etat
+     */
+    public function setEtat($etat): void
+    {
+        $this->etat = $etat;
+    }
+
+
+
+    /**
      * @return mixed
      */
     public function getCampus()
     {
         return $this->campus;
     }
+
+    /**
+     * @param mixed $campus
+     */
+    public function setCampus($campus): void
+    {
+        $this->campus = $campus;
+    }
+
+
 
 
     public function getNom(): ?string
@@ -218,7 +246,7 @@ class Sorties
         return $this->organisateur;
     }
 
-    public function setOrganisateur(int $organisateur): self
+    public function setOrganisateur(User $organisateur): self
     {
         $this->organisateur = $organisateur;
 

@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Campus;
+use App\Entity\Etats;
 use App\Entity\Lieux;
 use App\Entity\Sorties;
 use App\Entity\Villes;
@@ -22,22 +23,26 @@ class CreationSortieFormType extends AbstractType
             ->add('nbinscriptionsmax')
             ->add('duree')
             ->add('descriptioninfos')
-            ->add("noCampus", EntityType::class, [
+            ->add("campus", EntityType::class, [
                 'class' => Campus::class,
                 'choice_label' => 'nom_campus',
-                'mapped' => false
+
             ])
             ->add("nom_ville", EntityType::class, [
                 'class' => Villes::class,
                 'choice_label' => 'nom_ville',
                 'mapped' => false
             ])
-            ->add("nom_lieu", EntityType::class, [
+            ->add("noLieu", EntityType::class, [
                 'class' => Lieux::class,
                 'choice_label' => 'nom_lieu',
-                'mapped' => false,
-            ]);
 
+            ])
+            ->add("etat", EntityType::class, [
+                'class' => Etats::class,
+                'choice_label' => 'libelle',
+
+            ]);
 
     }
 
