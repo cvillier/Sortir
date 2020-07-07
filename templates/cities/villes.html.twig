@@ -4,6 +4,26 @@
 
 {% block main %}
 
+<h1 class="text-center">Gérer les villes</h1>
 
+    <div>
+        <h2>Filtrer les villes</h2>
+
+        <form action="get">
+            <div class="form-group row">
+                <label class="col-4">Le nom contient :</label>
+                <div class="col-4"><input class="form-control" type="text" placeholder="Ville"></div>
+                <div class="col-4"><button type="submit" class="btn btn-primary mb-2">Rechercher</button></div>
+            </div>
+        </form>
+    </div>
+
+    <div class="liste">
+        <ul>
+            <li>Nom de la ville 1</li>
+            <li>Nom de la ville 2</li>
+            <li>Nom de la ville 3</li>
+        </ul>
+    </div>
 
 {% endblock %}
