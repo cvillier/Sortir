@@ -4,25 +4,51 @@
 
 {% block main %}
 
-<h1>Gérer les campus</h1>
+<h1 class="text-center">Gérer les campus</h1>
 
-<div>
+    <div>
+        <h2>Filtrer les sites</h2>
 
-    <h2>Filtrer les sites</h2>
+        <form method="get" action="campus.html.twig">
+            <div class="form-group row">
+                <label class="col-4">Le nom contient :</label>
+                <div class="col-4"><input class="form-control" type="text" placeholder="Campus"></div>
+                <div class="col-4"><button type="submit" class="btn btn-primary mb-2">Rechercher</button></div>
+            </div>
+        </form>
 
-    <form class="form-group row">
-        <label class=col-4" for="campus">Le nom contient :</label>
-        <input class=col-4" type="text" name="campus" id="campus">
-        <input class=col-4" type="submit" value="Rechercher">
-    </form>
+    </div>
 
-</div>
+    <div>
+        <table class="table table-striped">
 
-<div>
+            <thead>
+                <tr>
+                    <th scope="col">Campus</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
 
+            <tbody>
+                    {% for campu in campus %}
+                <tr>
+                    <td>{{ campu.getNomCampus() }}</td>
+                    <td><a href="">Modifier</a> <a href="">Supprimer</a></td>
+                </tr>
+                    {% endfor %}
+            </tbody>
 
+            <tfoot>
+                <tr>
+                    <form method="get" action="">
+                        <td><input name="campus" class="form-control" type="text" placeholder="Nouveau campus"></td>
+                        <td><button type="submit" class="btn btn-primary mb-2">Ajouter</button></td>
+                    </form>
+                </tr>
+            </tfoot>
 
-</div>
+        </table>
+    </div>
 
 
 {% endblock %}

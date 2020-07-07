@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Campus;
-use App\Entity\Etats;
 use App\Entity\Lieux;
 use App\Entity\Sorties;
 use App\Entity\Villes;
@@ -37,12 +36,8 @@ class CreationSortieFormType extends AbstractType
                 'class' => Lieux::class,
                 'choice_label' => 'nom_lieu',
 
-            ])
-            ->add("etat", EntityType::class, [
-                'class' => Etats::class,
-                'choice_label' => 'libelle',
-
             ]);
+
 
     }
 

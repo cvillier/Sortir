@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Campus;
+use App\Entity\Villes;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -12,7 +14,19 @@ class CitiesController extends AbstractController
      */
     public function campus()
     {
-        return $this->render('cities/campus.html.twig');
+        $campus = $this->getDoctrine()
+            ->getRepository(Campus::class)
+            ->findAll();
+
+        if (!$campus) {
+            throw $this->createNotFoundException(
+                'Aucun campus trouvé'
+            );
+        }
+
+        return $this->render('cities/campus.html.twig',
+            ['campus' => $campus]
+        );
     }
 
     /**
@@ -20,6 +34,17 @@ class CitiesController extends AbstractController
      */
     public function villes()
     {
-        return $this->render('cities/villes.html.twig');
+        $villes = $this->getDoctrine()
+            ->getRepository(Villes::class)
+            ->findAll();
+
+        if (!$villes) {
+            throw $this->createNotFoundException(
+                'Aucune ville trouvée'
+            );
+        }
+        return $this->render('cities/villes.html.twig',
+        ['villes' => $villes]
+        );
     }
 }
