@@ -6,6 +6,7 @@ use App\Repository\SortiesRepository;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * @ORM\Entity(repositoryClass=SortiesRepository::class)
@@ -137,7 +138,6 @@ class Sorties
     }
 
 
-
     /**
      * @return mixed
      */
@@ -153,8 +153,6 @@ class Sorties
     {
         $this->campus = $campus;
     }
-
-
 
 
     public function getNom(): ?string
@@ -256,7 +254,7 @@ class Sorties
     /**
      * @return ArrayCollection
      */
-    public function getSortieUser(): ArrayCollection
+    public function getSortieUser(): Collection
     {
         return $this->sortieUser;
     }
@@ -264,7 +262,7 @@ class Sorties
     /**
      * @param ArrayCollection $sortieUser
      */
-    public function setSortieUser(ArrayCollection $sortieUser): void
+    public function setSortieUser(Collection $sortieUser): void
     {
         $this->sortieUser = $sortieUser;
     }

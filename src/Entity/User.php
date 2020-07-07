@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\Common\Collections\Collection;
+
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -244,7 +246,7 @@ class User implements UserInterface
     /**
      * @return ArrayCollection
      */
-    public function getSortieOrganise(): ArrayCollection
+    public function getSortieOrganise(): Collection
     {
         return $this->sortieOrganise;
     }
@@ -252,23 +254,23 @@ class User implements UserInterface
     /**
      * @param ArrayCollection $sortieOrganise
      */
-    public function setSortieOrganise(ArrayCollection $sortieOrganise): void
+    public function setSortieOrganise(Collection $sortieOrganise): void
     {
         $this->sortieOrganise = $sortieOrganise;
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection
      */
-    public function getSortieUser(): ArrayCollection
+    public function getSortieUser(): Collection
     {
         return $this->sortieUser;
     }
 
     /**
-     * @param ArrayCollection $sortieUser
+     * @param Collection $sortieUser
      */
-    public function setSortieUser(ArrayCollection $sortieUser): void
+    public function setSortieUser(Collection $sortieUser): void
     {
         $this->sortieUser = $sortieUser;
     }

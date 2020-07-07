@@ -3,19 +3,26 @@
 {% block title %}Afficher une sortie{% endblock %}
 
 {% block main %}
-    <ul> <u><b>Nom de la sortie :</b></u>{{ sortie.nom }}</ul>
-    <ul>  <u><b>Date de debut :</b></u>{{ sortie.datedebut | date("d/m/Y") }}</ul>
-    <ul>  <u><b>Date de cloture :</b></u>{{ sortie. datecloture | date("d/m/Y") }}</ul>
-    <ul>  <u><b>Nombre de places :</b></u> {{ sortie.nbinscriptionsmax }}</ul>
-    <ul>  <u><b>Durée :</b></u> {{ sortie.duree }}</ul>
-    <ul> <u><b>Description :</b></u> {{ sortie.descriptioninfos }}</ul>
-    <ul>  <u><b>Campus :</b></u>{{ sortie.campus.nomCampus }}</ul>
-    <ul><u><b>Lieu :</b></u>  {{ sortie.noLieu.nomLieu }}</ul>
-    <ul> <u><b>Rue :</b></u> {{ sortie.noLieu.rue }}</ul>
-    <ul> <u><b>Ville :</b></u> {{ sortie.noLieu.ville.codePostal }}
-    {{ sortie.noLieu.ville.nomVille }}</ul>
-    <ul> <u><b>Latitude :</b></u> {{ sortie.noLieu.latitude }}</ul>
-    <ul> <u><b>Longitude :</b></u>  {{ sortie.noLieu.longitude }}</ul>
+    <ul><u><b>Nom de la sortie :</b></u>{{ sortie.nom }}</ul>
+    <ul><u><b>Date de debut :</b></u>{{ sortie.datedebut | date("d/m/Y") }}</ul>
+    <ul><u><b>Date de cloture :</b></u>{{ sortie. datecloture | date("d/m/Y") }}</ul>
+    <ul><u><b>Nombre de places :</b></u> {{ sortie.nbinscriptionsmax }}</ul>
+    <ul><u><b>Durée :</b></u> {{ sortie.duree }}</ul>
+    <ul><u><b>Description :</b></u> {{ sortie.descriptioninfos }}</ul>
+    <ul><u><b>Campus :</b></u>{{ sortie.campus.nomCampus }}</ul>
+    <ul><u><b>Lieu :</b></u> {{ sortie.noLieu.nomLieu }}</ul>
+    <ul><u><b>Rue :</b></u> {{ sortie.noLieu.rue }}</ul>
+    <ul><u><b>Ville :</b></u> {{ sortie.noLieu.ville.codePostal }}
+        {{ sortie.noLieu.ville.nomVille }}</ul>
+    <ul><u><b>Latitude :</b></u> {{ sortie.noLieu.latitude }}</ul>
+    <ul><u><b>Longitude :</b></u> {{ sortie.noLieu.longitude }}</ul>
 
+    {% for participant in sortie.sortieUser %}
+        <ul>
+            {{ participant.user.pseudo }}
+            {{ participant.user.nom }}
+            {{ participant.user.prenom }}
 
+        </ul>
+    {% endfor %}
 {% endblock %}
