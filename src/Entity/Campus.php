@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use App\Repository\CampusRepository;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -30,17 +29,21 @@ class Campus
     private $users;
 
     /**
-     *@ORM\OneToMany(targetEntity="App\Entity\Sorties",mappedBy="campus")
+     * @ORM\OneToMany(targetEntity="App\Entity\Sorties",mappedBy="campus")
      */
     private $sorties;
+
+
+    // CONSTRUCTOR
 
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->sorties = new ArrayCollection();
+
     }
 
-
-
+    // GETTERS ET SETTERS
     /**
      * @return mixed
      */
@@ -58,7 +61,6 @@ class Campus
     }
 
 
-
     public function getNomCampus(): ?string
     {
         return $this->nom_campus;
@@ -72,12 +74,39 @@ class Campus
     }
 
     /**
-     * @return Collection|User[]
+     * @return ArrayCollection
      */
-    public function getUsers(): Collection
+    public function getUsers(): ArrayCollection
     {
         return $this->users;
     }
+
+    /**
+     * @param ArrayCollection $users
+     */
+    public function setUsers(ArrayCollection $users): void
+    {
+        $this->users = $users;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getSorties(): ArrayCollection
+    {
+        return $this->sorties;
+    }
+
+    /**
+     * @param ArrayCollection $sorties
+     */
+    public function setSorties(ArrayCollection $sorties): void
+    {
+        $this->sorties = $sorties;
+    }
+
+
+    // FONCTIONS
 
     public function addUser(User $user): self
     {
@@ -100,22 +129,6 @@ class Campus
         }
 
         return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getSorties()
-    {
-        return $this->sorties;
-    }
-
-    /**
-     * @param mixed $sorties
-     */
-    public function setSorties($sorties): void
-    {
-        $this->sorties = $sorties;
     }
 
 }

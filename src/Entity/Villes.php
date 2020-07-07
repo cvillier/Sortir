@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\VillesRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -32,6 +33,14 @@ class Villes
      * @ORM\OneToMany(targetEntity="App\Entity\Lieux", mappedBy="ville")
      */
     private $lieux;
+
+    // CONSTRUCTOR
+    public function __construct()
+    {
+        $this->lieux = new ArrayCollection();
+    }
+
+    // GETTERS ET SETTERS
 
 
     public function getId(): ?int
@@ -64,19 +73,20 @@ class Villes
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
-    public function getLieux()
+    public function getLieux(): ArrayCollection
     {
         return $this->lieux;
     }
 
     /**
-     * @param mixed $lieux
+     * @param ArrayCollection $lieux
      */
-    public function setLieux($lieux): void
+    public function setLieux(ArrayCollection $lieux): void
     {
         $this->lieux = $lieux;
     }
+
 
 }

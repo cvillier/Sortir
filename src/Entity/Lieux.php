@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\LieuxRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -45,7 +46,17 @@ class Lieux
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Sorties",mappedBy="noLieu");
      */
-private $sortie;
+    private $sortie;
+
+// CONSTRUCTOR
+
+
+    public function __construct()
+    {
+        $this->sortie = new ArrayCollection();
+    }
+
+// GETTERS ET SETTERS
 
     public function getId(): ?int
     {
@@ -100,38 +111,33 @@ private $sortie;
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
+
     public function getVille()
     {
         return $this->ville;
     }
 
-    /**
-     * @param mixed $ville
-     */
+
     public function setVille($ville): void
     {
         $this->ville = $ville;
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
-    public function getSortie()
+    public function getSortie(): ArrayCollection
     {
         return $this->sortie;
     }
 
     /**
-     * @param mixed $sortie
+     * @param ArrayCollection $sortie
      */
-    public function setSortie($sortie): void
+    public function setSortie(ArrayCollection $sortie): void
     {
         $this->sortie = $sortie;
     }
-
 
 
 }

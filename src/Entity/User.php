@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -70,10 +71,24 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Sorties", mappedBy="organisateur")
      */
     private $sortieOrganise;
+
+    // OneToMany qui va crée la table de pivot avec le OneToMany situé dans Sorties.php
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Inscriptions",mappedBy="user")
      */
     private $sortieUser;
+
+    // CONSTRUCTOR
+
+    public function __construct()
+    {
+        $this->sortieOrganise = new ArrayCollection();;
+        $this->sortieUser = new ArrayCollection();;
+    }
+
+
+    // GETTERS ET SETTERS
+
 
 
     public function getId(): ?int
@@ -227,19 +242,39 @@ class User implements UserInterface
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
-    public function getSortieOrganise()
+    public function getSortieOrganise(): ArrayCollection
     {
         return $this->sortieOrganise;
     }
 
     /**
-     * @param mixed $sortieOrganise
+     * @param ArrayCollection $sortieOrganise
      */
-    public function setSortieOrganise($sortieOrganise): void
+    public function setSortieOrganise(ArrayCollection $sortieOrganise): void
     {
         $this->sortieOrganise = $sortieOrganise;
     }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getSortieUser(): ArrayCollection
+    {
+        return $this->sortieUser;
+    }
+
+    /**
+     * @param ArrayCollection $sortieUser
+     */
+    public function setSortieUser(ArrayCollection $sortieUser): void
+    {
+        $this->sortieUser = $sortieUser;
+    }
+
+
+
+
 
 }

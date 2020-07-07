@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\EtatsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -28,6 +29,14 @@ class Etats
      */
     private $sorties;
 
+    // CONSTRUCTOR
+    public function __construct()
+    {
+        $this->sorties = new ArrayCollection();
+    }
+
+    // GETTERES ET SETTERS
+
     public function getId()
     {
         return $this->id;
@@ -46,19 +55,20 @@ class Etats
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
-    public function getSorties()
+    public function getSorties(): ArrayCollection
     {
         return $this->sorties;
     }
 
     /**
-     * @param mixed $sorties
+     * @param ArrayCollection $sorties
      */
-    public function setSorties($sorties): void
+    public function setSorties(ArrayCollection $sorties): void
     {
         $this->sorties = $sorties;
     }
+
 
 }

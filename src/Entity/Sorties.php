@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\SortiesRepository;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -74,6 +75,7 @@ class Sorties
      */
     private $organisateur;
 
+    // methode avec le ManyToMany
     /* /**
      * @ORM\ManyToMany(targetEntity="App\Entity\User")
      * @ORM\JoinTable(name="sortie_user")
@@ -81,17 +83,19 @@ class Sorties
     private $sortieUser;
     */
 
+    // OneToMany qui va crée la table de pivot avec le OneToMany situé dans User.php
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Inscriptions",mappedBy="sortie")
      */
     private $sortieUser;
 
+    // CONSTRUCTEUR
 
-   /* public function __construct()
+    public function __construct()
     {
         $this->sortieUser = new ArrayCollection();
     }
-*/
+
 
     //GETTERS AND SETTERS
 
@@ -219,6 +223,22 @@ class Sorties
         $this->organisateur = $organisateur;
 
         return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getSortieUser(): ArrayCollection
+    {
+        return $this->sortieUser;
+    }
+
+    /**
+     * @param ArrayCollection $sortieUser
+     */
+    public function setSortieUser(ArrayCollection $sortieUser): void
+    {
+        $this->sortieUser = $sortieUser;
     }
 
 
