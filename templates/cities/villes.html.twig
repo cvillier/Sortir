@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Les campus | {{ parent() }} {% endblock %}
+{% block title %}Les villes | {{ parent() }} {% endblock %}
 
 {% block main %}
 
@@ -9,7 +9,7 @@
     <div>
         <h2>Filtrer les villes</h2>
 
-        <form action="get">
+        <form method="get" action="villes.html.twig">
             <div class="form-group row">
                 <label class="col-4">Le nom contient :</label>
                 <div class="col-4"><input class="form-control" type="text" placeholder="Ville"></div>
@@ -18,12 +18,36 @@
         </form>
     </div>
 
-    <div class="liste">
-        <ul>
-            <li>Nom de la ville 1</li>
-            <li>Nom de la ville 2</li>
-            <li>Nom de la ville 3</li>
-        </ul>
+    <div>
+        <table class="table table-striped">
+
+            <thead>
+                <tr>
+                    <th scope="col">Ville</th>
+                    <th scope="col">Code postal</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            {% for ville in villes %}
+                <tr>
+                    <td>{{ ville.getNomVille() }}</td>
+                    <td>{{ ville.getCodePostal() }}</td>
+                    <td><a href="">Modifier</a> <a href="">Supprimer</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+
+            <tfoot>
+                <tr>
+                    <td><input name="ville" class="form-control" type="text" placeholder="Nouvelle ville"></td>
+                    <td><input name="campus" class="form-control" type="text" placeholder="Nouveau code codal"></td>
+                    <td><button type="submit" class="btn btn-primary mb-2">Ajouter</button></td>
+                </tr>
+            </tfoot>
+
+        </table>
     </div>
 
 {% endblock %}
