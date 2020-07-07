@@ -35,18 +35,16 @@ class CreationSortieController extends AbstractController
 
             if ($request->request->has('enregistrer')) {
                 $etat = $etatRepo->find(1);
-
                 $sortie->setEtat($etat);
             }
             if ($request->request->has('publier')) {
                 $etat = $etatRepo->find(2);
-
                 $sortie->setEtat($etat);
             }
             $em->persist($sortie);
             $em->flush();
             $this->addFlash("success", "Sortie ajouté avec succès !");
-            return $this->redirectToRoute("home", [
+            return $this->redirectToRoute("affichage_sortie", [
                 "id" => $sortie->getId()
             ]);
 
