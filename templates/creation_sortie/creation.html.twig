@@ -17,15 +17,15 @@
     {{ form_row(creationSortieForm.campus) }}
     {{ form_row(creationSortieForm.nom_ville) }}
     {{ form_row(creationSortieForm.noLieu) }}
-    {{ form_row(creationSortieForm.etat) }}
 
 
 
-    {{ form_widget(creationSortieForm) }}
 
-    <button type="submit" class="btn" value="enregistrer">Enregistrer</button>
-    <button type="submit" class="btn" value="publier">Publier la sortie</button>
-    <button type="submit" class="btn" value="annuler">Annuler</button>
+
+
+    <button type="submit" class="btn" name="enregistrer" value="enregistrer">Enregistrer</button>
+    <button type="submit" class="btn" name="publier" value="publier">Publier la sortie</button>
+    <button type="submit" class="btn" name="annuler" value="annuler">Annuler</button>
 
     {{ form_end(creationSortieForm) }}
 

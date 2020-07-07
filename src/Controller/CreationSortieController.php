@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Etats;
 use App\Entity\Sorties;
 use App\Form\CreationSortieFormType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -30,6 +31,18 @@ class CreationSortieController extends AbstractController
 
         if ($creationSortieform->isSubmitted() && $creationSortieform->isValid()) {
 
+            $etatRepo = $this->getDoctrine()->getRepository(Etats::class);
+
+            if ($request->request->has('enregistrer')) {
+                $etat = $etatRepo->find(1);
+
+                $sortie->setEtat($etat);
+            }
+            if ($request->request->has('publier')) {
+                $etat = $etatRepo->find(2);
+
+                $sortie->setEtat($etat);
+            }
             $em->persist($sortie);
             $em->flush();
             $this->addFlash("success", "Sortie ajouté avec succès !");
