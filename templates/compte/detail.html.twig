@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <h2>Compte de L'utilisateur {{ account.pseudo }}</h2>
+    <ul>
+        <li>{{ account.nom }}</li>
+        <li>{{ account.prenom }}</li>
+        <li>{{ account.telephone }}</li>
+        <li>{{ account.email }}</li>
+{#        <li>{{ account.no_campus }}</li>#}
+    </ul>
+{#{% block title %}#}
+{#    Ideas details | {{ parent() }}#}
+{% endblock %}
