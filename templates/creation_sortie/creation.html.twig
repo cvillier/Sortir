@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Creation de Sorties{% endblock %}
+
+{% block body %}
+
+
+    <h1>Creation de sorties</h1>
+
+    {{ form_start(creationSortieForm) }}
+    {{ form_row(creationSortieForm.nom) }}
+    {{ form_end(creationSortieForm) }}
+    <p>Rue:</p>
+    <p>Code Postal:</p>
+    <p>Latitude:</p>
+    <p>Longitude:</p>
+
+
+    <button type="submit" class="btn">Enregistrer</button>
+    <button type="submit" class="btn">Publier la sortie</button>
+    <button type="submit" class="btn">Annuler</button>
+
+{% endblock %}

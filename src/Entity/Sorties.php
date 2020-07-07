@@ -56,7 +56,7 @@ class Sorties
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Lieux",inversedBy="sorties")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Lieux",inversedBy="sortie")
      */
     private $noLieu;
 
