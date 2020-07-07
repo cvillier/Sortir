@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Creation de Sorties{% endblock %}
+
+{% block main %}
+
+
+    <h1>Creation de sorties</h1>
+
+    {{ form_start(creationSortieForm) }}
+    {{ form_row(creationSortieForm.nom) }}
+    {{ form_row(creationSortieForm.datedebut) }}
+    {{ form_row(creationSortieForm.datecloture) }}
+    {{ form_row(creationSortieForm.nbinscriptionsmax) }}
+    {{ form_row(creationSortieForm.duree) }}
+    {{ form_row(creationSortieForm.descriptioninfos) }}
+    {{ form_row(creationSortieForm.campus) }}
+    {{ form_row(creationSortieForm.nom_ville) }}
+    {{ form_row(creationSortieForm.noLieu) }}
+    {{ form_row(creationSortieForm.etat) }}
+
+
+
+    {{ form_widget(creationSortieForm) }}
+
+    <button type="submit" class="btn" value="enregistrer">Enregistrer</button>
+    <button type="submit" class="btn" value="publier">Publier la sortie</button>
+    <button type="submit" class="btn" value="annuler">Annuler</button>
+
+    {{ form_end(creationSortieForm) }}
+
+
+
+
+{% endblock %}
