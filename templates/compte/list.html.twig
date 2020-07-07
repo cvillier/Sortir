@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <h2>Les utilisateurs</h2>
+
+    <section>
+        {% for accounts in account %}
+            <article>
+{#                <p>{{ accounts.pseudo|capitalize }}</p>#}
+                <a href="{{ path('detail', {'id': accounts.id}) }}" title="{{ accounts.pseudo }}">{{ accounts.pseudo|capitalize }}</a>
+            </article>
+        {% endfor %}
+    </section>
+{% endblock %}
