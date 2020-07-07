@@ -1,5 +1,7 @@
 DELETE FROM `villes`;
 DELETE FROM `campus`;
+DELETE FROM `etats`;
+
 
 INSERT INTO `villes` (`id`, `nom_ville`, `code_postal`) VALUES (NULL,'Chartes-de-Bretagne','35131');
 INSERT INTO `villes` (`id`, `nom_ville`, `code_postal`) VALUES (NULL,'Rennes','35000');
@@ -13,4 +15,13 @@ INSERT INTO `campus` (`id`, `nom_campus`) VALUES (NULL,'Chartes-de-Bretagne');
 INSERT INTO `campus` (`id`, `nom_campus`) VALUES (NULL,'Saint-Herblain');
 INSERT INTO `campus` (`id`, `nom_campus`) VALUES (NULL,'Niort');
 INSERT INTO `campus` (`id`, `nom_campus`) VALUES (NULL,'Quimper');
+
+INSERT INTO `etats` (`id`, `libelle`) VALUES (NULL,'Créée');
+INSERT INTO `etats` (`id`, `libelle`) VALUES (NULL,'Ouverte');
+INSERT INTO `etats` (`id`, `libelle`) VALUES (NULL,'Clôturée');
+INSERT INTO `etats` (`id`, `libelle`) VALUES (NULL,'En cours');
+INSERT INTO `etats` (`id`, `libelle`) VALUES (NULL,'Passée');
+INSERT INTO `etats` (`id`, `libelle`) VALUES (NULL,'Annulée');
+
+
 
