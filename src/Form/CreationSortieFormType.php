@@ -31,18 +31,18 @@ class CreationSortieFormType extends AbstractType
             ->add('datedebut', DateTimeType::class, [
                 'label'  => 'Date et heure de la sortie : ',
                 "widget" => 'single_text',
-                "data" => new \DateTime(),
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'placeholder' => ""
                 ]
             ])
 
             ->add('datecloture', DateTimeType::class, [
                 'label'  => 'Date limite d inscription : ',
                 "widget" => 'single_text',
-                "data" => new \DateTime(),
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'placeholder' => ""
                 ]
             ])
 
@@ -55,9 +55,9 @@ class CreationSortieFormType extends AbstractType
 
             ->add('duree', IntegerType::class, [
                 'label'  => 'Durée : ',
-                "data" => 90,
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'placeholder' => 90
                 ]
             ])
 
