@@ -68,22 +68,23 @@ class CreationSortieFormType extends AbstractType
                 ]
             ])
 
-            //à supprimer : on ne demande pas au User de choisir son campus : on affiche le campus auquel il est affilié
-            ->add("campus", EntityType::class, [
-                'class' => Campus::class,
-                'choice_label' => 'nom_campus',
-
-            ])
             ->add("nom_ville", EntityType::class, [
                 'class' => Villes::class,
                 'choice_label' => 'nom_ville',
-                'mapped' => false
+                'mapped' => false,
+                'label' => 'Ville : ',
+                'attr' => [
+                    'class' => 'form-control'
+                ]
             ])
 
             ->add("noLieu", EntityType::class, [
                 'class' => Lieux::class,
                 'choice_label' => 'nom_lieu',
-
+                'label' => 'Lieu',
+                'attr' => [
+                    'class' => 'form-control'
+                ]
             ]);
 
 

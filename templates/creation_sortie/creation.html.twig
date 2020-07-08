@@ -50,20 +50,48 @@
             </div>
         </div>
 
-        <div class="col-sm-6"> <!--colone de gauche-->
+        <div class="col-sm-6"> <!--colone de droite-->
             <div class="card">
                 <div class="card-body">
+
                     <div class="form-group row">
-                       //afficher campus du User
+                        <p>Campus : {{ app.user.campus }}</p>
                     </div>
-                    {{ form_row(creationSortieForm.nom_ville) }}
-                    {{ form_row(creationSortieForm.noLieu) }}
+
+                    <div class="form-group row">
+                        {{ form_label(creationSortieForm.nom_ville) }}
+                        {{ form_widget(creationSortieForm.nom_ville) }}
+                    </div>
+
+                    <div class="form-group row">
+                        {{ form_label(creationSortieForm.noLieu) }}
+                        {{ form_widget(creationSortieForm.noLieu) }}
+                        <!-- bouton "+" -->
+                    </div>
+
+                    <div class="form-group row">
+                        <p>Rue : </p>
+                    </div>
+
+                    <div class="form-group row">
+                        <p>Code postal : </p>
+                    </div>
+
+                    <div class="form-group row">
+                        <p>Latitude : </p>
+                    </div>
+
+                    <div class="form-group row">
+                        <p>Longitude : </p>
+                    </div>
+
                 </div>
             </div>
         </div>
+
     </div>
 
-    <div class="text-center">
+    <div class="text-center"> <!--boutons-->
         <button type="submit" class="btn" name="enregistrer" value="enregistrer">Enregistrer</button>
         <button type="submit" class="btn" name="publier" value="publier">Publier la sortie</button>
         <button type="submit" class="btn" name="annuler" value="annuler">Annuler</button>
