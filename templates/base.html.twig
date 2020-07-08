@@ -38,14 +38,11 @@
                 <li class="nav-item">
                     {% if app.user %}
                         <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_logout') }}" title="Disconnect">Se déconnecter</a>
+                            <a class="nav-link" href="{{ path('app_logout') }}" title="Disconnect">Se déconnecter</a>
                         </li>
                     {% else %}
                         <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_login') }}" title="Connect">Se Connecter</a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_register') }}" title="Create your account">S'inscrire</a>
+                            <a class="nav-link" href="{{ path('app_login') }}" title="Connect">Se Connecter</a>
                         </li>
                     {% endif %}
                 </li>
