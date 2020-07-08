@@ -1,27 +1,53 @@
-DELETE FROM `villes`;
 DELETE FROM `campus`;
+ALTER TABLE `campus` AUTO_INCREMENT = 0;
+INSERT INTO `campus` (`id`, `nom_campus`) VALUES (NULL,'Chartes-de-Bretagne');
+INSERT INTO `campus` (`id`, `nom_campus`) VALUES (NULL,'Saint-Herblain');
+INSERT INTO `campus` (`id`, `nom_campus`) VALUES (NULL,'Niort');
+INSERT INTO `campus` (`id`, `nom_campus`) VALUES (NULL,'Quimper');
+
+
 DELETE FROM `etats`;
+ALTER TABLE `etats` AUTO_INCREMENT = 0;
+INSERT INTO `etats` (`id`, `libelle`) VALUES (NULL,'Créé');
+INSERT INTO `etats` (`id`, `libelle`) VALUES (NULL,'Ouvert');
+INSERT INTO `etats` (`id`, `libelle`) VALUES (NULL,'Clôturé');
+INSERT INTO `etats` (`id`, `libelle`) VALUES (NULL,'En cours');
+INSERT INTO `etats` (`id`, `libelle`) VALUES (NULL,'Passé');
+INSERT INTO `etats` (`id`, `libelle`) VALUES (NULL,'Annulé');
 
 
+DELETE FROM `villes`;
+ALTER TABLE `villes` AUTO_INCREMENT = 0;
 INSERT INTO `villes` (`id`, `nom_ville`, `code_postal`) VALUES (NULL,'Chartes-de-Bretagne','35131');
 INSERT INTO `villes` (`id`, `nom_ville`, `code_postal`) VALUES (NULL,'Rennes','35000');
 INSERT INTO `villes` (`id`, `nom_ville`, `code_postal`) VALUES (NULL,'Saint-Herblain','44800');
 INSERT INTO `villes` (`id`, `nom_ville`, `code_postal`) VALUES (NULL,'Nantes','44000');
 INSERT INTO `villes` (`id`, `nom_ville`, `code_postal`) VALUES (NULL,'Niort','79000');
 INSERT INTO `villes` (`id`, `nom_ville`, `code_postal`) VALUES (NULL,'Quimper','29000');
+INSERT INTO `villes` (`id`, `nom_ville`, `code_postal`) VALUES (NULL,'Paris','75000');
+INSERT INTO `villes` (`id`, `nom_ville`, `code_postal`) VALUES (NULL,'Bordeaux','33000');
+INSERT INTO `villes` (`id`, `nom_ville`, `code_postal`) VALUES (NULL,'Vannes','56000');
+INSERT INTO `villes` (`id`, `nom_ville`, `code_postal`) VALUES (NULL,'Lorient','56100');
+INSERT INTO `villes` (`id`, `nom_ville`, `code_postal`) VALUES (NULL,'Brest','29200');
+INSERT INTO `villes` (`id`, `nom_ville`, `code_postal`) VALUES (NULL,'Saint-Brieuc','22000');
 
 
-INSERT INTO `campus` (`id`, `nom_campus`) VALUES (NULL,'Chartes-de-Bretagne');
-INSERT INTO `campus` (`id`, `nom_campus`) VALUES (NULL,'Saint-Herblain');
-INSERT INTO `campus` (`id`, `nom_campus`) VALUES (NULL,'Niort');
-INSERT INTO `campus` (`id`, `nom_campus`) VALUES (NULL,'Quimper');
-
-INSERT INTO `etats` (`id`, `libelle`) VALUES (NULL,'Créée');
-INSERT INTO `etats` (`id`, `libelle`) VALUES (NULL,'Ouverte');
-INSERT INTO `etats` (`id`, `libelle`) VALUES (NULL,'Clôturée');
-INSERT INTO `etats` (`id`, `libelle`) VALUES (NULL,'En cours');
-INSERT INTO `etats` (`id`, `libelle`) VALUES (NULL,'Passée');
-INSERT INTO `etats` (`id`, `libelle`) VALUES (NULL,'Annulée');
+DELETE FROM `lieux`;
+ALTER TABLE `lieux` AUTO_INCREMENT = 0;
+INSERT INTO `lieux` (`id`, `ville_id`, `nom_lieu`, `rue`, `latitude`, `longitude`)  VALUES (NULL, 3,"L\'auberge du poney qui tousse","123 Rue de la Monnaie" ,"47.21441650390625", "-1.6388837099075317");
+INSERT INTO `lieux` (`id`, `ville_id`, `nom_lieu`, `rue`, `latitude`, `longitude`)  VALUES (NULL, 2,"La Cité d\'Ys","31 Rue Vasselot" ,"48.108612060546875", "-1.6782492399215698");
+INSERT INTO `lieux` (`id`, `ville_id`, `nom_lieu`, `rue`, `latitude`, `longitude`)  VALUES (NULL, 4,"Au Vestiaire","2 Place de la Petite Hollande" ,"47.2122948", "-1.5572616");
 
 
+DELETE FROM `sorties`;
+ALTER TABLE `sorties` AUTO_INCREMENT = 0;
+INSERT INTO `sorties` (`id`, `no_lieu_id`, `etat_id`, `campus_id`, `organisateur_id`, `nom`, `datedebut`, `duree`, `datecloture`, `nbinscriptionsmax`, `descriptioninfos`, `url_photo`) VALUES (NULL,2,2,1,1,"Des bières à Rennes ?",'2020-10-05 12:00:36',90,'2020-08-20 13:00:36',20,"Les élèves et alumni de l'ENI se retrouve dans le centre de Rennes pour partager quelques mousses...","https://ik.imagekit.io/youshould/tr:w-768,rt-auto/Bar/prod/ECBB9149-DA64-4A6C-A85F-7C1F6038F71D/20170127150100690ys/1485528301.jpg");
+INSERT INTO `sorties` (`id`, `no_lieu_id`, `etat_id`, `campus_id`, `organisateur_id`, `nom`, `datedebut`, `duree`, `datecloture`, `nbinscriptionsmax`, `descriptioninfos`, `url_photo`) VALUES (NULL,3,2,3,1,"Des bières à Nantes !",'2020-11-05 12:00:36',90,'2020-09-20 20:00:36',20,"Les élèves et alumni de l'ENI se retrouve dans le centre de Nantes pour partager quelques mousses...","https://www.wik-nantes.fr/sites/default/files/styles/img_principale_contenu_interne/public/bar/nantes-vestiaire-2.jpg?itok=Tdnqobk7");
 
+
+DELETE FROM `inscriptions`;
+
+
+
+DELETE FROM `user`;
+ALTER TABLE `user` AUTO_INCREMENT = 0;
