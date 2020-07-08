@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-    <title>{% block title %}Sortir! {% endblock %}</title>
+    <title>{% block title %}Sortir | {% endblock %}</title>
 </head>
 <body>
 
@@ -29,11 +29,11 @@
 {#                    <a class="nav-link" href="#">Sortir.com</a>#}
 {#                    <img src="{{ asset('IMAGES/logo_test.jpg') }}" />#}
 {#                </li>#}
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ path('home') }}">Accueil <span class="sr-only">(current)</span></a>
-                </li>
                 <li class="nav-item">
                     {% if app.user %}
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ path('home') }}">Accueil <span class="sr-only">(current)</span></a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('app_logout') }}" title="Disconnect">Se déconnecter</a>
                         </li>
