@@ -35,6 +35,14 @@ class Etats
         $this->sorties = new ArrayCollection();
     }
 
+    // TO STRING
+
+    public function __toString()
+    {
+        return $this->id;
+
+    }
+
     // GETTERES ET SETTERS
 
     public function getId()
