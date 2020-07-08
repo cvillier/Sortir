@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Etats;
+use App\Entity\Inscriptions;
 use App\Entity\Sorties;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,6 +17,7 @@ class AccueilController extends AbstractController
         $sorties = $this->getDoctrine()
             ->getRepository(Sorties::class)
             ->findAll();
+        $inscriptions = $this->getDoctrine()->getRepository(Inscriptions::class)->findAll();
 
         if (!$sorties) {
             throw $this->createNotFoundException(
@@ -24,8 +25,8 @@ class AccueilController extends AbstractController
             );
         }
 
-        return $this->render('accueil/index.html.twig',[
-            'sorties'=>$sorties,
+        return $this->render('accueil/index.html.twig', [
+            'sorties' => $sorties, 'inscriptions' => $inscriptions
         ]);
     }
 }

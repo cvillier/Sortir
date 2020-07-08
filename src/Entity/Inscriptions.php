@@ -31,12 +31,12 @@ class Inscriptions
 
 
 
-    public function getSortie(): ?int
+    public function getSortie(): ?Sorties
     {
         return $this->sortie;
     }
 
-    public function setSortie(int $sortie): self
+    public function setSortie(Sorties $sortie): self
     {
         $this->sortie = $sortie;
 
