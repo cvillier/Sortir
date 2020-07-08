@@ -26,7 +26,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="inputPassword" class="col-sm-5 col-form-label">Le nom de la sortie contient :</label>
+                    <label for="inputRecherche" class="col-sm-5 col-form-label">Le nom de la sortie contient :</label>
                     <div class="col-sm-6">
                         <input type="text" class="form-control" id="inputRecherche" placeholder="Recherche">
                     </div>
@@ -88,14 +88,20 @@
             </thead>
 
             <tbody>
-            {% for sortie in sorties%}
+            {% for sortie in sorties %}
                 <tr>
                     <td>{{ sortie.nom }}</td>
                     <td>{{ sortie.datedebut|date("d/m/Y") }}</td>
                     <td>{{ sortie.datecloture|date("d/m/Y") }}</td>
                     <td> {{ sortie.sortieUser.count}} / {{ sortie.nbinscriptionsmax }}</td>
                     <td>{{ sortie.etat.libelle }}</td>
-                    <td>{{ dump(sortie.sortieUser.contains(app.user.id)) }}</td>
+                    <td>
+                        {% for participant in inscriptions %}
+                            {% if (participant.user == app.user) and (participant.sortie == sortie) %}
+                                X
+                            {% endif %}
+                        {% endfor %}
+                    </td>
                     <td> {{ sortie.organisateur.prenom|capitalize }} {{ sortie.organisateur.nom|first|capitalize }}.</td>
                     {% if sortie.etat.libelle == "En cours" %}
                         <td><a href="">Afficher</a></td>
