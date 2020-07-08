@@ -82,6 +82,11 @@ class User implements UserInterface
      */
     private $sortieUser;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $pictureFileName;
+
     // CONSTRUCTOR
 
     public function __construct()
@@ -277,8 +282,16 @@ class User implements UserInterface
         $this->sortieUser = $sortieUser;
     }
 
+    public function getPictureFileName(): ?string
+    {
+        return $this->pictureFileName;
+    }
 
+    public function setPictureFileName(?string $pictureFileName): self
+    {
+        $this->pictureFileName = $pictureFileName;
 
-
+        return $this;
+    }
 
 }

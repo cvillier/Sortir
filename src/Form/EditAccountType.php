@@ -4,9 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\SubmitButton;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class EditAccountType extends AbstractType
@@ -23,6 +21,22 @@ class EditAccountType extends AbstractType
             ->add('email')
             ->add('actif')
             ->add('campus')
+            ->add('photo', FileType::class, [
+                'label' => 'Ma photo : ',
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '10000k',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                            'image/gif'
+                        ],
+                        'mimeTypesMessage' => 'Please upload a valid picture',
+                    ])
+                ],
+            ])
             ->add('button', SubmitType::class);
     }
 
