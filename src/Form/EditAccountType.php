@@ -4,7 +4,9 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\SubmitButton;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class EditAccountType extends AbstractType
@@ -21,7 +23,7 @@ class EditAccountType extends AbstractType
             ->add('email')
             ->add('actif')
             ->add('campus')
-        ;
+            ->add('button', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

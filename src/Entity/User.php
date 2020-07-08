@@ -30,7 +30,7 @@ class User implements UserInterface
     private $pseudo;
 
     /**
-     * @ORM\Column(type="json")
+     * @ORM\Column(type="json", nullable=true)
      */
     private $roles = [];
 
