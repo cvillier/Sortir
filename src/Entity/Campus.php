@@ -29,7 +29,7 @@ class Campus
     private $nom_campus;
 
     /**
-     * @ORM\OneToMany(targetEntity=User::class, mappedBy="no_campus")
+     * @ORM\OneToMany(targetEntity=User::class, mappedBy="campus")
      */
     private $users;
 

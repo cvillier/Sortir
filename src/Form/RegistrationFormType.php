@@ -26,7 +26,7 @@ class RegistrationFormType extends AbstractType
             ->add('telephone')
             ->add('email')
 
-            ->add("noCampus", EntityType::class, [
+            ->add("campus", EntityType::class, [
                 'class' => Campus::class,
                 'choice_label' => 'nom_campus'
             ])
