@@ -9,7 +9,8 @@
     {{ form_start(creationSortieForm) }}
 
     <div class="row">
-        <div class="col-sm-6">
+
+        <div class="col-sm-6"> <!--colone de gauche-->
             <div class="card">
                 <div class="card-body">
 
@@ -25,18 +26,36 @@
                     </div>
 
                     <div class="form-group row">
-                        {{ form_row(creationSortieForm.datecloture) }}
+                        {{ form_label(creationSortieForm.datecloture) }}
+                        {{ form_widget(creationSortieForm.datecloture) }}
                     </div>
-                    {{ form_row(creationSortieForm.nbinscriptionsmax) }}
-                    {{ form_row(creationSortieForm.duree) }}
-                    {{ form_row(creationSortieForm.descriptioninfos) }}
+
+                    <div class="form-group row">
+                        {{ form_label(creationSortieForm.nbinscriptionsmax) }}
+                        {{ form_widget(creationSortieForm.nbinscriptionsmax) }}
+                    </div>
+
+                    <div class="form-group row">
+                        {{ form_label(creationSortieForm.duree) }}
+                        {{ form_widget(creationSortieForm.duree) }}
+                        <p>minutes</p>
+                    </div>
+
+                    <div class="form-group row">
+                        {{ form_label(creationSortieForm.descriptioninfos) }}
+                        {{ form_widget(creationSortieForm.descriptioninfos) }}
+                    </div>
+
                 </div>
             </div>
         </div>
-        <div class="col-sm-6">
+
+        <div class="col-sm-6"> <!--colone de gauche-->
             <div class="card">
                 <div class="card-body">
-                    {{ form_row(creationSortieForm.campus) }}
+                    <div class="form-group row">
+                       //afficher campus du User
+                    </div>
                     {{ form_row(creationSortieForm.nom_ville) }}
                     {{ form_row(creationSortieForm.noLieu) }}
                 </div>
