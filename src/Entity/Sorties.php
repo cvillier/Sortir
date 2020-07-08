@@ -239,7 +239,7 @@ class Sorties
         return $this;
     }
 
-    public function getOrganisateur(): ?int
+    public function getOrganisateur(): ?User
     {
         return $this->organisateur;
     }

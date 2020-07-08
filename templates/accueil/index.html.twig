@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} {{ parent() }} | Accueil!{% endblock %}
+{% block title %} {{ parent() }} Accueil!{% endblock %}
 
 {% block main %}
 
@@ -94,9 +94,9 @@
                     <td>{{ sortie.datedebut|date("d/m/Y") }}</td>
                     <td>{{ sortie.datecloture|date("d/m/Y") }}</td>
                     <td>{{ sortie.nbinscriptionsmax }}</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{ sortie.etat.libelle }}</td>
+                    <td>{{ dump(sortie.sortieUser.contains(app.user.id)) }}</td>
+                    <td>{{ sortie.organisateur.nom }} {{ sortie.organisateur.prenom|first }}.</td>
                     <td></td>
                 </tr>
             {% endfor %}
@@ -104,7 +104,7 @@
 
             <tfoot>
             <tr>
-                <td><button type="submit" class="btn btn-primary mb-2">Créer une sortie</button></td>
+                <td><a href="{{ path('creation_sortie') }}"><button type="submit" class="btn btn-primary mb-2">Créer une sortie</button></a></td>
             </tr>
             </tfoot>
 
