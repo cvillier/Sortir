@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ parent() }} | Modification de Sorties{% endblock %}
+
+{% block main %}
+
+
+<h1>Creation de sorties</h1>
+
+{{ form_start(modificationSortieForm) }}
+    {{ form_row(modificationSortieForm.nom) }}
+    {{ form_row(modificationSortieForm.datedebut) }}
+    {{ form_row(modificationSortieForm.datecloture) }}
+    {{ form_row(modificationSortieForm.nbinscriptionsmax) }}
+    {{ form_row(modificationSortieForm.duree) }}
+    {{ form_row(modificationSortieForm.descriptioninfos) }}
+    {{ app.user.campus }}
+    {{ form_row(modificationSortieForm.nom_ville) }}
+    {{ form_row(modificationSortieForm.noLieu) }}
+
+<button type="submit" class="btn" name="enregistrer" value="enregistrer">Enregistrer</button>
+<button type="submit" class="btn" name="publier" value="publier">Publier la sortie</button>
+<button type="submit" class="btn" name="supprimer" value="supprimer">Supprimer la sortie</button>
+<button type="submit" class="btn" name="annuler" value="annuler">Annuler</button>
+
+{{ form_end(modificationSortieForm) }}
+
+{% endblock %}
