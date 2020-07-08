@@ -23,6 +23,8 @@ class CreationSortieController extends AbstractController
 
         $sortie = new Sorties();
         $creationSortieform = $this->createForm(CreationSortieFormType::class, $sortie);
+
+        //set l'organisateur a l'user connecté
         $sortie->setOrganisateur($this->getUser());
 
 
