@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %} {{ parent() }} Enregistrer un compte {% endblock %}
 
 {% block main %}
     {% for flashError in app.flashes('verify_email_error') %}
