@@ -13,7 +13,7 @@
 {#        {% endfor %}#}
         <li>{{ account.campus.getNomCampus() }}</li>
     </ul>
-    <a href="{{ path('edit', {'id': account.id}) }}) }}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" value="edit">Modifier profil</a>
+    <a href="{{ path('edit', {'id': account.id})  }}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" value="edit">Modifier profil</a>
 {#{% block title %}#}
 {#    Ideas details | {{ parent() }}#}
 {% endblock %}

@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class EditAccountController extends AbstractController
 {
     /**
-     * @Route("/compte/detail/{id}/edit", name="edit", requirements={"id":"\d+"})
+     * @Route("/compte/detail/{id}/edit", name="edit")
      */
     public function formEditExampleAction(Request $request, User $user, EntityManagerInterface $em, $id)
     {
