@@ -16,6 +16,7 @@ use Doctrine\Common\Collections\Collection;
  */
 class User implements UserInterface
 {
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -71,13 +72,13 @@ class User implements UserInterface
     private $campus;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Sorties", mappedBy="organisateur")
+     * @ORM\OneToMany(targetEntity=Sorties::class, mappedBy="organisateur")
      */
     private $sortieOrganise;
 
     // OneToMany qui va crée la table de pivot avec le OneToMany situé dans Sorties.php
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Inscriptions",mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Inscriptions::class,mappedBy="user")
      */
     private $sortieUser;
 

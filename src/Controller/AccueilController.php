@@ -20,7 +20,7 @@ class AccueilController extends AbstractController
 
         if (!$sorties) {
             throw $this->createNotFoundException(
-                'Aucune sortie trouvée '
+                'Aucune sortie trouvée'
             );
         }
 
