@@ -96,8 +96,14 @@
                     <td> {{ sortie.sortieUser.count}} / {{ sortie.nbinscriptionsmax }}</td>
                     <td>{{ sortie.etat.libelle }}</td>
                     <td>{{ dump(sortie.sortieUser.contains(app.user.id)) }}</td>
-                    <td>{{ sortie.organisateur.nom }} {{ sortie.organisateur.prenom|first|upper }}.</td>
-                    <td></td>
+                    <td> {{ sortie.organisateur.prenom|capitalize }} {{ sortie.organisateur.nom|first|capitalize }}.</td>
+                    {% if sortie.etat.libelle == "En cours" %}
+                        <td><a href="">Afficher</a></td>
+                    {% elseif (sortie.etat.libelle == "Fermé" or sortie.etat.libelle == "Ouvert") %}
+                        <td><a href="">Afficher</a> - <a href="">Se désister</a></td>
+                    {% elseif sortie.etat.libelle == "En création" %}
+                        <td><a href="">Modifier</a> - <a href="">Publier</a></td>
+                    {% endif %}
                 </tr>
             {% endfor %}
             </tbody>
