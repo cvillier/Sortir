@@ -4,32 +4,54 @@
 
 {% block main %}
 
-
-    <h1>Creation de sorties</h1>
+    <h1 class="text-center">Créer une sortie</h1>
 
     {{ form_start(creationSortieForm) }}
-    {{ form_row(creationSortieForm.nom) }}
-    {{ form_row(creationSortieForm.datedebut) }}
-    {{ form_row(creationSortieForm.datecloture) }}
-    {{ form_row(creationSortieForm.nbinscriptionsmax) }}
-    {{ form_row(creationSortieForm.duree) }}
-    {{ form_row(creationSortieForm.descriptioninfos) }}
-    {{ form_row(creationSortieForm.campus) }}
-    {{ form_row(creationSortieForm.nom_ville) }}
-    {{ form_row(creationSortieForm.noLieu) }}
 
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
 
+                    <div class="form-group row">
+                        {{ form_label(creationSortieForm.nom) }}
+                        {{ form_widget(creationSortieForm.nom) }}
+                    </div>
 
+                    <div class="form-group row">
+                        {{ form_label(creationSortieForm.datedebut) }}
+                        {{ form_widget(creationSortieForm.datedebut) }}
 
+                    </div>
 
+                    <div class="form-group row">
+                        {{ form_row(creationSortieForm.datecloture) }}
+                    </div>
+                    {{ form_row(creationSortieForm.nbinscriptionsmax) }}
+                    {{ form_row(creationSortieForm.duree) }}
+                    {{ form_row(creationSortieForm.descriptioninfos) }}
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    {{ form_row(creationSortieForm.campus) }}
+                    {{ form_row(creationSortieForm.nom_ville) }}
+                    {{ form_row(creationSortieForm.noLieu) }}
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <button type="submit" class="btn" name="enregistrer" value="enregistrer">Enregistrer</button>
-    <button type="submit" class="btn" name="publier" value="publier">Publier la sortie</button>
-    <button type="submit" class="btn" name="annuler" value="annuler">Annuler</button>
+    <div class="text-center">
+        <button type="submit" class="btn" name="enregistrer" value="enregistrer">Enregistrer</button>
+        <button type="submit" class="btn" name="publier" value="publier">Publier la sortie</button>
+        <button type="submit" class="btn" name="annuler" value="annuler">Annuler</button>
+    </div>
 
     {{ form_end(creationSortieForm) }}
 
-
-
-
 {% endblock %}
+
+{% block javascripts %}{% endblock %}

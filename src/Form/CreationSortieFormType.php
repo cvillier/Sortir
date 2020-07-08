@@ -8,6 +8,9 @@ use App\Entity\Sorties;
 use App\Entity\Villes;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,8 +19,19 @@ class CreationSortieFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom')
-            ->add('datedebut')
+            ->add('nom',TextType::class, [
+                'label'  => 'Nom de la sortie : '
+            ])
+
+            ->add('datedebut', DateTimeType::class, [
+                'label'  => 'Date et heure de la sortie : ',
+                "widget" => 'single_text',
+                "data" => new \DateTime(),
+                'attr' => [
+                    'class' => 'form-control'
+                ]
+            ])
+
             ->add('datecloture')
             ->add('nbinscriptionsmax')
             ->add('duree')
