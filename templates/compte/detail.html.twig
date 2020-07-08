@@ -7,7 +7,11 @@
         <li>{{ account.prenom }}</li>
         <li>{{ account.telephone }}</li>
         <li>{{ account.email }}</li>
-{#        <li>{{ account.no_campus }}</li>#}
+{#        {% for ecole in account.campus  %}#}
+{#            {{ dump(account.nom_campus ) }}#}
+{#        <li>{{ account.campus.nom_campus }}</li>#}
+{#        {% endfor %}#}
+        <li>{{ account.campus.getNomCampus() }}</li>
     </ul>
 {#{% block title %}#}
 {#    Ideas details | {{ parent() }}#}

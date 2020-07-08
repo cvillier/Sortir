@@ -11,6 +11,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Campus
 {
+
+    public function __toString()
+    {
+        return $this->nom_campus;
+    }
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -24,18 +29,17 @@ class Campus
     private $nom_campus;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="no_campus")
+     * @ORM\OneToMany(targetEntity=User::class, mappedBy="no_campus")
      */
     private $users;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Sorties",mappedBy="campus")
+     * @ORM\OneToMany(targetEntity=Sorties::class,mappedBy="campus")
      */
     private $sorties;
 
 
     // CONSTRUCTOR
-
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -112,7 +116,7 @@ class Campus
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
-            $user->getNoCampus();
+            $user->getCampus();
         }
 
         return $this;
@@ -123,12 +127,13 @@ class Campus
         if ($this->users->contains($user)) {
             $this->users->removeElement($user);
             // set the owning side to null (unless already changed)
-            if ($user->getNoCampus() === $this) {
-                $user->setNoCampus(null);
+            if ($user->getCampus() === $this) {
+                $user->setCampus(null);
             }
         }
 
         return $this;
     }
+
 
 }

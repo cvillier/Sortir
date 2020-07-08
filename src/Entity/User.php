@@ -65,9 +65,10 @@ class User implements UserInterface
     private $actif;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Campus", inversedBy="users")
+     * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="users")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $no_campus;
+    private $campus;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Sorties", mappedBy="organisateur")
@@ -231,14 +232,14 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getNoCampus(): ?Campus
+    public function getCampus(): ?Campus
     {
-        return $this->no_campus;
+        return $this->campus;
     }
 
-    public function setNoCampus(?Campus $no_campus): self
+    public function setCampus(?Campus $campus): self
     {
-        $this->no_campus = $no_campus;
+        $this->campus = $campus;
 
         return $this;
     }

@@ -8,6 +8,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -34,6 +35,20 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $user->setPassword($newEncodedPassword);
         $this->_em->persist($user);
         $this->_em->flush();
+    }
+
+    public function findUserWithCampus()
+    {
+        $qb = $this->createQueryBuilder('i');
+        $qb->andWhere('i.actif = true');
+//        $qb->addOrderBy('i.dateCreated', 'DESC');
+        $qb->setMaxResults(50);
+        $qb->join('i.campus', 'c');
+        $qb->addSelect('c');
+
+        $query = $qb->getQuery();
+        $paginator = new Paginator($query);
+        return $paginator;
     }
 
     // /**
