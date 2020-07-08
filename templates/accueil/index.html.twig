@@ -93,10 +93,10 @@
                     <td>{{ sortie.nom }}</td>
                     <td>{{ sortie.datedebut|date("d/m/Y") }}</td>
                     <td>{{ sortie.datecloture|date("d/m/Y") }}</td>
-                    <td>{{ sortie.nbinscriptionsmax }}</td>
+                    <td> {{ sortie.sortieUser.count}} / {{ sortie.nbinscriptionsmax }}</td>
                     <td>{{ sortie.etat.libelle }}</td>
                     <td>{{ dump(sortie.sortieUser.contains(app.user.id)) }}</td>
-                    <td>{{ sortie.organisateur.nom }} {{ sortie.organisateur.prenom|first }}.</td>
+                    <td>{{ sortie.organisateur.nom }} {{ sortie.organisateur.prenom|first|upper }}.</td>
                     <td></td>
                 </tr>
             {% endfor %}
