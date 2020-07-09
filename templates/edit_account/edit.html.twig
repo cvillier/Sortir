@@ -52,15 +52,14 @@
             {{ form_widget(form.photo) }}
         </div>
 
+    {% if form.roles == "ROLE_ADMIN" %}
         <div>
             {{ form_label(form.roles) }}
-                {% if is_granted('ROLE_ADMIN') %}
-                    {{ form_widget(form.roles) }}
-                {% else %}
-                    {{ form_widget(form.roles, { 'disabled':'disabled' }) }}
-                {% endif %}
+            {{ form_widget(form.roles) }}
         </div>
-
+    {% else %}
+        {{ form_widget(form.roles, { 'attr': {'class': 'hidden-row'} }) }}
+    {% endif %}
         <div>
             <button type="submit" class="btn btn-primary">Enregistrer</button>
             <button type="reset" class="btn btn-primary">Annuler</button>
@@ -68,5 +67,5 @@
 
         {{ form_end(form) }}
 </div>
-
+</form>
 {% endblock %}

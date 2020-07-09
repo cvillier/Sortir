@@ -26,6 +26,7 @@ class RegistrationFormType extends AbstractType
             ->add('prenom')
             ->add('telephone')
             ->add('email')
+            ->add('actif')
             ->add('roles', ChoiceType::class, [
                 'choices' => [
                     'Admin' => 'ROLE_ADMIN',
