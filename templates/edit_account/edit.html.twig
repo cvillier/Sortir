@@ -8,65 +8,82 @@
 
     {{ form_start(form) }}
 
-    <div class="card">
-        <div class="card-body">
+    <div class="row">
 
-            <div class="form-group row">
-                {{ form_label(form.pseudo) }}
-                {{ form_widget(form.pseudo) }}
+        <div class="col-sm-4"> <!--colone de gauche-->
+            <div class="card">
+                <div class="card-body">
+                    <img class="profil-picture"
+                         src="{{ asset('IMAGES/profilPicture/' ~ app.user.photo) }}"
+                         alt="La photo de profil">
+                </div>
             </div>
-
-            <div class="form-group row">
-                {{ form_label(form.prenom) }}
-                {{ form_widget(form.prenom) }}
-            </div>
-
-            <div class="form-group row">
-                {{ form_label(form.nom) }}
-                {{ form_widget(form.nom) }}
-            </div>
-
-            <div class="form-group row">
-                {{ form_label(form.telephone) }}
-                {{ form_widget(form.telephone) }}
-            </div>
-
-            <div class="form-group row">
-                {{ form_label(form.email) }}
-                {{ form_widget(form.email) }}
-            </div>
-
-            <div class="form-group row">
-                {{ form_label(form.password) }}
-                {{ form_widget(form.password) }}
-            </div>
-
-            <!-- **confirmation password** -->
-
-            <div class="form-group row">
-                {{ form_label(form.campus) }}
-                {{ form_widget(form.campus) }}
-            </div>
-
-{#            <div class="form-group row">#}
-{#                {{ form_label(form.photoFile) }}#}
-{#                {{ form_widget(form.photoFile) }}#}
-{#            </div>#}
-
-    {#A ne pas afficher#}
-        <div>
-            {{ form_label(form.roles) }}
-            {{ form_widget(form.roles) }}
         </div>
 
-        <div>
-            <button type="submit" class="btn btn-primary">Enregistrer</button>
-            <button type="reset" class="btn btn-primary">Annuler</button>
+
+        <div class="col-sm-8"> <!--colone de droite-->
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="form-group row">
+                        {{ form_label(form.pseudo) }}
+                        {{ form_widget(form.pseudo) }}
+                    </div>
+
+                    <div class="form-group row">
+                        {{ form_label(form.prenom) }}
+                        {{ form_widget(form.prenom) }}
+                    </div>
+
+                    <div class="form-group row">
+                        {{ form_label(form.nom) }}
+                        {{ form_widget(form.nom) }}
+                    </div>
+
+                    <div class="form-group row">
+                        {{ form_label(form.telephone) }}
+                        {{ form_widget(form.telephone) }}
+                    </div>
+
+                    <div class="form-group row">
+                        {{ form_label(form.email) }}
+                        {{ form_widget(form.email) }}
+                    </div>
+
+                    <div class="form-group row">
+                        {{ form_label(form.password) }}
+                        {{ form_widget(form.password) }}
+                    </div>
+
+                    <!-- **confirmation password** -->
+
+                    <div class="form-group row">
+                        {{ form_label(form.campus) }}
+                        {{ form_widget(form.campus) }}
+                    </div>
+
+                    <div class="form-group row">
+                        {{ form_label(form.photoFile) }}
+                        {{ form_widget(form.photoFile) }}
+                    </div>
+
+                    {#A ne pas afficher#}
+                    <div>
+                        {{ form_label(form.roles) }}
+                        {{ form_widget(form.roles) }}
+                    </div>
+
+                    <div>
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                        <button type="reset" class="btn btn-primary">Annuler</button>
+                    </div>
+
+                </div>
+            </div>
         </div>
-    </div>
 
     {{ form_end(form) }}
 
-</div>
-</form>
+    </div>
+
 {% endblock %}
