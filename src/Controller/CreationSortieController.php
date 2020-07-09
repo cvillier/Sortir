@@ -17,8 +17,9 @@ class CreationSortieController extends AbstractController
      */
     public function createSortie(EntityManagerInterface $em, Request $request)
     {
-        if (!$this->isGranted("ROLE_USER")) {
-            throw $this->createAccessDeniedException("Interdit");
+        if (!$this->isGranted("ROLE_ORGANISATEUR")) {
+            $this->addFlash("error", "Accès interdit !");
+            return $this->redirectToRoute("accueil");
         }
 
         $sortie = new Sorties();

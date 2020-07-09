@@ -47,7 +47,7 @@ class EditAccountType extends AbstractType
 
             ->add('campus')
 
-            ->add('photo', FileType::class, [
+            ->add('photoFile', FileType::class, [
                 'label' => 'Ma photo : '
             ])
 

@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -86,6 +87,11 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $photo;
+
+    /**
+     * @Assert\Image(maxSize="2M")
+     */
+    private $photoFile;
 
 
 
@@ -301,6 +307,22 @@ class User implements UserInterface
     public function setPhoto($photo): void
     {
         $this->photo = $photo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPhotoFile()
+    {
+        return $this->photoFile;
+    }
+
+    /**
+     * @param mixed $photoFile
+     */
+    public function setPhotoFile($photoFile): void
+    {
+        $this->photoFile = $photoFile;
     }
 
 
