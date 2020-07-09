@@ -7,6 +7,7 @@ use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -25,7 +26,16 @@ class RegistrationFormType extends AbstractType
             ->add('prenom')
             ->add('telephone')
             ->add('email')
-
+            ->add('roles', ChoiceType::class, [
+                'choices' => [
+                    'Admin' => 'ROLE_ADMIN',
+                    'User' => 'ROLE_USER',
+                    'Organisateur' => 'ROLE_ORGANISATEUR',
+                    'Participant' => 'ROLE_PARTICIPANT',
+                ],
+                'expanded'  => false, // liste déroulante
+                'multiple'  => true, // choix multiple
+            ])
             ->add("campus", EntityType::class, [
                 'class' => Campus::class,
                 'choice_label' => 'nom_campus'

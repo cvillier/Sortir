@@ -5,20 +5,23 @@
 {% block main %}
 
 <div class="example-wrapper">
-    {{ dump (form) }}
+{#    {{ dump (form) }}#}
 
     <h1>Modifier profil </h1>
         {{ form_start(form) }}
-        {{ form_row(form.pseudo) }}
-        {{ form_row(form.nom) }}
-        {{ form_row(form.prenom) }}
-        {{ form_row(form.email) }}
-        {{ form_row(form.password) }}
-        {{ form_row(form.telephone) }}
-        {{ form_row(form.campus) }}
-{#        {{ form_row(form.roles) }}#}
-{#        {{ form_row(form.button) }}#}
-    {#    <button type="submit" class="btn btn-primary">Update!</button>#}
-{#        {{ form_end(form) }}#}
+            {{ form_row(form.pseudo) }}
+            {{ form_row(form.nom) }}
+            {{ form_row(form.prenom) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.password) }}
+            {{ form_row(form.telephone) }}
+            {{ form_row(form.campus) }}
+            {% if is_granted('ROLE_ADMIN') %}
+                    {{ form_row(form.roles) }}
+            {% else %}
+                {{ form_widget(form.roles, { 'disabled':'disabled' }) }}
+            {% endif %}
+{#            {{ form_widget(form) }}#}
+        {{ form_end(form) }}
 </div>
 {% endblock %}
