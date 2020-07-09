@@ -102,7 +102,8 @@
                             {% endif %}
                         {% endfor %}
                     </td>
-                    <td> {{ sortie.organisateur.prenom|capitalize }} {{ sortie.organisateur.nom|first|capitalize }}.</td>
+{#                    {{ dump(sortie.organisateur) }}#}
+                    <td> <a href="{{ path('detail', {'id': sortie.organisateur.id}) }}">{{ sortie.organisateur.prenom|capitalize }} {{ sortie.organisateur.nom|first|capitalize }}.</a></td>
                     {% if sortie.etat.libelle == "En cours" %}
                         <td><a href="">Afficher</a></td>
                     {% elseif (sortie.etat.libelle == "Fermé" or sortie.etat.libelle == "Ouvert") %}
