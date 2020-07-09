@@ -113,9 +113,11 @@
                     {% elseif sortie.etat.libelle == "Fermé" %}
                         <td><a href="{{ path('affichage_sortie', {'id': sortie.id}) }}">Se désister</a></td>
                     {% elseif sortie.etat.libelle == "En création" %}
-                        <td><a href="{{ path('modification_sortie', {'id': sortie.id}) }}">Modifier</a> - <a href="">Publier</a></td>
+                        <td><a href="{{ path('modification_sortie', {'id': sortie.id}) }}">Modifier</a> -
+                            <a href="">Publier</a></td>
                     {% elseif sortie.etat.libelle == "Ouvert" %}z
-                        <td><a href="{{ path('affichage_sortie', {'id': sortie.id}) }}">Afficher</a> - <a href="">Annuler</a></td>
+                        <td><a href="{{ path('affichage_sortie', {'id': sortie.id}) }}">Afficher</a> -
+                            <a href="{{ path('annulation_sortie', {'id': sortie.id}) }}">Annuler</a></td>
                     {% endif %}
 
 
