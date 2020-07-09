@@ -21,6 +21,12 @@ class AnnulationSortieController extends AbstractController
         $sortiesRepo = $this->getDoctrine()->getRepository(Sorties::class);
         $sortie = $sortiesRepo->find($id);
 
+        // empeche d'acceder a la page si l'user n'est pas l'organisateur de la sortie
+        if ($sortie->getOrganisateur() !== $this->getUser()) {
+            $this->addFlash("error", "Annulation interdite vous n'etes pas l'organisateur !");
+            return $this->redirectToRoute("accueil");
+        }
+
         $annulationSortieForm = $this->createForm(AnnulationSortieFormType::class, $sortie);
         $annulationSortieForm->handleRequest($request);
 

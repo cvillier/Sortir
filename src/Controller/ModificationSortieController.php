@@ -21,6 +21,13 @@ class ModificationSortieController extends AbstractController
         $sortiesRepo = $this->getDoctrine()->getRepository(Sorties::class);
         $sortie = $sortiesRepo->find($id);
 
+        // empeche d'acceder a la page si l'user n'est pas l'organisateur de la sortie
+        if ($sortie->getOrganisateur() !== $this->getUser()) {
+            $this->addFlash("error", "Modification interdite vous n'etes pas l'organisateur !");
+            return $this->redirectToRoute("accueil");
+        }
+
+
         $modificationSortieform = $this->createForm(CreationSortieFormType::class, $sortie);
         $modificationSortieform->handleRequest($request);
 
