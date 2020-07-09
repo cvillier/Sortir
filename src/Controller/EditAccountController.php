@@ -13,7 +13,7 @@ class EditAccountController extends AbstractController
     /**
      * @Route("/compte/detail/{id}/edit", name="edit")
      */
-    public function formEditExampleAction(Request $request, $id)
+    public function formEditExampleAction(Request $request, User $user, $id)
     {
         // pour recuperer la sortie avec l'id et afficher les valeurs dans les placeholder
         $repo = $this->getDoctrine()->getRepository(User::class);
@@ -32,7 +32,7 @@ class EditAccountController extends AbstractController
 
         if ($editAccountForm->isSubmitted() && $editAccountForm->isValid()) {
 
-            $photoProfil = $account->getPhotoFile();
+            $photoProfil = $user->getPhotoFile();
             // this condition is needed because the 'brochure' field is not required
             // so the PDF file must be processed only when a file is uploaded
             if ($photoProfil) {
@@ -42,7 +42,7 @@ class EditAccountController extends AbstractController
                 // Move the file to the directory where brochures are stored
                 try {
                     $photoProfil->move(
-                        $this->getParameter('upload_directory'),
+                        $this->getParameter('upload_directory' ),
                         $newFilename
                     );
                 } catch (FileException $e) {
