@@ -4,14 +4,8 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\HttpFoundation\File\File;
 
 class EditAccountType extends AbstractType
 {
@@ -36,24 +30,39 @@ class EditAccountType extends AbstractType
             ->add('telephone')
             ->add('email')
             ->add('actif')
+            ->add('pseudo', TextType::class, [
+                'label' => 'Pseudo : '
+            ])
+
+//            ->add('roles')
+
+            ->add('password', PasswordType::class, [
+                'label' => 'Mot de passe : '
+            ])
+
+            ->add('nom', TextType::class, [
+                'label' => 'Nom : '
+            ])
+
+            ->add('prenom', TextType::class, [
+                'label' => 'Prénom : '
+            ])
+
+            ->add('telephone', IntegerType::class, [
+                'label' => 'Téléphone : '
+            ])
+
+            ->add('email', EmailType::class, [
+                'label' => 'Email'
+            ])
+
             ->add('campus')
-//            ->add('photo', FileType::class, [
-//                'label' => 'Ma photo : ',
-//                'mapped' => false,
-//                'required' => false,
-//                'constraints' => [
-//                    new File([
-//                        'maxSize' => '10000k',
-//                        'mimeTypes' => [
-//                            'image/jpeg',
-//                            'image/png',
-//                            'image/gif'
-//                        ],
-//                        'mimeTypesMessage' => 'Please upload a valid picture',
-//                    ])
-//                ],
-//            ])
-            ->add('button', SubmitType::class);
+
+//            ->add('actif')
+
+            ->add('photo', FileType::class, [
+                'label' => 'Ma photo : '
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

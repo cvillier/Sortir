@@ -4,11 +4,59 @@
 
 {% block main %}
 
-<div class="example-wrapper">
-{#    {{ dump (form) }}#}
+<form class="example-wrapper">
 
     <h1>Modifier profil </h1>
+
         {{ form_start(form) }}
+
+        <div class="form-group row">
+            {{ form_label(form.pseudo) }}
+            {{ form_widget(form.pseudo) }}
+        </div>
+
+        <div class="form-group row">
+            {{ form_label(form.prenom) }}
+            {{ form_widget(form.prenom) }}
+        </div>
+
+        <div class="form-group row">
+            {{ form_label(form.nom) }}
+            {{ form_widget(form.nom) }}
+        </div>
+
+        <div class="form-group row">
+            {{ form_label(form.telephone) }}
+            {{ form_widget(form.telephone) }}
+        </div>
+
+        <div class="form-group row">
+            {{ form_label(form.email) }}
+            {{ form_widget(form.email) }}
+        </div>
+
+        <div class="form-group row">
+            {{ form_label(form.password) }}
+            {{ form_widget(form.password) }}
+        </div>
+
+        <!-- **confirmation password** -->
+
+        <div class="form-group row">
+            {{ form_label(form.campus) }}
+            {{ form_widget(form.campus) }}
+        </div>
+
+        <div class="form-group row">
+            {{ form_label(form.photo) }}
+            {{ form_widget(form.photo) }}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+        <button type="reset" class="btn btn-primary">Annuler</button>
+
+        {{ form_end(form) }}
+
             {{ form_row(form.pseudo) }}
             {{ form_row(form.nom) }}
             {{ form_row(form.prenom) }}
@@ -24,4 +72,5 @@
 {#            {{ form_widget(form) }}#}
         {{ form_end(form) }}
 </div>
+
 {% endblock %}

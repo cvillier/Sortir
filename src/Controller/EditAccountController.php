@@ -19,6 +19,7 @@ class EditAccountController extends AbstractController
         // pour recuperer la sortie avec l'id et afficher les valeurs dans les placeholder
         $repo = $this->getDoctrine()->getRepository(User::class);
         $account = $repo->find($id);
+
         $editAccountForm = $this->createForm(EditAccountType::class, $account);
 
 
@@ -32,7 +33,8 @@ class EditAccountController extends AbstractController
             $em->flush();
 
             return $this->redirectToRoute('edit'    , [
-                'id' => $account->getId(),]);
+                'id' => $account->getId()
+            ]);
 
         }
 
