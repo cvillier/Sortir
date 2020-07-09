@@ -52,24 +52,20 @@
             {{ form_widget(form.photo) }}
         </div>
 
-        <button type="submit" class="btn btn-primary">Enregistrer</button>
-        <button type="reset" class="btn btn-primary">Annuler</button>
+        <div>
+            {{ form_label(form.roles) }}
+                {% if is_granted('ROLE_ADMIN') %}
+                    {{ form_widget(form.roles) }}
+                {% else %}
+                    {{ form_widget(form.roles, { 'disabled':'disabled' }) }}
+                {% endif %}
+        </div>
 
-        {{ form_end(form) }}
+        <div>
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+            <button type="reset" class="btn btn-primary">Annuler</button>
+        </div>
 
-            {{ form_row(form.pseudo) }}
-            {{ form_row(form.nom) }}
-            {{ form_row(form.prenom) }}
-            {{ form_row(form.email) }}
-            {{ form_row(form.password) }}
-            {{ form_row(form.telephone) }}
-            {{ form_row(form.campus) }}
-            {% if is_granted('ROLE_ADMIN') %}
-                    {{ form_row(form.roles) }}
-            {% else %}
-                {{ form_widget(form.roles, { 'disabled':'disabled' }) }}
-            {% endif %}
-{#            {{ form_widget(form) }}#}
         {{ form_end(form) }}
 </div>
 
