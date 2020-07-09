@@ -52,14 +52,12 @@
             {{ form_widget(form.photo) }}
         </div>
 
-    {% if form.roles == "ROLE_ADMIN" %}
+    {#A ne pas afficher#}
         <div>
             {{ form_label(form.roles) }}
             {{ form_widget(form.roles) }}
         </div>
-    {% else %}
-        {{ form_widget(form.roles, { 'attr': {'class': 'hidden-row'} }) }}
-    {% endif %}
+
         <div>
             <button type="submit" class="btn btn-primary">Enregistrer</button>
             <button type="reset" class="btn btn-primary">Annuler</button>

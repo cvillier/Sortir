@@ -37,9 +37,15 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('app_logout') }}" title="Disconnect">Se déconnecter</a>
                         </li>
+                            {% if (is_granted("ROLE_ADMIN")) %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('compte') }}">Mon profil</a>
+                            <a class="nav-link" href="{{ path('compte') }}">Tous les profils</a>
                         </li>
+                            {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('detail', {'id': app.user.id}) }}">Mon profil</a>
+                        </li>
+                            {% endif %}
                     {% else %}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('app_login') }}" title="Connect">Se Connecter</a>
