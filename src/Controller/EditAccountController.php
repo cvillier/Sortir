@@ -27,6 +27,26 @@ class EditAccountController extends AbstractController
 
         if ($editAccountForm->isSubmitted() && $editAccountForm->isValid()) {
 
+            $photoProfil = $user->getPhotoFile();
+            // this condition is needed because the 'brochure' field is not required
+            // so the PDF file must be processed only when a file is uploaded
+            if ($photoProfil) {
+                $safeFilename = uniqid();
+                $newFilename = $safeFilename.'.'.$photoProfil->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    $photoProfil->move(
+                        $this->getParameter('upload_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    error_log($e->getMessage());
+                }
+
+                $user->setPhoto($newFilename);
+            }
+
 //            /** @var User $user */
 //            $user = $form->getData();
             $em = $this->getDoctrine()->getManager();
