@@ -108,18 +108,41 @@
 
                     {#PARTIE ACTIONS#}
 
-                    {% if sortie.etat.libelle == "En cours" %}
-                        <td><a href="{{ path('affichage_sortie', {'id': sortie.id}) }}">Afficher</a></td>
-                    {% elseif sortie.etat.libelle == "Fermé" %}
-                        <td><a href="{{ path('affichage_sortie', {'id': sortie.id}) }}">Se désister</a></td>
-                    {% elseif sortie.etat.libelle == "En création" %}
-                        <td><a href="{{ path('modification_sortie', {'id': sortie.id}) }}">Modifier</a> -
-                            <a href="">Publier</a></td>
-                    {% elseif sortie.etat.libelle == "Ouvert" %}z
-                        <td><a href="{{ path('affichage_sortie', {'id': sortie.id}) }}">Afficher</a> -
-                            <a href="{{ path('annulation_sortie', {'id': sortie.id}) }}">Annuler</a></td>
-                    {% endif %}
+                    {# Si il y a encore de la place dans l'activité alors ou peut s'inscrire si l'état le permet#}
+                    {% if (app.user.roles != ["ROLE_USER"]) %}
 
+                        {% if sortie.etat.libelle == "En cours" %}
+                            <td><a href="{{ path('affichage_sortie', {'id': sortie.id}) }}">Afficher</a></td>
+                        {% endif %}
+
+                        {% if sortie.etat.libelle == "Fermé" %}
+                            <td><a href="{{ path('affichage_sortie', {'id': sortie.id}) }}">Afficher</a>
+                            {% for participant in inscriptions %}
+                                {% if (participant.user == app.user) and (participant.sortie == sortie) %}
+                                    <a href="{{ path('affichage_sortie', {'id': sortie.id}) }}">Se désister</a>
+                                    </td>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+
+                        {% if sortie.etat.libelle == "En création" %}
+                            <td><a href="{{ path('modification_sortie', {'id': sortie.id}) }}">Modifier</a> -
+                                <a href="">Publier</a>
+                            </td>
+                        {% endif %}
+
+                        {% if sortie.etat.libelle == "Ouvert" %}
+                            <td><a href="{{ path('affichage_sortie', {'id': sortie.id}) }}">Afficher</a> -
+                                <a href="{{ path('annulation_sortie', {'id': sortie.id}) }}">Annuler</a></td>
+
+                        {% endif %}
+
+                        {#Si plus de place, alors la personne ne peut qu'afficher la sortie#}
+                        {% else %}
+
+                        <td><a href="{{ path('affichage_sortie', {'id': sortie.id}) }}">Afficher</a></td>
+
+                    {% endif %}
 
                 </tr>
             {% endfor %}
@@ -127,7 +150,9 @@
 
             <tfoot>
             <tr>
-                <td><a href="{{ path('creation_sortie') }}"><button type="submit" class="btn btn-primary mb-2">Créer une sortie</button></a></td>
+                {% if app.user.roles == ["ROLE_ORGA"] or app.user.roles == ["ROLE_ADMIN"] %}
+                    <td><a href="{{ path('creation_sortie') }}"><button type="submit" class="btn btn-primary mb-2">Créer une sortie</button></a></td>
+                {% endif %}
             </tr>
             </tfoot>
 
