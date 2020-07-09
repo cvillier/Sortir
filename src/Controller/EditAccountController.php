@@ -32,7 +32,7 @@ class EditAccountController extends AbstractController
 
         if ($editAccountForm->isSubmitted() && $editAccountForm->isValid()) {
 
-            $photoProfil = $user->getPhotoFile();
+            $photoProfil = $account->getPhotoFile();
             // this condition is needed because the 'brochure' field is not required
             // so the PDF file must be processed only when a file is uploaded
             if ($photoProfil) {
