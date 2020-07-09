@@ -31,7 +31,7 @@ class EditAccountType extends AbstractType
                 'label' => 'Nom : '
             ])
 
-            ->add('telephone', IntegerType::class, [
+            ->add('telephone', TextType::class, [
                 'label' => 'Téléphone : '
             ])
 
