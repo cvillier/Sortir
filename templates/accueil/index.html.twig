@@ -89,6 +89,7 @@
 
             <tbody>
             {% for sortie in sorties %}
+
                 <tr>
                     <td>{{ sortie.nom }}</td>
                     <td>{{ sortie.datedebut|date("d/m/Y") }}</td>
@@ -119,7 +120,7 @@
                             <td><a href="{{ path('affichage_sortie', {'id': sortie.id}) }}">Afficher</a>
                             {% for participant in inscriptions %}
                                 {% if (participant.user == app.user) and (participant.sortie == sortie) %}
-                                    <a href="{{ path('affichage_sortie', {'id': sortie.id}) }}">Se désister</a>
+                                   - <a href="{{ path('affichage_sortie', {'id': sortie.id}) }}">Se désister</a>
                                     </td>
                                 {% endif %}
                             {% endfor %}
@@ -131,21 +132,27 @@
                             </td>
                         {% endif %}
 
-                        {% if sortie.etat.libelle == "Ouvert" %}
-                            <td><a href="{{ path('affichage_sortie', {'id': sortie.id}) }}">Afficher</a> -
-                                <a href="{{ path('annulation_sortie', {'id': sortie.id}) }}">Annuler</a></td>
-
+                        {% if (sortie.etat.libelle == "Ouvert") %}
+                            <td><a href="{{ path('affichage_sortie', {'id': sortie.id}) }}">Afficher</a>
+                            {% for participant in inscriptions %}
+                                {% if (participant.user == app.user) and (participant.sortie == sortie) and (app.user.id == sortie.organisateur.id) %}
+                                    - <a href="{{ path('affichage_sortie', {'id': sortie.id}) }}">Annuler</a></td>
+                                {% endif %}
+                            {% endfor %}
+                                - <a href="{{ path('affichage_sortie', {'id': sortie.id}) }}">S'FFGDSFDSFDS</a></td>
                         {% endif %}
 
                         {#Si plus de place, alors la personne ne peut qu'afficher la sortie#}
-                        {% else %}
+                    {% else %}
 
                         <td><a href="{{ path('affichage_sortie', {'id': sortie.id}) }}">Afficher</a></td>
 
                     {% endif %}
 
                 </tr>
+
             {% endfor %}
+
             </tbody>
 
             <tfoot>
