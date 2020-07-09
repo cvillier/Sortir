@@ -104,13 +104,23 @@
                     </td>
 {#                    {{ dump(sortie.organisateur) }}#}
                     <td> <a href="{{ path('detail', {'id': sortie.organisateur.id}) }}">{{ sortie.organisateur.prenom|capitalize }} {{ sortie.organisateur.nom|first|capitalize }}.</a></td>
+
+
+                    {#PARTIE ACTIONS#}
+
                     {% if sortie.etat.libelle == "En cours" %}
-                        <td><a href="">Afficher</a></td>
-                    {% elseif (sortie.etat.libelle == "Fermé" or sortie.etat.libelle == "Ouvert") %}
-                        <td><a href="">Afficher</a> - <a href="">Se désister</a></td>
+                        <td><a href="{{ path('affichage_sortie', {'id': sortie.id}) }}">Afficher</a></td>
+                    {% elseif sortie.etat.libelle == "Fermé" %}
+                        <td><a href="{{ path('affichage_sortie', {'id': sortie.id}) }}">Se désister</a></td>
                     {% elseif sortie.etat.libelle == "En création" %}
-                        <td><a href="">Modifier</a> - <a href="">Publier</a></td>
+                        <td><a href="{{ path('modification_sortie', {'id': sortie.id}) }}">Modifier</a> -
+                            <a href="">Publier</a></td>
+                    {% elseif sortie.etat.libelle == "Ouvert" %}z
+                        <td><a href="{{ path('affichage_sortie', {'id': sortie.id}) }}">Afficher</a> -
+                            <a href="{{ path('annulation_sortie', {'id': sortie.id}) }}">Annuler</a></td>
                     {% endif %}
+
+
                 </tr>
             {% endfor %}
             </tbody>

@@ -51,6 +51,11 @@ class Sorties
     private $descriptioninfos;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $motifAnnulation;
+
+    /**
      * @ORM\Column(type="string", length=250, nullable=true)
      */
     private $urlPhoto;
@@ -226,6 +231,21 @@ class Sorties
 
         return $this;
     }
+
+
+    public function getMotifAnnulation(): ?string
+    {
+        return $this->motifAnnulation;
+    }
+
+
+    public function setMotifAnnulation(?string $motifAnnulation): self
+    {
+        $this->motifAnnulation = $motifAnnulation;
+
+        return $this;
+    }
+
 
     public function getUrlPhoto(): ?string
     {
