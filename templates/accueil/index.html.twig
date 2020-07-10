@@ -14,14 +14,9 @@
             <div class="col-7">
 
                 <div class="form-group row ">
-                    <label for="inputState" class="col-sm-5 col-form-label">Campus :</label>
+                    {{ form_label(accueilForm.villes) }}
                     <div class="col-sm-6">
-                        <select id="inputState" class="form-control">
-                            <option selected>Villes</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                        </select>
+                        {{ form_widget(accueilForm.villes) }}
                     </div>
                 </div>
 
@@ -47,20 +42,22 @@
 
             <div class="col-3 my-auto">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">Sorties dont je suis l'organisateur/trice</label>
+                    {{ form_widget(accueilForm.organisateur) }}
+                    {{ form_label(accueilForm.organisateur) }}
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">Sorties auxquelles je suis inscrit/e</label>
+                    {{ form_widget(accueilForm.inscrit) }}
+                    {{ form_label(accueilForm.inscrit) }}
+
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">Sorties auxquelles je ne suis pas inscrit/e</label>
+                    {{ form_widget(accueilForm.nonInscrit) }}
+                    {{ form_label(accueilForm.nonInscrit) }}
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">Sorties passées</label>
+                    {{ form_widget(accueilForm.sortiesPassees) }}
+                    {{ form_label(accueilForm.sortiesPassees) }}
+
                 </div>
             </div>
 
@@ -114,7 +111,7 @@
 
                         {% if sortie.etat.id == 1 %}
                             <td><a href="{{ path('modification_sortie', {'id': sortie.id}) }}">Modifier</a> -
-                                <a href="">Publier</a>
+                                <a href="{{ path('publier/{id}', {'id': sortie.id}) }}">Publier</a>
                             </td>
                         {% endif %}
 
@@ -122,9 +119,9 @@
                             <td><a href="{{ path('affichage_sortie', {'id': sortie.id}) }}">Afficher</a>
                             {% for participant in inscriptions %}
                                 {% if (participant.user != app.user) and (participant.sortie == sortie) %}
-                                    - <a href="{{ path('affichage_sortie', {'id': sortie.id}) }}">S'inscrire</a></td>
+                                    - <a href="{{ path('inscrire/{id}', {'id': sortie.id}) }}">S'inscrire</a></td>
                                 {% elseif (participant.user == app.user) and (participant.sortie == sortie) %}
-                                    - <a href="{{ path('affichage_sortie', {'id': sortie.id}) }}">Annuler</a></td>
+                                    - <a href="{{ path('annulation_sortie', {'id': sortie.id}) }}">Annuler</a></td>
                                 {% endif %}
                             {% endfor %}
                         {% endif %}
@@ -133,7 +130,7 @@
                             <td><a href="{{ path('affichage_sortie', {'id': sortie.id}) }}">Afficher</a>
                             {% for participant in inscriptions %}
                                 {% if (participant.user == app.user) and (participant.sortie == sortie) %}
-                                    - <a href="{{ path('affichage_sortie', {'id': sortie.id}) }}">Se désister</a>
+                                    - <a href="{{ path('desister/{id}', {'id': sortie.id}) }}">Se désister</a>
                                     </td>
                                 {% endif %}
                             {% endfor %}
