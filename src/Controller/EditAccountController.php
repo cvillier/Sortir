@@ -39,26 +39,26 @@ class EditAccountController extends AbstractController
                     $editAccountForm->get('plainPassword')->getData()
                 )
             );
-            $photoProfil = $user->getPhotoFile();
-            // this condition is needed because the 'photo' field is not required
-            // so the PDF file must be processed only when a file is uploaded
-            if ($photoProfil) {
-                $safeFilename = uniqid();
-                $newFilename = $safeFilename.'.'.$photoProfil->guessExtension();
-
-                // Move the file to the directory where brochures are stored
-                try {
-                    $photoProfil->move(
-                        $this->getParameter('upload_directory' ),
-                        $newFilename
-                    );
-                    $user->setAttachment($newFilename);
-                } catch (FileException $e) {
-                    error_log($e->getMessage());
-                }
-
-                $user->setPhoto($newFilename);
-            }
+//            $photoProfil = $user->getPhotoFile();
+//            // this condition is needed because the 'photo' field is not required
+//            // so the PDF file must be processed only when a file is uploaded
+//            if ($photoProfil) {
+//                $safeFilename = uniqid();
+//                $newFilename = $safeFilename.'.'.$photoProfil->guessExtension();
+//
+//                // Move the file to the directory where brochures are stored
+//                try {
+//                    $photoProfil->move(
+//                        $this->getParameter('upload_directory' ),
+//                        $newFilename
+//                    );
+//                    $user->setAttachment($newFilename);
+//                } catch (FileException $e) {
+//                    error_log($e->getMessage());
+//                }
+//
+//                $user->setPhoto($newFilename);
+//            }
 
 //            /** @var User $user */
 //            $user = $form->getData();

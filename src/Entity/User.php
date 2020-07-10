@@ -20,7 +20,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @UniqueEntity(fields={"pseudo"}, message="There is already an account with this pseudo")
  * @Vich\Uploadable()
  */
-class User implements UserInterface, \Serializable
+class User implements UserInterface
 {
 
     /**
@@ -88,16 +88,16 @@ class User implements UserInterface, \Serializable
      */
     private $sortieUser;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $photo;
-
-    /**
-     * @Assert\Image(maxSize="2M")
-     * @Vich\UploadableField(mapping="profilPicture", fileNameProperty="fileName")
-     */
-    private $photoFile;
+//    /**
+//     * @ORM\Column(type="string", length=255, nullable=true)
+//     */
+//    protected $photo;
+//
+//    /**
+//     * @Assert\Image(maxSize="2M")
+//     * @Vich\UploadableField(mapping="profilPicture")
+//     */
+//    protected $photoFile;
 
 
 
@@ -298,66 +298,74 @@ class User implements UserInterface, \Serializable
         $this->sortieUser = $sortieUser;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getPhoto()
-    {
-        return $this->photo;
-    }
-
-    /**
-     * @param mixed $photo
-     */
-    public function setPhoto($photo): void
-    {
-        $this->photo = $photo;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPhotoFile()
-    {
-        return $this->photoFile;
-    }
-
-    /**
-     * @param mixed $photoFile
-     */
-    public function setPhotoFile($photoFile): void
-    {
-        $this->photoFile = $photoFile;
-    }
-
-
-    //SERIALIZERS
-
-    public function serialize() {
-
-        return serialize( [
-            $this->id,
-            $this->pseudo,
-            $this->prenom,
-            $this->nom,
-            $this->telephone,
-            $this->email,
-            $this->campus,
-            ]
-        );
-    }
-
-    public function unserialize($serialized) {
-
-        list (
-            $this->id,
-            $this->pseudo,
-            $this->prenom,
-            $this->nom,
-            $this->telephone,
-            $this->email,
-            $this->campus,
-            ) = unserialize($serialized);
-    }
+//    /**
+//     * @return mixed
+//     */
+//    public function getPhoto()
+//    {
+//        return $this->photo;
+//    }
+//
+//    /**
+//     * @param mixed $photo
+//     */
+//    public function setPhoto($photo): void
+//    {
+//        $this->photo = $photo;
+//    }
+//
+//    /**
+//     * @return mixed
+//     */
+//    public function getPhotoFile()
+//    {
+//        return $this->photoFile;
+//    }
+//
+//    /**
+//     * @param mixed $photoFile
+//     */
+//    public function setPhotoFile($photoFile): void
+//    {
+//        $this->photoFile = $photoFile;
+//    }
+//
+//
+//    //SERIALIZERS
+//
+//    public function serialize() {
+//
+//        return serialize( [
+//            $this->id,
+//            $this->pseudo,
+//            $this->prenom,
+//            $this->password,
+//            $this->roles,
+//            $this->nom,
+//            $this->telephone,
+//            $this->email,
+//            $this->campus,
+//            $this->photo,
+//            $this->actif,
+//            ]
+//        );
+//    }
+//
+//    public function unserialize($serialized) {
+//
+//        list (
+//            $this->id,
+//            $this->pseudo,
+//            $this->prenom,
+//            $this->password,
+//            $this->roles,
+//            $this->nom,
+//            $this->telephone,
+//            $this->email,
+//            $this->campus,
+//            $this->photo,
+//            $this->actif,
+//            ) = unserialize($serialized);
+//    }
 
 }
