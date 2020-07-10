@@ -103,13 +103,13 @@
                             {% endif %}
                         {% endfor %}
                     </td>
-{#                    {{ dump(sortie.organisateur) }}#}
+                    {{ dump(sortie.organisateur) }}
                     <td> <a href="{{ path('detail', {'id': sortie.organisateur.id}) }}">{{ sortie.organisateur.prenom|capitalize }} {{ sortie.organisateur.nom|first|capitalize }}.</a></td>
 
 
-                    {#PARTIE ACTIONS#}
+                    PARTIE ACTIONS
 
-                    {# Si il y a encore de la place dans l'activité alors ou peut s'inscrire si l'état le permet#}
+                     Si il y a encore de la place dans l'activité alors ou peut s'inscrire si l'état le permet
                     {% if (app.user.roles != ["ROLE_USER"]) %}
 
                         {% if sortie.etat.libelle == "En cours" %}
@@ -142,7 +142,7 @@
                                 - <a href="{{ path('affichage_sortie', {'id': sortie.id}) }}">S'inscrire</a></td>
                         {% endif %}
 
-                        {#Si plus de place, alors la personne ne peut qu'afficher la sortie#}
+                        Si plus de place, alors la personne ne peut qu'afficher la sortie
                     {% else %}
 
                         <td><a href="{{ path('affichage_sortie', {'id': sortie.id}) }}">Afficher</a></td>
