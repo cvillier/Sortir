@@ -67,12 +67,17 @@
 {#                        {{ form_widget(form.photoFile) }}#}
 {#                    </div>#}
 
-                    {#A ne pas afficher#}
-                    <div>
+{#                    {% if is_granted("ROLE_ADMIN") %}#}
+                    <div class="form-control">
                         {{ form_label(form.roles) }}
                         {{ form_widget(form.roles) }}
                     </div>
-
+{#                        {% else %}#}
+{#                            <div class="form-control" disabled>#}
+{#                                {{ form_label(form.roles) }}#}
+{#                                {{ form_widget(form.roles) }}#}
+{#                            </div>#}
+{#                    {% endif %}#}
 {#                    <div>#}
 {#                        <button type="submit" class="btn btn-primary">Enregistrer</button>#}
 {#                        <button type="reset" class="btn btn-primary">Annuler</button>#}
