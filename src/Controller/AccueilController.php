@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Inscriptions;
 use App\Entity\Sorties;
+use App\Form\AccueilType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -25,8 +26,11 @@ class AccueilController extends AbstractController
             );
         }
 
+        $form = $this->createForm(AccueilType::class);
+
         return $this->render('accueil/index.html.twig', [
-            'sorties' => $sorties, 'inscriptions' => $inscriptions
+            'sorties' => $sorties, 'inscriptions' => $inscriptions,
+             'accueilForm' => $form->createView(),
         ]);
     }
 }
