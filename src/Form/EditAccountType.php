@@ -16,6 +16,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class EditAccountType extends AbstractType
 {
@@ -67,9 +68,9 @@ class EditAccountType extends AbstractType
 
                 ->add('campus')
 
-//            ->add('photoFile', FileType::class, [
-//                'label' => 'Ma photo : '
-//            ])
+            ->add('photoFile', VichImageType::class, [
+                'label' => 'Ma photo : '
+            ])
 
 //            ->add('actif')
 

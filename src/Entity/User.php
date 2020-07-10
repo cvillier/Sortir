@@ -9,13 +9,18 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
+
 
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"pseudo"}, message="There is already an account with this pseudo")
+ * @Vich\Uploadable()
  */
-class User implements UserInterface
+class User implements UserInterface, \Serializable
 {
 
     /**
@@ -90,6 +95,7 @@ class User implements UserInterface
 
     /**
      * @Assert\Image(maxSize="2M")
+     * @Vich\UploadableField(mapping="profilPicture", fileNameProperty="fileName")
      */
     private $photoFile;
 
@@ -325,5 +331,33 @@ class User implements UserInterface
     }
 
 
+    //SERIALIZERS
+
+    public function serialize() {
+
+        return serialize( [
+            $this->id,
+            $this->pseudo,
+            $this->prenom,
+            $this->nom,
+            $this->telephone,
+            $this->email,
+            $this->campus,
+            ]
+        );
+    }
+
+    public function unserialize($serialized) {
+
+        list (
+            $this->id,
+            $this->pseudo,
+            $this->prenom,
+            $this->nom,
+            $this->telephone,
+            $this->email,
+            $this->campus,
+            ) = unserialize($serialized);
+    }
 
 }
