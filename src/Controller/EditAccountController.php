@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\EditAccountType;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,30 +14,28 @@ class EditAccountController extends AbstractController
     /**
      * @Route("/compte/detail/{id}/edit", name="edit")
      */
-    public function formEditExampleAction(Request $request, User $user, $id, UserPasswordEncoderInterface $passwordEncoder)
+    public function formEditExampleAction(Request $request, $id, UserPasswordEncoderInterface $passwordEncoder)
     {
         // pour recuperer la sortie avec l'id et afficher les valeurs dans les placeholder
         $repo = $this->getDoctrine()->getRepository(User::class);
         $account = $repo->find($id);
 
         // empeche de modifier si l'utilisateur n'est pas celui de la page
-//        if ($account !== $this->getUser()) {
-//            $this->addFlash("error", "Modification interdite ce n'est pas votre compte !");
-//            return $this->redirectToRoute("accueil");
-//        }
-
-        $editAccountForm = $this->createForm(EditAccountType::class, $account);
+        if ($account == $this->getUser() or $this->isGranted("ROLE_ADMIN")) {
 
 
-        $editAccountForm->handleRequest($request);
+            $editAccountForm = $this->createForm(EditAccountType::class, $account);
 
-        if ($editAccountForm->isSubmitted() && $editAccountForm->isValid()) {
-            $account->setPassword(
-                $passwordEncoder->encodePassword(
-                    $account,
-                    $editAccountForm->get('plainPassword')->getData()
-                )
-            );
+
+            $editAccountForm->handleRequest($request);
+
+            if ($editAccountForm->isSubmitted() && $editAccountForm->isValid()) {
+                $account->setPassword(
+                    $passwordEncoder->encodePassword(
+                        $account,
+                        $editAccountForm->get('plainPassword')->getData()
+                    )
+                );
 //            $photoProfil = $user->getPhotoFile();
 //            // this condition is needed because the 'photo' field is not required
 //            // so the PDF file must be processed only when a file is uploaded
@@ -62,17 +59,21 @@ class EditAccountController extends AbstractController
 
 //            /** @var User $user */
 //            $user = $form->getData();
-            $em = $this->getDoctrine()->getManager();
-            $em->flush();
+                $em = $this->getDoctrine()->getManager();
+                $em->flush();
 
-            return $this->redirectToRoute('edit', [
-                'id' => $account->getId()
+                return $this->redirectToRoute('edit', [
+                    'id' => $account->getId()
+                ]);
+
+            }
+
+            return $this->render('edit_account/edit.html.twig', [
+                'form' => $editAccountForm->createView()
             ]);
-
+        } else {
+            $this->addFlash("error", "Modification interdite ce n'est pas votre compte !");
+            return $this->redirectToRoute("accueil");
         }
-
-        return $this->render('edit_account/edit.html.twig', [
-            'form' => $editAccountForm->createView()
-        ]);
     }
 }

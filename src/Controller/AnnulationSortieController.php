@@ -44,7 +44,6 @@ class AnnulationSortieController extends AbstractController
                 }
 
             }
-
             return $this->render('annulation_sortie/annulationSortie.html.twig', [
                 'annulationSortieForm' => $annulationSortieForm->createView(),
                 "sortie" => $sortie
@@ -55,4 +54,5 @@ class AnnulationSortieController extends AbstractController
             return $this->redirectToRoute("accueil");
         }
     }
+
 }

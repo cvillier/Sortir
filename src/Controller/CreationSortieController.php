@@ -18,59 +18,56 @@ class CreationSortieController extends AbstractController
      */
     public function createSortie(EntityManagerInterface $em, Request $request)
     {
-        if (!$this->isGranted("ROLE_ORGANISATEUR")) {
-            $this->addFlash("error", "Accès interdit !");
-            return $this->redirectToRoute("accueil");
-        }
-
         // en attente de pouvoir reussir a utiliser l'utilisateur en session pour eviter la requete
 //        $session = $request->getSession();
 //        $utilisateurConnecte = $session->get('utilisateurConnecte');
 
+        if ($this->isGranted("ROLE_ORGANISATEUR") or $this->isGranted("ROLE_ADMIN")) {
 
-        $sortie = new Sorties();
-        $creationSortieform = $this->createForm(CreationSortieFormType::class, $sortie);
+            $sortie = new Sorties();
+            $creationSortieform = $this->createForm(CreationSortieFormType::class, $sortie);
+            $creationSortieform->handleRequest($request);
 
+            if ($creationSortieform->isSubmitted() && $creationSortieform->isValid()) {
 
+                // recupere l'utilisateur connecté
+                $repoUser = $this->getDoctrine()->getRepository(User::class);
+                $utilisateurConnecte = $repoUser->findOneBy(['pseudo' => $this->getUser()->getUsername()]);
 
-        $creationSortieform->handleRequest($request);
+                // recupere la liste des etats
+                $etatRepo = $this->getDoctrine()->getRepository(Etats::class);
 
-        if ($creationSortieform->isSubmitted() && $creationSortieform->isValid()) {
+                // changement de l'etat selon le bouton choisi : En creation / Ouvert
+                if ($request->request->has('enregistrer')) {
+                    $etat = $etatRepo->find(1);
+                    $sortie->setEtat($etat);
+                }
+                if ($request->request->has('publier')) {
+                    $etat = $etatRepo->find(2);
+                    $sortie->setEtat($etat);
+                }
 
-            // recupere l'utilisateur connecté
-            $repoUser = $this->getDoctrine()->getRepository(User::class);
-            $utilisateurConnecte = $repoUser->findOneBy(['pseudo' => $this->getUser()->getUsername()]);
+                //set l'organisateur a l'user connecté
+                $sortie->setOrganisateur($utilisateurConnecte);
+                //set le campus de la sortie comme celui de l'utilisateur connecté
+                $sortie->setCampus($utilisateurConnecte->getCampus());
+                //ajout en BDD
+                $em->persist($sortie);
+                $em->flush();
 
-            // recupere la liste des etats
-            $etatRepo = $this->getDoctrine()->getRepository(Etats::class);
+                $this->addFlash("success", "Sortie ajouté avec succès !");
+                return $this->redirectToRoute("affichage_sortie", [
+                    "id" => $sortie->getId()
+                ]);
 
-            // changement de l'etat selon le bouton choisi : En creation / Ouvert
-            if ($request->request->has('enregistrer')) {
-                $etat = $etatRepo->find(1);
-                $sortie->setEtat($etat);
             }
-            if ($request->request->has('publier')) {
-                $etat = $etatRepo->find(2);
-                $sortie->setEtat($etat);
-            }
 
-            //set l'organisateur a l'user connecté
-            $sortie->setOrganisateur($utilisateurConnecte);
-            //set le campus de la sortie comme celui de l'utilisateur connecté
-            $sortie->setCampus($utilisateurConnecte->getCampus());
-            //ajout en BDD
-            $em->persist($sortie);
-            $em->flush();
-
-            $this->addFlash("success", "Sortie ajouté avec succès !");
-            return $this->redirectToRoute("affichage_sortie", [
-                "id" => $sortie->getId()
+            return $this->render('creation_sortie/creation.html.twig', [
+                'creationSortieForm' => $creationSortieform->createView(),
             ]);
-
+        } else {
+            $this->addFlash("error", "Accès interdit, vous n'avez pas les droits !");
+            return $this->redirectToRoute("accueil");
         }
-
-        return $this->render('creation_sortie/creation.html.twig', [
-            'creationSortieForm' => $creationSortieform->createView(),
-        ]);
     }
 }

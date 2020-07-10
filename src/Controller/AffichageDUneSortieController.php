@@ -13,11 +13,18 @@ class AffichageDUneSortieController extends AbstractController
      */
     public function afficher($id)
     {
-        $sortiesRepo = $this->getDoctrine()->getRepository(Sorties::class);
-        $sortie = $sortiesRepo->find($id);
+        if ($this->getUser()) {
 
-        return $this->render('affichage_d_une_sortie/affichageSortie.html.twig', [
-            "sortie" => $sortie
-        ]);
+
+            $sortiesRepo = $this->getDoctrine()->getRepository(Sorties::class);
+            $sortie = $sortiesRepo->find($id);
+
+            return $this->render('affichage_d_une_sortie/affichageSortie.html.twig', [
+                "sortie" => $sortie
+            ]);
+        } else {
+            $this->addFlash("error", "Accès interdit, veuillez vous conencter !");
+            return $this->redirectToRoute("app_login");
+        }
     }
 }

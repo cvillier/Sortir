@@ -6,8 +6,7 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -16,6 +15,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+
 
 class EditAccountType extends AbstractType
 {
@@ -64,7 +64,7 @@ class EditAccountType extends AbstractType
 
 //            ajouter confirmation password
 
-                ->add('campus')
+            ->add('campus')
 
 //            ->add('photoFile', FileType::class, [
 //                'label' => 'Ma photo : '
@@ -81,11 +81,11 @@ class EditAccountType extends AbstractType
                     'expanded' => false, // liste déroulante
                     'multiple' => true, // choix multiple
                     'label' => 'Le rôle de cet utilisateur : '
-                ])
-
-;
+                ]);
 
     }
+
+//    }
 
     public function configureOptions(OptionsResolver $resolver)
     {
