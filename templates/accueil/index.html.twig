@@ -126,7 +126,7 @@
                             {% endfor %}
                         {% endif %}
 
-                        {% if sortie.etat.libelle == "Crée" %}
+                        {% if sortie.etat.libelle == "Créé" %}
                             <td><a href="{{ path('modification_sortie', {'id': sortie.id}) }}">Modifier</a> -
                                 <a href="">Publier</a>
                             </td>
@@ -157,7 +157,7 @@
 
             <tfoot>
             <tr>
-                {% if app.user.roles == ["ROLE_ORGA"] or app.user.roles == ["ROLE_ADMIN"] %}
+                {% if app.user.roles == ["ROLE_ORGANISATEUR"] or app.user.roles == ["ROLE_ADMIN"] %}
                     <td><a href="{{ path('creation_sortie') }}"><button type="submit" class="btn btn-primary mb-2">Créer une sortie</button></a></td>
                 {% endif %}
             </tr>
