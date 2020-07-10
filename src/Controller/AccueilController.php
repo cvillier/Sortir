@@ -61,7 +61,7 @@ class AccueilController extends AbstractController
 
         // supprime l'inscription
         $inscriptionRepo = $this->getDoctrine()->getRepository(Inscriptions::class);
-        $inscription = $inscriptionRepo->findOneBy(['sortie_id' => $sortie, '_user_id' => $utilisateurConnecte]);
+        $inscription = $inscriptionRepo->findOneBy(['sortie' => $sortie, 'user' => $utilisateurConnecte]);
 
         // ajout en BDD
         $em->remove($inscription);
