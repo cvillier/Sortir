@@ -34,28 +34,28 @@
                         <li class="nav-item active">
                             <a class="nav-link" href="{{ path('accueil') }}">Accueil <span class="sr-only">(current)</span></a>
                         </li>
-                        <li class="nav-item">
+                <li class="nav-item">
                             <a class="nav-link" href="{{ path('app_logout') }}" title="Disconnect">Se déconnecter</a>
                         </li>
-                            {% if (is_granted("ROLE_ADMIN")) %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('compte') }}">Tous les profils</a>
-                        </li>
-                            {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('detail', {'id': app.user.id}) }}">Mon profil</a>
-                        </li>
-                            {% endif %}
-                    {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_login') }}" title="Connect">Se Connecter</a>
-                        </li>
-                    {% endif %}
-                </li>
                 {% if (is_granted("ROLE_ADMIN")) %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_register') }}" title="register">Enregistrer un utilisateur</a>
-                    </li>
+                            <a class="nav-link" href="{{ path('compte') }}">Tous les profils</a>
+                        </li>
+                {% else %}
+                    <li class="nav-item">
+                            <a class="nav-link" href="{{ path('detail', {'id': app.user.id}) }}">Mon profil</a>
+                        </li>
+                {% endif %}
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_register') }}" title="register">Enregistrer un utilisateur</a>
+                </li>
+                <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_login') }}" title="Connect">Se Connecter</a>
+                        </li>
+                {% endif %}
+                </li>
+                {% if (is_granted("ROLE_ADMIN")) %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('cities_villes') }}" title="ville">Ville</a>
                     </li>
