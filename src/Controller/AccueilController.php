@@ -47,7 +47,7 @@ class AccueilController extends AbstractController
     }
 
     /**
-     * @Route("/desister", name="desister", requirements={"id":"\d+"})
+     * @Route("/desister/{id}", name="desister", requirements={"id":"\d+"})
      */
     public function seDesister($id, EntityManagerInterface $em)
     {
@@ -75,7 +75,7 @@ class AccueilController extends AbstractController
     }
 
     /**
-     * @Route("/publier", name="publier", requirements={"id":"\d+"})
+     * @Route("/publier/{id}", name="publier", requirements={"id":"\d+"})
      */
     public function publier($id, EntityManagerInterface $em)
     {
@@ -99,7 +99,7 @@ class AccueilController extends AbstractController
     }
 
     /**
-     * @Route("/inscrire", name="inscrire", requirements={"id":"\d+"})
+     * @Route("/inscrire/{id}", name="inscrire", requirements={"id":"\d+"})
      */
     public function inscrire($id, EntityManagerInterface $em)
     {
