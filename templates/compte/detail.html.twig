@@ -15,7 +15,12 @@
 {#        {% endfor %}#}
         <li>{{ account.campus.getNomCampus() }}</li>
     </ul>
+{#    {% if {{ path('compte') }} OR {{ path('detail') }} %}#}
     <a href="{{ path('edit', {'id': account.id})  }}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" value="edit">Modifier profil</a>
+{#        {% elseif {{ path('accueil') }} %}#}
+{#            <h1>You can't access that button fucking nerd</h1>#}
+{#        {% endif %}#}
+{#    {% endif %}#}
 {#{% block title %}#}
 {#    Ideas details | {{ parent() }}#}
 {% endblock %}

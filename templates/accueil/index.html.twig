@@ -101,7 +101,7 @@
                         {% endfor %}
                     </td>
                     {{ dump(sortie.organisateur) }}
-                    <td> <a href="{{ path('detail', {'id': sortie.organisateur.id}) }}">{{ sortie.organisateur.prenom|capitalize }} {{ sortie.organisateur.nom|first|capitalize }}.</a></td>
+                    <td> <a href="{{ path('show', {'id': sortie.organisateur.id}) }}">{{ sortie.organisateur.prenom|capitalize }} {{ sortie.organisateur.nom|first|capitalize }}.</a></td>
 
 
                     PARTIE ACTIONS

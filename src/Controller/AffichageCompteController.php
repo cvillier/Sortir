@@ -37,4 +37,14 @@ class AffichageCompteController extends AbstractController
 
         return $this->render('compte/detail.html.twig', compact("account"));
     }
+
+    /**
+     * @Route("/compte/detailCompteUser/{id}", name="show")
+     */
+    public function detailCompte($id, UserRepository $repo)
+    {
+        $account = $repo->find($id);
+
+        return $this->render('compte/detailCompteUser.html.twig', compact("account"));
+    }
 }
