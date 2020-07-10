@@ -21,36 +21,38 @@ class AnnulationSortieController extends AbstractController
         $sortiesRepo = $this->getDoctrine()->getRepository(Sorties::class);
         $sortie = $sortiesRepo->find($id);
 
-        // empeche d'acceder a la page si l'user n'est pas l'organisateur de la sortie
-        if ($sortie->getOrganisateur() !== $this->getUser()) {
+        // autorise l'acces a la page que si l'user est l'organisateur de la sortie ou admin
+        if ($sortie->getOrganisateur() == $this->getUser() or $this->isGranted("ROLE_ADMIN")) {
+
+            $annulationSortieForm = $this->createForm(AnnulationSortieFormType::class, $sortie);
+            $annulationSortieForm->handleRequest($request);
+
+            if ($annulationSortieForm->isSubmitted() && $annulationSortieForm->isValid()) {
+
+                if ($request->request->has('annuler')) {
+                    return $this->redirectToRoute("accueil");
+                }
+                $etatRepo = $this->getDoctrine()->getRepository(Etats::class);
+
+                if ($request->request->has('enregistrer')) {
+                    $etat = $etatRepo->find(6);
+                    $sortie->setEtat($etat);
+                    $em->persist($sortie);
+                    $em->flush();
+                    $this->addFlash("success", "Sortie annulée avec succès !");
+                    return $this->redirectToRoute("accueil");
+                }
+
+            }
+
+            return $this->render('annulation_sortie/annulationSortie.html.twig', [
+                'annulationSortieForm' => $annulationSortieForm->createView(),
+                "sortie" => $sortie
+            ]);
+
+        } else {
             $this->addFlash("error", "Annulation interdite vous n'etes pas l'organisateur !");
             return $this->redirectToRoute("accueil");
         }
-
-        $annulationSortieForm = $this->createForm(AnnulationSortieFormType::class, $sortie);
-        $annulationSortieForm->handleRequest($request);
-
-        if ($annulationSortieForm->isSubmitted() && $annulationSortieForm->isValid()) {
-
-            if ($request->request->has('annuler')) {
-                return $this->redirectToRoute("accueil");
-            }
-            $etatRepo = $this->getDoctrine()->getRepository(Etats::class);
-
-            if ($request->request->has('enregistrer')) {
-                $etat = $etatRepo->find(6);
-                $sortie->setEtat($etat);
-                $em->persist($sortie);
-                $em->flush();
-                $this->addFlash("success", "Sortie annulée avec succès !");
-                return $this->redirectToRoute("accueil");
-            }
-
-        }
-
-        return $this->render('annulation_sortie/annulationSortie.html.twig', [
-            'annulationSortieForm' => $annulationSortieForm->createView(),
-            "sortie" => $sortie
-        ]);
     }
 }
