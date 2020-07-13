@@ -86,12 +86,12 @@
 
             <tbody>
             {% for sortie in sorties %}
-
-                <tr>
+                {% if ((sortie.etat.id == 1 and sortie.organisateur == app.user) or app.user.roles == ["ROLE_ADMIN"] ) or sortie.etat.id == 2 or sortie.etat.id == 3 or sortie.etat.id == 4 or sortie.etat.id == 5 %}
+                    <tr>
                     <td>{{ sortie.nom }}</td>
                     <td>{{ sortie.datedebut|date("d/m/Y") }}</td>
                     <td>{{ sortie.datecloture|date("d/m/Y") }}</td>
-                    <td> {{ sortie.sortieUser.count}} / {{ sortie.nbinscriptionsmax }}</td>
+                    <td> {{ sortie.sortieUser.count }} / {{ sortie.nbinscriptionsmax }}</td>
                     <td>{{ sortie.etat.libelle }}</td>
                     <td>
                         {% for participant in inscriptions %}
@@ -100,31 +100,59 @@
                             {% endif %}
                         {% endfor %}
                     </td>
-                    {{ dump(sortie.organisateur) }}
-                    <td> <a href="{{ path('show', {'id': sortie.organisateur.id}) }}">{{ sortie.organisateur.prenom|capitalize }} {{ sortie.organisateur.nom|first|capitalize }}.</a></td>
+                    <td>
+                        <a href="{{ path('show', {'id': sortie.organisateur.id}) }}">{{ sortie.organisateur.prenom|capitalize }} {{ sortie.organisateur.nom|first|capitalize }}
+                            .</a></td>
 
-{#                     Si il y a encore de la place dans l'activité alors ou peut s'inscrire si l'état le permet#}
-                    {% if (app.user.roles != ["ROLE_USER"]) %}
 
-                        {% if sortie.etat.id == 1 %}
-                            <td><a href="{{ path('modification_sortie', {'id': sortie.id}) }}">Modifier</a> -
+                    {# ACTIONS #}
+
+                    {# si l'user n'a pas un des 3 roles #}
+                    {% if (app.user.roles == ["ROLE_USER"]) %}
+                        <td><a href="{{ path('affichage_sortie', {'id': sortie.id}) }}">Afficher</a></td>
+                    {% else %}
+
+                        {# Si la sortie est créée mais pas publier , seul l'orga et l'admin peuvent la voir #}
+                        {% if (sortie.etat.id == 1 and sortie.organisateur == app.user) or (sortie.etat.id == 1 and app.user.roles == ["ROLE_ADMIN"]) %}
+                            <td>
+                                {% if app.user.roles == ["ROLE_ADMIN"] %}
+                                    <a href="{{ path('affichage_sortie', {'id': sortie.id}) }}">Afficher</a> -
+                                {% endif %}
+                                <a href="{{ path('modification_sortie', {'id': sortie.id}) }}">Modifier</a> -
                                 <a href="{{ path('publier', {'id': sortie.id}) }}">Publier</a>
                             </td>
                         {% endif %}
 
-                        {% if sortie.etat.id == 2 %}
+                        {# Si la sortie est publiée et que l'orga est l'user #}
+                        {% if (sortie.etat.id == 2 and sortie.organisateur == app.user) %}
                             <td><a href="{{ path('affichage_sortie', {'id': sortie.id}) }}">Afficher</a>
-                            {% for participant in inscriptions %}
-                                {% if (sortie.organisateur == app.user)  %}
-                                    - <a href="{{ path('annulation_sortie', {'id': sortie.id}) }}">Annuler</a></td>
-                                {% endif %}
-                                {% if (participant.sortie == sortie) %}
-                                    - <a href="{{ path('inscrire', {'id': sortie.id}) }}">S'inscrire</a></td>
-                                {% elseif (participant.user == app.user) and (participant.sortie == sortie) %}
-                                    - <a href="{{ path('annulation_sortie', {'id': sortie.id}) }}">Annuler</a></td>
-                                {% endif %}
-                            {% endfor %}
+                                - <a href="{{ path('annulation_sortie', {'id': sortie.id}) }}">Annuler</a></td>
                         {% endif %}
+
+                        {# Si la sortie est publiée et que l'user est participant ou admin #}
+                        <td>
+                            {% if sortie.etat.id == 2 and sortie.organisateur != app.user %}
+                                <a href="{{ path('affichage_sortie', {'id': sortie.id}) }}">Afficher</a>
+                                {% set present = false %}
+                                {% if inscriptions is not empty %}
+                                    {% set present = false %}
+                                    {% for participant in inscriptions if not present %}
+                                        {% if (participant.user == app.user) and (participant.sortie == sortie) %}
+                                            - <a href="{{ path('desister', {'id': sortie.id}) }}">Se desinscrire</a>
+                                            {% set present = true %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if present == false %}
+                                        - <a href="{{ path('inscrire', {'id': sortie.id}) }}">S'inscrire</a>
+                                    {% endif %}
+                                {% elseif sortie.sortieUser.count < sortie.nbinscriptionsmax and present == false %}
+                                    - <a href="{{ path('inscrire', {'id': sortie.id}) }}">S'inscrire</a>
+                                {% endif %}
+
+                            {% endif %}
+                        </td>
+
+
 
                         {% if sortie.etat.id == 3 %}
                             <td><a href="{{ path('affichage_sortie', {'id': sortie.id}) }}">Afficher</a>
@@ -136,29 +164,29 @@
                             {% endfor %}
                         {% endif %}
 
-                        {% if sortie.etat.id == 4 %}
+                        {% if sortie.etat.id == 4 or sortie.etat.id == 5 %}
                             <td><a href="{{ path('affichage_sortie', {'id': sortie.id}) }}">Afficher</a></td>
                         {% endif %}
 
-{#                        Si plus de place, alors la personne ne peut qu'afficher la sortie#}
-                    {% else %}
+                        {#                        {% endif %}#}
 
-                        <td><a href="{{ path('affichage_sortie', {'id': sortie.id}) }}">Afficher</a></td>
 
+                        </tr>
                     {% endif %}
-
-                </tr>
+                {% endif %}
 
             {% endfor %}
 
             </tbody>
 
             <tfoot>
-                <tr>
-                    {% if app.user.roles == ["ROLE_ORGANISATEUR"] or app.user.roles == ["ROLE_ADMIN"] %}
-                        <td><a href="{{ path('creation_sortie') }}"><button type="submit" class="btn btn-primary mb-2">Créer une sortie</button></a></td>
-                    {% endif %}
-                </tr>
+            <tr>
+                {% if app.user.roles == ["ROLE_ORGANISATEUR"] or app.user.roles == ["ROLE_ADMIN"] %}
+                    <td><a href="{{ path('creation_sortie') }}">
+                            <button type="submit" class="btn btn-primary mb-2">Créer une sortie</button>
+                        </a></td>
+                {% endif %}
+            </tr>
             </tfoot>
 
         </table>

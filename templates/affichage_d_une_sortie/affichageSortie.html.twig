@@ -25,4 +25,14 @@
 
         </ul>
     {% endfor %}
+
+    {% if app.user.roles == ["ROLE_ADMIN"] %}
+    <td><a href="{{ path('modification_sortie', {'id': sortie.id}) }}">
+            <button type="submit" class="btn btn-primary mb-2">Modifier la sortie</button>
+        </a>
+    <a href="{{ path('annulation_sortie', {'id': sortie.id}) }}">
+            <button type="submit" class="btn btn-primary mb-2">Annuler la sortie</button>
+        </a></td>
+{% endif %}
+
 {% endblock %}
