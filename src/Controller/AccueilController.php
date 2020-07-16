@@ -12,7 +12,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use function Doctrine\ORM\QueryBuilder;
 
 
 class AccueilController extends AbstractController
@@ -35,6 +34,7 @@ class AccueilController extends AbstractController
             ->findAll();
         $inscriptions = $this->getDoctrine()->getRepository(Inscriptions::class)->findAll();
 
+
         if (!$sorties) {
             throw $this->createNotFoundException(
                 'Aucune sortie trouvée'
@@ -46,8 +46,7 @@ class AccueilController extends AbstractController
 
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-                $sorties = $this->recherche($form, $em);
+            $sorties = $this->recherche($request, $form, $em);
 
         }
         return $this->render('accueil/index.html.twig', [
@@ -59,30 +58,24 @@ class AccueilController extends AbstractController
     /**
      * @Route("/recherche", name="recherche")
      */
-    public function recherche(FormInterface $form, EntityManagerInterface $em)
+    public function recherche(Request $request, FormInterface $form, EntityManagerInterface $em)
     {
         $qb = $em->createQueryBuilder();
+        $qb->select('s')
+            ->from('App:Sorties', 's');
+
         // si la case (Dont je suis l'organisteur est cochée)
         if ($form->get("organisateur")->getData()) {
-            $qb->select('s')
-                ->from('App:Sorties', 's')
-                ->where('s.organisateur = ?1')
+            $qb->where('s.organisateur = ?1')
                 ->setParameter(1, $this->getUser());
-            if ($form->get("sortiesPassees")->getData()) {
-                $qb->andWhere('s.datedebut < ?2');
-                $qb->setParameter(2, new \DateTime());
-            }
+
             // si la case (Dont je suis inscrit)
         } elseif ($form->get("inscrit")->getData()) {
-            $qb->select(array('i', 's'))
-                ->from('App:Sorties', 's')
-                ->Join('s.sortieUser', 'i')
+            // $qb->select(array('i', 's')) au cas ou
+            $qb->Join('s.sortieUser', 'i')
                 ->where('i.user = ?1')
                 ->setParameter(1, $this->getUser());
-            if ($form->get("sortiesPassees")->getData()) {
-                $qb->andWhere('s.datedebut < ?2');
-                $qb->setParameter(2, new \DateTime());
-            }
+
 
             // si la case (Dont je ne suis pas inscrit) -> j'y arrive pas :(
 //        } elseif ($form->get("nonInscrit")->getData()) {
@@ -107,17 +100,32 @@ class AccueilController extends AbstractController
 //                $qb->setParameter(2, new \DateTime());
 //            }
 
-        } elseif ($form->get("sortiesPassees")->getData()) {
-            $qb->select('s')
-                ->from('App:Sorties', 's')
-                ->where('s.datedebut < ?2')
-                ->setParameter(2, new \DateTime());
-        } else {
-            $sorties = $this->getDoctrine()
-                ->getRepository(Sorties::class)
-                ->findAll();
-            return $sorties;
         }
+        if ($form->get("sortiesPassees")->getData()) {
+            $qb->andWhere('s.datedebut < ?2');
+            $qb->setParameter(2, new \DateTime());
+        }
+
+        if ( $request->get('inputRecherche') != "") {
+            $word = $request->get('inputRecherche');
+            $qb->andWhere('s.nom LIKE :word')
+                ->orWhere('s.descriptioninfos LIKE :word')
+                ->setParameter('word', '%'.$word.'%');
+        }
+
+        if ( $request->get('inputDateDebut') != "") {
+            $qb->andWhere('s.datedebut > ?4')
+                ->setParameter(4, $request->get('inputDateDebut'));
+        }
+
+        if ( $request->get('inputDateFin') != "") {
+            $qb->andWhere('s.datedebut < ?5')
+                ->setParameter(5, $request->get('inputDateFin'));
+        }
+
+
+        $qb->andWhere('s.campus = ?3')
+            ->setParameter(3, $form->get('campus')->getData());
         $query = $qb->getQuery();
         $result = $query->getResult();
         return $result;
@@ -127,7 +135,8 @@ class AccueilController extends AbstractController
     /**
      * @Route("/desister/{id}", name="desister", requirements={"id":"\d+"})
      */
-    public function seDesister($id, EntityManagerInterface $em)
+    public
+    function seDesister($id, EntityManagerInterface $em)
     {
         // recupere la sortie
         $sortiesRepo = $this->getDoctrine()->getRepository(Sorties::class);
