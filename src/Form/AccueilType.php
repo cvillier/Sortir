@@ -2,9 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\Campus;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,13 +14,9 @@ class AccueilType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('villes', ChoiceType::class, [
-                'choices' => [
-                    'Chartres-de-Bretagne' => 'Chartres-de-Bretagne',
-                    'Saint-Herblain' => 'Saint-Herblain',
-                    'Niort' => 'Niort',
-                    'Quimper' => 'Quimper',
-                ],
+            ->add('campus', EntityType::class, [
+                'class' => Campus::class,
+                'choice_label' => 'nom_campus',
                 'expanded'  => false, // liste déroulante
                 'multiple'  => false, // choix multiple
                 'label' => 'Campus : ',

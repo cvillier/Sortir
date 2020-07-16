@@ -9,7 +9,10 @@ use App\Form\AccueilType;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use function Doctrine\ORM\QueryBuilder;
 
 
 class AccueilController extends AbstractController
@@ -17,7 +20,7 @@ class AccueilController extends AbstractController
     /**
      * @Route("/accueil", name="accueil")
      */
-    public function index()
+    public function index(Request $request, EntityManagerInterface $em)
     {
         // pour l'instant ne sert a rien , a voir si arrive a faire marcher pour eviter des requetes d'user
 //        $session = new Session();
@@ -39,11 +42,86 @@ class AccueilController extends AbstractController
         }
 
         $form = $this->createForm(AccueilType::class);
+        $form->handleRequest($request);
 
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+                $sorties = $this->recherche($form, $em);
+
+        }
         return $this->render('accueil/index.html.twig', [
             'sorties' => $sorties, 'inscriptions' => $inscriptions,
             'accueilForm' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/recherche", name="recherche")
+     */
+    public function recherche(FormInterface $form, EntityManagerInterface $em)
+    {
+        $qb = $em->createQueryBuilder();
+        // si la case (Dont je suis l'organisteur est cochée)
+        if ($form->get("organisateur")->getData()) {
+            $qb->select('s')
+                ->from('App:Sorties', 's')
+                ->where('s.organisateur = ?1')
+                ->setParameter(1, $this->getUser());
+            if ($form->get("sortiesPassees")->getData()) {
+                $qb->andWhere('s.datedebut < ?2');
+                $qb->setParameter(2, new \DateTime());
+            }
+            // si la case (Dont je suis inscrit)
+        } elseif ($form->get("inscrit")->getData()) {
+            $qb->select(array('i', 's'))
+                ->from('App:Sorties', 's')
+                ->Join('s.sortieUser', 'i')
+                ->where('i.user = ?1')
+                ->setParameter(1, $this->getUser());
+            if ($form->get("sortiesPassees")->getData()) {
+                $qb->andWhere('s.datedebut < ?2');
+                $qb->setParameter(2, new \DateTime());
+            }
+
+            // si la case (Dont je ne suis pas inscrit) -> j'y arrive pas :(
+//        } elseif ($form->get("nonInscrit")->getData()) {
+//            $inscrit = $em->createQueryBuilder();
+//
+//            $inscrit->select(array('i', 's'))
+//                ->from('App:Sorties', 's')
+//                ->Join('s.sortieUser', 'i')
+//                ->where('i.user = ?1');
+//
+//                ->getQuery()
+//                ->getArrayResult();
+//
+//
+//            $qb->select(array('ii', 'ss'))
+//                ->from('App:Sorties', 'ss')
+//                ->Join('ss.sortieUser', 'ii')
+//                ->where($qb->expr()->notIn('ii.user', $inscrit->getDQL()))
+//                ->setParameter(1, $this->getUser());
+//            if ($form->get("sortiesPassees")->getData()) {
+//                $qb->andWhere('ss.datedebut < ?2');
+//                $qb->setParameter(2, new \DateTime());
+//            }
+
+        } elseif ($form->get("sortiesPassees")->getData()) {
+            $qb->select('s')
+                ->from('App:Sorties', 's')
+                ->where('s.datedebut < ?2')
+                ->setParameter(2, new \DateTime());
+        } else {
+            $sorties = $this->getDoctrine()
+                ->getRepository(Sorties::class)
+                ->findAll();
+            return $sorties;
+        }
+        $query = $qb->getQuery();
+        $result = $query->getResult();
+        return $result;
+
     }
 
     /**
@@ -71,13 +149,13 @@ class AccueilController extends AbstractController
         return $this->redirectToRoute("accueil");
 
 
-
     }
 
     /**
      * @Route("/publier/{id}", name="publier", requirements={"id":"\d+"})
      */
-    public function publier($id, EntityManagerInterface $em)
+    public
+    function publier($id, EntityManagerInterface $em)
     {
         // recupere la sortie
         $sortiesRepo = $this->getDoctrine()->getRepository(Sorties::class);
@@ -101,7 +179,8 @@ class AccueilController extends AbstractController
     /**
      * @Route("/inscrire/{id}", name="inscrire", requirements={"id":"\d+"})
      */
-    public function inscrire($id, EntityManagerInterface $em)
+    public
+    function inscrire($id, EntityManagerInterface $em)
     {
         // recupere la sortie
         $sortiesRepo = $this->getDoctrine()->getRepository(Sorties::class);
@@ -126,6 +205,5 @@ class AccueilController extends AbstractController
         return $this->redirectToRoute("accueil");
 
     }
-
 
 }

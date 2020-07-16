@@ -7,16 +7,16 @@
     <h2>Filtrer les sorties</h2>
 
 
-    <form method="get">
+    {{ form_start(accueilForm) }}
 
         <div class="row">
 
             <div class="col-7">
 
                 <div class="form-group row ">
-                    {{ form_label(accueilForm.villes) }}
+                    {{ form_label(accueilForm.campus) }}
                     <div class="col-sm-6">
-                        {{ form_widget(accueilForm.villes) }}
+                        {{ form_widget(accueilForm.campus) }}
                     </div>
                 </div>
 
@@ -28,13 +28,13 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="inputPassword" class="col-1 col-form-label">Entre :</label>
+                    <label for="inputDateDebut" class="col-1 col-form-label">Entre :</label>
                     <div class="col-3">
-                        <input type="date" class="form-control" id="inputPassword">
+                        <input type="date" class="form-control" id="inputDateDebut">
                     </div>
-                    <label for="inputPassword" class="col-1 col-form-label">Et :</label>
+                    <label for="inputDateFin" class="col-1 col-form-label">Et :</label>
                     <div class="col-3">
-                        <input type="date" class="form-control" id="inputPassword">
+                        <input type="date" class="form-control" id="inputDateFin">
                     </div>
                 </div>
 
@@ -65,8 +65,8 @@
                 <button type="submit" class="btn btn-primary mb-2">Rechercher</button>
             </div>
         </div>
+    {{ form_end(accueilForm) }}
 
-    </form>
 
     <div>
         <table class="table table-striped">
