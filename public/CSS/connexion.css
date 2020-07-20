@@ -50,3 +50,7 @@ form{
     background-color: #e36414;
     color: white;
 }
+
+.btn-violet:hover{
+    color: white;
+}
