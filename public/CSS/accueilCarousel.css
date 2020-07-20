@@ -1,0 +1,12 @@
+/*stylisation carrousel*/
+
+.images {
+    width: fit-content;
+    display: block;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    width: 35px;
+    height: 35px;
+    color: #fc4a1a;
+}

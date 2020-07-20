@@ -215,4 +215,11 @@ class AccueilController extends AbstractController
 
     }
 
+    /**
+     * @Route("/test", name="test")
+     */
+    public function home()
+    {
+        return $this->render('accueil/accueilfront.html.twig', []);
+    }
 }
