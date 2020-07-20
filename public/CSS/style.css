@@ -1,0 +1,9 @@
+/* couleur dominante : #4A00E0
+   couleur secondaire : #fc4a1a
+   couleur terciaire : white
+ */
+
+body{
+    font-family: 'Montserrat', sans-serif;
+    background: #4A00E0;  /* fallback for old browsers */
+}
