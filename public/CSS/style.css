@@ -13,6 +13,7 @@ body{
 }
 
 #sidebar-wrapper {
+    z-index: 9999;
     background-color: #4A00E0;
     color: white;
     min-height: 100vh;
