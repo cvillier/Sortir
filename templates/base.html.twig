@@ -9,10 +9,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 {#    <link rel="stylesheet" src="{{ asset('CSS/editAccount.css') }}">#}
     <!-- Css -->
+    <link rel="stylesheet" href="{{ asset('CSS/style.css') }}">
     {% block accueilCss %}{% endblock %}
     {% block accueilCarouselCss %}{% endblock %}
     {% block connexionCss %}{% endblock %}
-    <link rel="stylesheet" href="{{ asset('CSS/style.css') }}">
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 
@@ -23,7 +23,7 @@
 <div class="d-flex" id="wrapper">
 
     <!-- Sidebar -->
-    <div class="border-right d-none d-lg-block" id="sidebar-wrapper">
+    <div class="d-none d-lg-block" id="sidebar-wrapper">
         <div class="sidebar-heading text-center">SORTIR.COM</div>
         <div class="list-group list-group-flush">
             <ul class="navbar-nav">
@@ -77,30 +77,54 @@
     <div id="page-content-wrapper">
 
         <nav class="navbar navbar-expand-lg navbar-light border-bottom d-lg-none">
-
+            <div class="sidebar-heading text-center">SORTIR.COM</div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                    </li>
+                <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                        {% if app.user %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ path('accueil') }}">Accueil <span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
+                    <hr>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_logout') }}" title="Disconnect">Se déconnecter</a>
                     </li>
+                    <hr>
+                    {% if (is_granted("ROLE_ADMIN")) %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('compte') }}">Tous les profils</a>
+                        </li>
+                        <hr>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('detail', {'id': app.user.id}) }}">Mon profil</a>
+                        </li>
+                        <hr>
+                    {% endif %}
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_register') }}" title="register">Enregistrer un utilisateur</a>
+                        </li>
+                        <hr>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_login') }}" title="Connect">Se Connecter</a>
+                        </li>
+                        <hr>
+                    {% endif %}
+                    </li>
+                    {% if (is_granted("ROLE_ADMIN")) %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('cities_villes') }}" title="ville">Ville</a>
+                        </li>
+                        <hr>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('cities_campus') }}" title="campus">Campus</a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
         </nav>

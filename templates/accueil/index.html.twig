@@ -8,6 +8,7 @@
 
 {% block main %}
 
+    <div class="content-recherche">
     <h2>Filtrer les sorties</h2>
 
     {{ form_start(accueilForm) }}
@@ -65,10 +66,11 @@
             </div>
 
         </div>
+    </div>
 
         <div class="row">
-            <div class="col-12 text-center">
-                    <button type="submit" class="btn btn-primary">Rechercher</button>
+            <div class="col-12 text-center btn-rechercher">
+                    <button type="submit" class="btn btn-violet">Rechercher</button>
             </div>
         </div>
     {{ form_end(accueilForm) }}
@@ -189,7 +191,7 @@
             <tr>
                 {% if app.user.roles == ["ROLE_ORGANISATEUR"] or app.user.roles == ["ROLE_ADMIN"] %}
                     <td><a href="{{ path('creation_sortie') }}">
-                            <button type="submit" class="btn btn-primary mb-2">Créer une sortie</button>
+                            <button type="submit" class="btn btn-violet mt-3">Créer une sortie</button>
                         </a></td>
                 {% endif %}
             </tr>
