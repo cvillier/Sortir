@@ -10,7 +10,6 @@
 
     <h2>Filtrer les sorties</h2>
 
-
     {{ form_start(accueilForm) }}
 
         <div class="row">
@@ -25,26 +24,26 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="inputRecherche" class="col-sm-5 col-form-label">Le nom de la sortie contient :</label>
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control" id="inputRecherche" name="inputRecherche" placeholder="Recherche">
+                    <label for="inputRecherche" class="col-sm-5 col-form-label col-form-label-sm">Le nom de la sortie contient :</label>
+                    <div class="col-3">
+                        <input type="text" class="form-control form-control-sm" id="inputRecherche" name="inputRecherche" placeholder="Recherche">
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="inputDateDebut" class="col-1 col-form-label">Entre :</label>
+                    <label for="inputDateDebut" class="col-1 col-form-label col-form-label-sm">Entre :</label>
                     <div class="col-3">
-                        <input type="date" class="form-control" id="inputDateDebut" name="inputDateDebut">
+                        <input type="date" class="form-control form-control-sm" id="inputDateDebut" name="inputDateDebut">
                     </div>
-                    <label for="inputDateFin" class="col-1 col-form-label">Et :</label>
+                    <label for="inputDateFin" class="col-1 col-form-label col-form-label-sm">Et :</label>
                     <div class="col-3">
-                        <input type="date" class="form-control" id="inputDateFin" name="inputDateFin">
+                        <input type="date" class="form-control form-control-sm" id="inputDateFin" name="inputDateFin">
                     </div>
                 </div>
 
             </div>
 
-            <div class="col-3 my-auto">
+            <div class="col-5 my-auto">
                 <div class="form-check">
                     {{ form_widget(accueilForm.organisateur) }}
                     {{ form_label(accueilForm.organisateur) }}
@@ -65,8 +64,11 @@
                 </div>
             </div>
 
-            <div class="col-2 my-auto">
-                <button type="submit" class="btn btn-primary mb-2">Rechercher</button>
+        </div>
+
+        <div class="row">
+            <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-primary">Rechercher</button>
             </div>
         </div>
     {{ form_end(accueilForm) }}

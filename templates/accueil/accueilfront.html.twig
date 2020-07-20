@@ -2,6 +2,10 @@
 
 {#{% block title %} {{ parent() }} Accueil!{% endblock %}#}
 
+{% block accueilCarouselCss %}
+    <link rel="stylesheet" href="{{ asset('CSS/accueilCarousel.css') }}">
+{% endblock %}
+
 {% block main %}
 
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
