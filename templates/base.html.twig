@@ -6,13 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    {#    <link rel="stylesheet" src="{{ asset('CSS/editAccount.css') }}">#}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+{#    <link rel="stylesheet" src="{{ asset('CSS/editAccount.css') }}">#}
     <!-- Css -->
+    {% block accueilCss %}{% endblock %}
+    {% block connexionCss %}{% endblock %}
     <link rel="stylesheet" href="{{ asset('CSS/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('CSS/connexion.css') }}">
-    <link rel="stylesheet" href="{{ asset('CSS/accueilCarousel.css') }}">
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 
@@ -23,53 +22,47 @@
 <header>
     <div class="logo">
         <h1>Sortir.com</h1>
-        <img src="{{ asset('IMAGES/logo_test.jpg') }}" width="100px" height="100px"/>
+        <img src="{{ asset('IMAGES/logo_test.jpg') }}" width="100px" height="100px" />
     </div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                {#                <li class="nav-item">#}
-                {#                    <a class="nav-link" href="#">Sortir.com</a>#}
-                {#                    <img src="{{ asset('IMAGES/logo_test.jpg') }}" />#}
-                {#                </li>#}
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link" href="#">Sortir.com</a>#}
+{#                    <img src="{{ asset('IMAGES/logo_test.jpg') }}" />#}
+{#                </li>#}
                 <li class="nav-item">
                     {% if app.user %}
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ path('accueil') }}">Accueil <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ path('test') }}">HOME TEST</a>
-                </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ path('accueil') }}">Accueil <span class="sr-only">(current)</span></a>
+                        </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_logout') }}" title="Disconnect">Se déconnecter</a>
-                </li>
+                            <a class="nav-link" href="{{ path('app_logout') }}" title="Disconnect">Se déconnecter</a>
+                        </li>
                 {% if (is_granted("ROLE_ADMIN")) %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('compte') }}">Tous les profils</a>
-                    </li>
+                            <a class="nav-link" href="{{ path('compte') }}">Tous les profils</a>
+                        </li>
                 {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('detail', {'id': app.user.id}) }}">Mon profil</a>
-                    </li>
+                            <a class="nav-link" href="{{ path('detail', {'id': app.user.id}) }}">Mon profil</a>
+                        </li>
                 {% endif %}
             {% else %}
-                <a class="nav-link" href="{{ path('app_login') }}" title="Connect">Se Connecter</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_register') }}" title="register">Enregistrer un utilisateur</a>
                 </li>
+                <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_login') }}" title="Connect">Se Connecter</a>
+                        </li>
                 {% endif %}
                 </li>
                 {% if (is_granted("ROLE_ADMIN")) %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_register') }}" title="register">Enregistrer un
-                            utilisateur</a>
-                    </li>
-                    <li class="nav-item">
-
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('cities_villes') }}" title="ville">Ville</a>
                     </li>
@@ -102,14 +95,8 @@
 {% block javascripts %}{% endblock %}
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 </body>
 </html>
