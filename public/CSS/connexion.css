@@ -1,7 +1,3 @@
-body{
-    font-family: 'Montserrat', sans-serif;
-}
-
 form{
     position: absolute;
     top: 50%;
@@ -51,6 +47,6 @@ form{
 }
 
 .btn-violet{
-    background-color: #4A00E0;
+    background-color: #e36414;
     color: white;
 }
