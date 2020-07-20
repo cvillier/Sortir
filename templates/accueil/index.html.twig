@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block accueilCss %}
+<link rel="stylesheet" href="{{ asset('CSS/accueil.css') }}">
+{% endblock %}
+
 {% block title %} {{ parent() }} Accueil!{% endblock %}
 
 {% block main %}

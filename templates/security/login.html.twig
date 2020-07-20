@@ -1,5 +1,9 @@
 {% extends 'baseNoNav.html.twig' %}
 
+{% block connexionCss %}
+    <link rel="stylesheet" href="{{ asset('CSS/connexion.css') }}">
+{% endblock %}
+
 {% block title %}{{ parent() }} Se connecter!{% endblock %}
 
 {% block main %}
