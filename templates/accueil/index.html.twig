@@ -15,7 +15,7 @@
 
         <div class="row">
 
-            <div class="col-7">
+            <div class="col-sm-12 col-lg-7">
 
                 <div class="form-group row ">
                     {{ form_label(accueilForm.campus) }}
@@ -25,18 +25,21 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="inputRecherche" class="col-sm-5 col-form-label col-form-label-sm">Le nom de la sortie contient :</label>
+                    <label for="inputRecherche" class="col-sm-3 col-form-label col-form-label-sm">Le nom de la sortie contient :</label>
                     <div class="col-3">
                         <input type="text" class="form-control form-control-sm" id="inputRecherche" name="inputRecherche" placeholder="Recherche">
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="inputDateDebut" class="col-1 col-form-label col-form-label-sm">Entre :</label>
+                    <label for="inputDateDebut" class="col-3 col-form-label col-form-label-sm">Entre :</label>
                     <div class="col-3">
                         <input type="date" class="form-control form-control-sm" id="inputDateDebut" name="inputDateDebut">
                     </div>
-                    <label for="inputDateFin" class="col-1 col-form-label col-form-label-sm">Et :</label>
+                </div>
+
+                <div class="form-group row">
+                    <label for="inputDateFin" class="col-3 col-form-label col-form-label-sm">Et :</label>
                     <div class="col-3">
                         <input type="date" class="form-control form-control-sm" id="inputDateFin" name="inputDateFin">
                     </div>
@@ -44,7 +47,7 @@
 
             </div>
 
-            <div class="col-5 my-auto">
+            <div class="col-sm-12 col-lg-5 my-auto">
                 <div class="form-check">
                     {{ form_widget(accueilForm.organisateur) }}
                     {{ form_label(accueilForm.organisateur) }}
@@ -82,7 +85,7 @@
             <thead>
             <tr>
                 <th scope="col">Nom de la sortie</th>
-                <th scope="col">Date de la sortie</th>
+                <th scope="col">Date</th>
                 <th scope="col">Clôture</th>
                 <th scope="col">inscrits/places</th>
                 <th scope="col">Etat</th>
