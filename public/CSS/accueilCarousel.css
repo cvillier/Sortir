@@ -3,26 +3,26 @@
     text-align: center;
     color: #4A00E0;
     font-family: Montserrat;
-    margin-top: 16px;
+    margin: 48px;
 }
 .carousel {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .carousel-inner {
-    margin-top: 16em;
-    margin-left: auto;
+    flex: 1;
 }
 
 .images {
-    justify-content: center;
-!important;
-    height: 500px;
-!important;
+    background-size: cover;
+    justify-content: center;!important;
+    height: 48em;!important;
     object-fit: cover;
 }
 
 .carousel-control-prev-icon, .carousel-control-next-icon {
+    /*text-shadow: #f1f2f3 1px 0 10px;*/
     width: 48px;
     height: 48px;
 }
