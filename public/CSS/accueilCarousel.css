@@ -25,10 +25,8 @@
 .carousel-control-prev-icon, .carousel-control-next-icon {
     width: 48px;
     height: 48px;
-    /*position: relative;*/
 }
 .carousel-control-prev-icon {
-    justify-content: space-between;
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fc4a1a' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
 }
 .carousel-control-next-icon {
