@@ -1,3 +1,29 @@
 .table-striped{
+    margin-bottom: 32px;
+}
+
+.content-recherche{
     margin-top: 64px;
+}
+
+.content-recherche h2{
+    margin-bottom: 32px;
+}
+
+.btn-rechercher{
+    margin: 32px 0 32px 0;
+}
+
+.btn-violet{
+    background-color: #4A00E0;
+    color: white;
+}
+
+.btn-violet:hover{
+    color: white;
+}
+
+.form-control:focus {
+    border: 2px solid rgba(74, 0, 224, .8);
+    box-shadow: none;
 }
