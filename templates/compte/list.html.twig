@@ -8,14 +8,42 @@
 
 {% block main %}
     <h1 class="text-center" id="utilisateurs">Les utilisateurs</h1>
+{#    {% set myVal = 50 %}#}
+{#    <section>#}
+{#        <table class="table table-striped">#}
+{#            <thead>#}
+{#            <tr>#}
+{#                <th scope="col">#</th>#}
+{#                <th scope="col">Pseudo</th>#}
+{#                <th scope="col">Nom</th>#}
+{#                <th scope="col">Prénom</th>#}
+{#            </tr>#}
+{#            </thead>#}
+{#            <tbody>#}
+    <div class="cardUtilisateur">
 
-    <section>
-        {% for accounts in account %}
-            <article>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item liste"><a class="liste" href="{{ path('detail', {'id': accounts.id}) }}" title="{{ accounts.pseudo }}">{{ accounts.prenom | capitalize }}</a></li>
-                </ul>
-            </article>
+    </div>
+    <div class="cardUtilisateurBis">
+
+    </div>
+            {% for accounts in account %}
+{#            #}{# test tableau #}
+{#            {% set counter = ( counter | default(0) ) + 1 %}#}
+
+{#            <tr>#}
+{#                <th scope="row"><a class="liste" href="{{ path('detail', {'id': accounts.id}) }}" title="{{ accounts.pseudo }}">{{ counter}}</a></th>#}
+{#                <td><a class="liste" href="{{ path('detail', {'id': accounts.id}) }}" title="{{ accounts.pseudo }}">{{ accounts.pseudo | capitalize }}</a></td>#}
+{#                <td><a class="liste" href="{{ path('detail', {'id': accounts.id}) }}" title="{{ accounts.pseudo }}">{{ accounts.prenom | capitalize }}</a></td>#}
+{#                <td><a class="liste" href="{{ path('detail', {'id': accounts.id}) }}" title="{{ accounts.pseudo }}">{{ accounts.nom | capitalize }}</a></td>#}
+{#            </tr>#}
+{#            #}{# test tableau #}
+
+{#            <div class="test">#}
+{#                <div class="cardUtilisateur">#}
+
+{#                </div>#}
+{#                <a class="liste" href="{{ path('detail', {'id': accounts.id}) }}" title="{{ accounts.pseudo }}">{{ accounts.prenom | capitalize }}</a>#}
+{#            </div>#}
         {% endfor %}
-    </section>
+{#    </section>#}
 {% endblock %}
