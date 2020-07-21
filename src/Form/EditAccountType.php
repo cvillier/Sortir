@@ -37,17 +37,14 @@ class EditAccountType extends AbstractType
                 ->add('email', EmailType::class, [
                     'label' => 'Email'
                 ])
-                ->add('button', SubmitType::class)
+                //->add('button', SubmitType::class)
 
-//            ->add('password', PasswordType::class, [
-//                'label' => 'Mot de passe : '
-//            ])
                 ->add('plainPassword', RepeatedType::class, [
                     'type' => PasswordType::class,
                     // instead of being set onto the object directly,
                     // this is read and encoded in the controller
-                    'first_options' => ['label' => 'Password'],
-                    'second_options' => ['label' => 'Repeat Password'],
+                    'first_options' => ['label' => 'Mot de passe : '],
+                    'second_options' => ['label' => 'Confirmation : '],
                     'mapped' => false,
                     'constraints' => [
                         new NotBlank([
@@ -62,15 +59,10 @@ class EditAccountType extends AbstractType
                     ],
                 ])
 
-//            ajouter confirmation password
+                ->add('campus')
 
-            ->add('campus')
+              //->add('actif')
 
-//            ->add('photoFile', FileType::class, [
-//                'label' => 'Ma photo : '
-//            ])
-
-//            ->add('actif')
                 ->add('roles', ChoiceType::class, [
                     'choices' => [
                         'Admin' => 'ROLE_ADMIN',
@@ -81,11 +73,14 @@ class EditAccountType extends AbstractType
                     'expanded' => false, // liste déroulante
                     'multiple' => true, // choix multiple
                     'label' => 'Le rôle de cet utilisateur : '
-                ]);
+                ])
 
+                ->add('photo', EditPhotoType::class, [
+                    'label' => 'Ma photo'
+                ])
+            ;
     }
 
-//    }
 
     public function configureOptions(OptionsResolver $resolver)
     {

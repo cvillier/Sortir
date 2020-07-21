@@ -9,10 +9,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\Collection;
 
-
-
-
-
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"pseudo"}, message="There is already an account with this pseudo")
@@ -85,18 +81,10 @@ class User implements UserInterface
      */
     private $sortieUser;
 
-//    /**
-//     * @ORM\Column(type="string", length=255, nullable=true)
-//     */
-//    protected $photo;
-//
-//    /**
-//     * @Assert\Image(maxSize="2M")
-//     * @Vich\UploadableField(mapping="profilPicture")
-//     */
-//    protected $photoFile;
-
-
+    /**
+     * @ORM\OneToOne(targetEntity=Photo::class, inversedBy="user")
+     */
+    protected $photo;
 
 
     // CONSTRUCTOR
@@ -118,17 +106,6 @@ class User implements UserInterface
         return $this->id;
     }
 
-    public function getPseudo(): ?string
-    {
-        return $this->pseudo;
-    }
-
-    public function setPseudo(string $pseudo): self
-    {
-        $this->pseudo = $pseudo;
-
-        return $this;
-    }
 
     /**
      * A visual identifier that represents this user.
@@ -189,6 +166,18 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
 //         $this->password = null;
+    }
+
+    public function getPseudo(): ?string
+    {
+        return $this->pseudo;
+    }
+
+    public function setPseudo(string $pseudo): self
+    {
+        $this->pseudo = $pseudo;
+
+        return $this;
     }
 
     public function getNom(): ?string
@@ -295,37 +284,31 @@ class User implements UserInterface
         $this->sortieUser = $sortieUser;
     }
 
-//    /**
-//     * @return mixed
-//     */
-//    public function getPhoto()
-//    {
-//        return $this->photo;
-//    }
-//
-//    /**
-//     * @param mixed $photo
-//     */
-//    public function setPhoto($photo): void
-//    {
-//        $this->photo = $photo;
-//    }
-//
-//    /**
-//     * @return mixed
-//     */
-//    public function getPhotoFile()
-//    {
-//        return $this->photoFile;
-//    }
-//
-//    /**
-//     * @param mixed $photoFile
-//     */
-//    public function setPhotoFile($photoFile): void
-//    {
-//        $this->photoFile = $photoFile;
-//    }
+    /**
+     * @return mixed
+     */
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    /**
+     * @param mixed $photo
+     * @return User
+     */
+    public function setPhoto($photo)
+    {
+        $this->photo = $photo;
+        return $this;
+    }
+
+
+
+
+
+
+
+
 //
 //
 //    //SERIALIZERS
