@@ -57,7 +57,7 @@ class CreationSortieFormType extends AbstractType
                 'label'  => 'Durée : ',
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 90
+                    'placeholder' => '90 minutes'
                 ]
             ])
 
