@@ -2,18 +2,22 @@
 
 {% block title %}{{ parent() }} Les villes {% endblock %}
 
+{% block campusVilleCss %}
+    <link rel="stylesheet" href="{{ asset('CSS/campusVille.css') }}">
+{% endblock %}
+
 {% block main %}
 
-<h1 class="text-center">Gérer les villes</h1>
+<h1 class="text-center mt-5">Gérer les villes</h1>
 
-    <div>
+    <div class="content-recherche">
         <h2>Filtrer les villes</h2>
 
         <form method="get" action="villes.html.twig">
             <div class="form-group row">
                 <label class="col-4">Le nom contient :</label>
                 <div class="col-4"><input class="form-control" type="text" placeholder="Ville"></div>
-                <div class="col-4"><button type="submit" class="btn btn-primary mb-2">Rechercher</button></div>
+                <div class="col-4"><button type="submit" class="btn btn-violet mb-2">Rechercher</button></div>
             </div>
         </form>
     </div>
@@ -34,7 +38,7 @@
                 <tr>
                     <td>{{ ville.getNomVille() }}</td>
                     <td>{{ ville.getCodePostal() }}</td>
-                    <td><a href="">Modifier</a> <a href="">Supprimer</a></td>
+                    <td><a href="">Modifier</a> - <a href="">Supprimer</a></td>
                 </tr>
             {% endfor %}
             </tbody>
@@ -43,7 +47,7 @@
                 <tr>
                     <td><input name="ville" class="form-control" type="text" placeholder="Nouvelle ville"></td>
                     <td><input name="campus" class="form-control" type="text" placeholder="Nouveau code codal"></td>
-                    <td><button type="submit" class="btn btn-primary mb-2">Ajouter</button></td>
+                    <td><button type="submit" class="btn btn-violet mb-2">Ajouter</button></td>
                 </tr>
             </tfoot>
 
