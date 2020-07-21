@@ -307,8 +307,6 @@ class User implements UserInterface
 
 
 
-
-
 //
 //
 //    //SERIALIZERS
