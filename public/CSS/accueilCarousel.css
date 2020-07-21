@@ -3,7 +3,9 @@
     text-align: center;
     color: #4A00E0;
     font-family: Montserrat;
-    margin: 32px;
+    margin-bottom: 0;
+    min-height: 10vh;
+    line-height: 2.2em;
 }
 .carousel {
     display: flex;
@@ -12,6 +14,7 @@
 
 .carousel-inner {
     flex: 1;
+    height: 90vh;
 }
 
 /*.images {*/
@@ -29,7 +32,6 @@
 /*}*/
 .container-fluid {
     padding: 0px;!important;
-    height: 100vh;
 }
 
 .carousel-control-prev-icon, .carousel-control-next-icon {
@@ -38,8 +40,6 @@
     height: 56px;
     background-color: #fc4a1a;
     background-size: auto;
-    /*width: 64px;*/
-    /*height: 64px;*/
     border-radius: 40px;
 }
 /*.carousel-control-prev-icon {*/
