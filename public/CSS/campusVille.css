@@ -7,7 +7,12 @@
     color: white;
 }
 
-.btn-violet:hover{
+.btn-orange{
+    background-color: #e36414;
+    color: white;
+}
+
+.btn-violet:hover, .btn-orange:hover{
     color: white;
 }
 
@@ -25,5 +30,6 @@ tfoot{
 }
 
 .content-recherche{
-    padding: 32px;
+    padding: 40px 72px 40px 72px;
+    margin: 32px 0 32px 0;
 }

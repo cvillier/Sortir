@@ -14,12 +14,12 @@
     margin: 32px 0 32px 0;
 }
 
-.btn-violet{
-    background-color: #4A00E0;
+.btn-orange{
+    background-color: #e36414;
     color: white;
 }
 
-.btn-violet:hover{
+.btn-orange:hover{
     color: white;
 }
 

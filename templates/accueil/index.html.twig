@@ -73,7 +73,7 @@
 
         <div class="row">
             <div class="col-12 text-center btn-rechercher">
-                    <button type="submit" class="btn btn-violet">Rechercher</button>
+                    <button type="submit" class="btn btn-orange">Rechercher</button>
             </div>
         </div>
     {{ form_end(accueilForm) }}
@@ -194,7 +194,7 @@
             <tr>
                 {% if app.user.roles == ["ROLE_ORGANISATEUR"] or app.user.roles == ["ROLE_ADMIN"] %}
                     <td><a href="{{ path('creation_sortie') }}">
-                            <button type="submit" class="btn btn-violet mt-3">Créer une sortie</button>
+                            <button type="submit" class="btn btn-orange mt-3">Créer une sortie</button>
                         </a></td>
                 {% endif %}
             </tr>
