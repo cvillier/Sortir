@@ -1,26 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} {{ parent() }} | Annuler une sortie{% endblock %}
+{% block title %} {{ parent() }} Annuler une sortie{% endblock %}
+
+{% block annulationSortieCss %}
+    <link rel="stylesheet" href="{{ asset('CSS/annulation.css') }}">
+{% endblock %}
 
 {% block main %}
-    {{ form_start(annulationSortieForm) }}
-    <h1>Annulation de sorties</h1>
 
-    <ul><u><b>Nom de la sortie :</b></u>{{ sortie.nom }}</ul>
-    <ul><u><b>Date de la sortie :</b></u>{{ sortie.datedebut | date("d/m/Y") }}</ul>
+    <h2 class="text-center content-annulation mt-5 mb-5 ">Annulation de sorties</h2>
 
-    <ul><u><b>Campus :</b></u>{{ sortie.campus.nomCampus }}</ul>
-    <ul>
-        <u><b>Lieu:</b></u> {{ sortie.noLieu.nomLieu }} {{ sortie.noLieu.rue }} {{ sortie.noLieu.ville.codePostal }} {{ sortie.noLieu.ville.nomVille }}
-    </ul>
+        {{ form_start(annulationSortieForm) }}
 
-    <ul>
-        <u><b>Motif :</b></u>
-        {{ form_row(annulationSortieForm.motifAnnulation) }}
-    </ul>
+    <div class="row">
 
-    <button type="submit" class="btn" name="enregistrer" value="enregistrer">Enregistrer</button>
-    <button type="submit" class="btn" name="annuler" value="annuler">Annuler</button>
+        <div class="mx-auto col-sm-10 col-lg-6 card">
+            <ul>
+                <li>Nom de la sortie : {{ sortie.nom }}</li>
+                <li>Date de la sortie : {{ sortie.datedebut | date("d/m/Y") }}</li>
+                <li>Campus : {{ sortie.campus.nomCampus }}</li>
+                <li>Lieu: {{ sortie.noLieu.nomLieu }} {{ sortie.noLieu.rue }} {{ sortie.noLieu.ville.codePostal }} {{ sortie.noLieu.ville.nomVille }}</li>
+                <li>Motif : {{ form_row(annulationSortieForm.motifAnnulation) }}</li>
+            </ul>
 
-    {{ form_end(annulationSortieForm) }}
+            <div class="d-inline mx-auto">
+                <button type="submit" class="btn btn-orange" name="enregistrer" value="enregistrer">Enregistrer</button>
+                <button type="submit" class="btn btn-orange" name="annuler" value="annuler">Annuler</button>
+            </div>
+        </div>
+
+    </div>
+
+        {{ form_end(annulationSortieForm) }}
+
+
 {% endblock %}

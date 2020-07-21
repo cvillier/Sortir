@@ -14,7 +14,7 @@
 
     <div class="row">
 
-        <div class="mx-auto col-sm-10 mb-sm-5 col-lg-4 card"> <!--colone de gauche-->
+        <div class="mx-auto col-sm-10 mb-sm-5 col-lg-4 card">
             <div class="form-group row">
                 {{ form_label(creationSortieForm.nom) }}
                 {{ form_widget(creationSortieForm.nom) }}
@@ -46,7 +46,7 @@
             </div>
         </div>
 
-        <div class="mx-auto col-sm-10 col-lg-4 card"> <!--colone de droite-->
+        <div class="mx-auto col-sm-10 mb-sm-5 col-lg-4 card">
             <div class="form-group row">
                 <p>Campus : {{ app.user.campus }}</p>
             </div>
@@ -83,9 +83,9 @@
     </div>
 
     <div class="text-center"> <!--boutons-->
-        <button type="submit" class="btn btn-violet" name="enregistrer" value="enregistrer">Enregistrer</button>
-        <button type="submit" class="btn btn-violet" name="publier" value="publier">Publier la sortie</button>
-        <button type="submit" class="btn btn-violet" name="annuler" value="annuler">Annuler</button>
+        <button type="submit" class="btn btn-orange" name="enregistrer" value="enregistrer">Enregistrer</button>
+        <button type="submit" class="btn btn-orange" name="publier" value="publier">Publier la sortie</button>
+        <button type="submit" class="btn btn-orange" name="annuler" value="annuler">Annuler</button>
     </div>
 
     {{ form_end(creationSortieForm) }}
