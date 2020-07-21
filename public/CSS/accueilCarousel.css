@@ -3,7 +3,7 @@
     text-align: center;
     color: #4A00E0;
     font-family: Montserrat;
-    margin: 48px;
+    margin: 32px;
 }
 .carousel {
     display: flex;
@@ -14,11 +14,22 @@
     flex: 1;
 }
 
-.images {
-    background-size: cover;
-    justify-content: center;!important;
-    height: 48em;!important;
-    object-fit: cover;
+/*.images {*/
+/*    background-size: cover;*/
+/*    justify-content: center;!important;*/
+/*    height: 48em;!important;*/
+/*    object-fit: cover;*/
+/*    padding: 0px; !important;*/
+/*}*/
+/*.carousel-inner {*/
+/*    height: 100vh;*/
+/*}*/
+/*.box {*/
+/*    padding: 0px;!important;*/
+/*}*/
+.container-fluid {
+    padding: 0px;!important;
+    height: 100vh;
 }
 
 .carousel-control-prev-icon, .carousel-control-next-icon {

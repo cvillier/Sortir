@@ -1,15 +1,20 @@
 {% extends 'base.html.twig' %}
 
+{% block accueilCarouselCss %}
+    <link rel="stylesheet" href="{{ asset('CSS/listeAdmin.css') }}">
+{% endblock %}
+
 {% block title %}{{ parent() }}{% endblock %}
 
 {% block main %}
-    <h1 class="text-center">Les utilisateurs</h1>
+    <h1 class="text-center" id="utilisateurs">Les utilisateurs</h1>
 
     <section>
         {% for accounts in account %}
             <article>
-{#                <p>{{ accounts.pseudo|capitalize }}</p>#}
-                <a href="{{ path('detail', {'id': accounts.id}) }}" title="{{ accounts.pseudo }}">{{ accounts.pseudo|capitalize }}</a>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item liste"><a class="liste" href="{{ path('detail', {'id': accounts.id}) }}" title="{{ accounts.pseudo }}">{{ accounts.prenom | capitalize }}</a></li>
+                </ul>
             </article>
         {% endfor %}
     </section>
