@@ -89,6 +89,7 @@ class User implements UserInterface
      */
     private $sortieUser;
 
+    //comment for update
     /**
      * @var string|null
      * @ORM\Column(type="string", length=255, nullable=true)
