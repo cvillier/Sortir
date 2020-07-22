@@ -38,7 +38,7 @@ class EditAccountController extends AbstractController
                 $user->setPassword(
                     $passwordEncoder->encodePassword(
                         $user,
-                        $editAccountForm->get('plainPassword')->getData()
+                        $editAccountForm->get('Password')->getData()
                     )
                 );
 

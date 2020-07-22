@@ -2,37 +2,47 @@
 
 {% block title %} {{ parent() }} Afficher une sortie{% endblock %}
 
-{% block main %}
-    <ul><u><b>Nom de la sortie :</b></u>{{ sortie.nom }}</ul>
-    <ul><u><b>Date de debut :</b></u>{{ sortie.datedebut | date("d/m/Y") }}</ul>
-    <ul><u><b>Date de cloture :</b></u>{{ sortie. datecloture | date("d/m/Y") }}</ul>
-    <ul><u><b>Nombre de places :</b></u> {{ sortie.nbinscriptionsmax }}</ul>
-    <ul><u><b>Durée :</b></u> {{ sortie.duree }}</ul>
-    <ul><u><b>Description :</b></u> {{ sortie.descriptioninfos }}</ul>
-    <ul><u><b>Campus :</b></u>{{ sortie.campus.nomCampus }}</ul>
-    <ul><u><b>Lieu :</b></u> {{ sortie.noLieu.nomLieu }}</ul>
-    <ul><u><b>Rue :</b></u> {{ sortie.noLieu.rue }}</ul>
-    <ul><u><b>Ville :</b></u> {{ sortie.noLieu.ville.codePostal }}
-        {{ sortie.noLieu.ville.nomVille }}</ul>
-    <ul><u><b>Latitude :</b></u> {{ sortie.noLieu.latitude }}</ul>
-    <ul><u><b>Longitude :</b></u> {{ sortie.noLieu.longitude }}</ul>
+{% block creationSortieCss %}
+    <link rel="stylesheet" href="{{ asset('CSS/affichageSortie.css') }}">
+{% endblock %}
 
-    {% for participant in sortie.sortieUser %}
-        <ul>
-            {{ participant.user.pseudo }}
-            {{ participant.user.nom }}
-            {{ participant.user.prenom }}
+{% block main %}
+
+    <h2 class="text-center content-profil mt-5 mb-5">Sortie : {{ sortie.nom }}</h2>
+
+    <div class="mx-auto col-sm-10 mb-sm-5 col-lg-6 card">
+
+        <ul class="mx-auto">
+            <li><span class="bold">Date de debut :</span> {{ sortie.datedebut | date("d/m/Y") }}</li>
+            <li><span class="bold">Date de cloture :</span> {{ sortie. datecloture | date("d/m/Y") }}</li>
+            <li><span class="bold">Nombre de places :</span> {{ sortie.nbinscriptionsmax }}</li>
+            <li><span class="bold">Durée :</span> {{ sortie.duree }}</li>
+            <li><span class="bold">Description :</span> {{ sortie.descriptioninfos }}</li>
+            <li><span class="bold">Campus :</span> {{ sortie.campus.nomCampus }}</li>
+            <li><span class="bold">Lieu :</span> {{ sortie.noLieu.nomLieu }}</li>
+            <li><span class="bold">Rue :</span> {{ sortie.noLieu.rue }}</li>
+            <li><span class="bold">Ville :</span> {{ sortie.noLieu.ville.codePostal }} {{ sortie.noLieu.ville.nomVille }}</li>
+            <li><span class="bold">Latitude :</span> {{ sortie.noLieu.latitude }}</li>
+            <li><span class="bold">Longitude :</span> {{ sortie.noLieu.longitude }}</li>
+
+            {% for participant in sortie.sortieUser %}
+                <li>
+                    <span class="bold">Participant :</span>
+                    {{ participant.user.pseudo }}
+                    {{ participant.user.nom }}
+                    {{ participant.user.prenom }}
+                </li>
+            {% endfor %}
 
         </ul>
-    {% endfor %}
+
+    </div>
 
     {% if app.user.roles == ["ROLE_ADMIN"] %}
-    <td><a href="{{ path('modification_sortie', {'id': sortie.id}) }}">
-            <button type="submit" class="btn btn-primary mb-2">Modifier la sortie</button>
-        </a>
-    <a href="{{ path('annulation_sortie', {'id': sortie.id}) }}">
-            <button type="submit" class="btn btn-primary mb-2">Annuler la sortie</button>
-        </a></td>
-{% endif %}
+        <div class="text-center">
+            <a href="{{ path('modification_sortie', {'id': sortie.id}) }}"><button type="submit" class="btn btn-orange">Modifier la sortie</button></a>
+            <a href="{{ path('annulation_sortie', {'id': sortie.id}) }}"><button type="submit" class="btn btn-orange">Annuler la sortie</button></a>
+        </div>
+    {% endif %}
 
 {% endblock %}
