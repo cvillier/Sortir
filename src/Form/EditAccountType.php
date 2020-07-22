@@ -69,7 +69,6 @@ class EditAccountType extends AbstractType
                         'class' => 'form-control',
                     ]
                 ])
-                ->add('button', SubmitType::class)
 
                 ->add('password', RepeatedType::class, [
                     'type' => PasswordType::class,
