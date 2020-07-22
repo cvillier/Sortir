@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block accueilCarouselCss %}
+    <link rel="stylesheet" href="{{ asset('CSS/formRegistration.css') }}">
+{% endblock %}
+
 {% block title %} {{ parent() }} Enregistrer un compte {% endblock %}
 
 {% block main %}

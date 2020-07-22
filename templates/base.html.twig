@@ -16,6 +16,7 @@
     {% block campusVilleCss %}{% endblock %}
     {% block creationSortieCss %}{% endblock %}
     {% block annulationSortieCss %}{% endblock %}
+    {% block formRegistratinoCss %}{% endblock %}
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 
@@ -45,17 +46,17 @@
                         <a class="nav-link" href="{{ path('compte') }}">Tous les profils</a>
                     </li>
                     <hr>
-                {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('detail', {'id': app.user.id}) }}">Mon profil</a>
-                    </li>
-                    <hr>
-                {% endif %}
-                {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('app_register') }}" title="register">Enregistrer un utilisateur</a>
                     </li>
                     <hr>
+                {% else %}
+                    <li class="nav-item">
+                    <a class="nav-link" href="{{ path('detail', {'id': app.user.id}) }}">Mon profil</a>
+                    </li>
+                    <hr>
+                {% endif %}
+                {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('app_login') }}" title="Connect">Se Connecter</a>
                     </li>
@@ -102,17 +103,18 @@
                             <a class="nav-link" href="{{ path('compte') }}">Tous les profils</a>
                         </li>
                         <hr>
-                    {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('detail', {'id': app.user.id}) }}">Mon profil</a>
-                        </li>
-                        <hr>
-                    {% endif %}
-                    {% else %}
+                        {{ dump(path('app_register')) }}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('app_register') }}" title="register">Enregistrer un utilisateur</a>
                         </li>
                         <hr>
+                    {% else %}
+                        <li class="nav-item">
+                        <a class="nav-link" href="{{ path('detail', {'id': app.user.id}) }}">Mon profil</a>
+                        </li>
+                        <hr>
+                    {% endif %}
+                    {% else %}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('app_login') }}" title="Connect">Se Connecter</a>
                         </li>
