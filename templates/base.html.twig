@@ -25,7 +25,7 @@
     <title>{% block title %} Sortir | {% endblock %}</title>
 </head>
 <body>
-{% for label, messages in app.flashes(['success', 'warning']) %}
+{% for label, messages in app.flashes(['success', 'warning', 'danger']) %}
     {% for message in messages %}
         <p class="alert-{{ label }}">{{ message }}</p>
     {% endfor %}

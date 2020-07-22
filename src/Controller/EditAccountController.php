@@ -65,7 +65,7 @@ class EditAccountController extends AbstractController
                 $em->persist($user);
                 $em->flush();
 
-                $this->addFlash("success", "Le profil a bien été mise à jour");
+                $this->addFlash("success", "Le profil a bien été mis à jour");
 
                 return $this->redirectToRoute('detail', [
                     'id' => $user->getId()
@@ -78,7 +78,7 @@ class EditAccountController extends AbstractController
             ]);
 
         } else {
-            $this->addFlash("error", "Modification interdite : ce n'est pas votre compte !");
+            $this->addFlash("danger", "Modification interdite : ce n'est pas votre compte !");
             return $this->redirectToRoute("accueil");
         }
     }
