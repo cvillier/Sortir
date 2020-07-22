@@ -14,7 +14,7 @@
             <div class="card">
                 <div class="card-body">
                     <img class="profil-picture"
-{#                         src="{{ asset('IMAGES/profilPicture/' ~ app.user.photo) }}"#}
+                         src="{{ asset('images/profilePicture/'~app.user.photoName) }}"
                          alt="La photo de profil">
                 </div>
             </div>
@@ -62,10 +62,10 @@
                         {{ form_widget(form.campus) }}
                     </div>
 
-{#                    <div class="form-group row">#}
-{#                        {{ form_label(form.photoFile) }}#}
-{#                        {{ form_widget(form.photoFile) }}#}
-{#                    </div>#}
+                    <div class="form-group row">
+                        {{ form_label(form.photoFile) }}
+                        {{ form_widget(form.photoFile) }}
+                    </div>
 
 {#                    {% if is_granted("ROLE_ADMIN") %}#}
                     <div class="form-control">

@@ -51,3 +51,6 @@ DELETE FROM `inscriptions`;
 
 DELETE FROM `user`;
 ALTER TABLE `user` AUTO_INCREMENT = 0;
+ALTER TABLE `user` CHANGE `photo_name` `photo_name` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'defaultPicture.png';
+
+INSERT INTO `photo` (`id`, `photo_name`) VALUES (NULL,'5f081744d36a1.jpeg');

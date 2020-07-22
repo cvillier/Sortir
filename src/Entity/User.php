@@ -2,15 +2,17 @@
 
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\Collection;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\HttpFoundation\File\File;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
+
 
 
 
@@ -18,7 +20,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"pseudo"}, message="There is already an account with this pseudo")
- */
+  */
 class User implements UserInterface
 {
 
@@ -87,16 +89,19 @@ class User implements UserInterface
      */
     private $sortieUser;
 
-//    /**
-//     * @ORM\Column(type="string", length=255, nullable=true)
-//     */
-//    protected $photo;
-//
-//    /**
-//     * @Assert\Image(maxSize="2M")
-//     * @Vich\UploadableField(mapping="profilPicture")
-//     */
-//    protected $photoFile;
+    /**
+     * @var string|null
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $photoName;
+
+    /**
+     * @var File|null
+     * @Assert\Image(maxSize="4M")
+     */
+    private $photoFile;
+
+
 
 
 
@@ -120,17 +125,6 @@ class User implements UserInterface
         return $this->id;
     }
 
-    public function getPseudo(): ?string
-    {
-        return $this->pseudo;
-    }
-
-    public function setPseudo(string $pseudo): self
-    {
-        $this->pseudo = $pseudo;
-
-        return $this;
-    }
 
     /**
      * A visual identifier that represents this user.
@@ -191,6 +185,18 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
 //         $this->password = null;
+    }
+
+    public function getPseudo(): ?string
+    {
+        return $this->pseudo;
+    }
+
+    public function setPseudo(string $pseudo): self
+    {
+        $this->pseudo = $pseudo;
+
+        return $this;
     }
 
     public function getNom(): ?string
@@ -297,74 +303,41 @@ class User implements UserInterface
         $this->sortieUser = $sortieUser;
     }
 
-//    /**
-//     * @return mixed
-//     */
-//    public function getPhoto()
-//    {
-//        return $this->photo;
-//    }
-//
-//    /**
-//     * @param mixed $photo
-//     */
-//    public function setPhoto($photo): void
-//    {
-//        $this->photo = $photo;
-//    }
-//
-//    /**
-//     * @return mixed
-//     */
-//    public function getPhotoFile()
-//    {
-//        return $this->photoFile;
-//    }
-//
-//    /**
-//     * @param mixed $photoFile
-//     */
-//    public function setPhotoFile($photoFile): void
-//    {
-//        $this->photoFile = $photoFile;
-//    }
-//
-//
-//    //SERIALIZERS
-//
-//    public function serialize() {
-//
-//        return serialize( [
-//            $this->id,
-//            $this->pseudo,
-//            $this->prenom,
-//            $this->password,
-//            $this->roles,
-//            $this->nom,
-//            $this->telephone,
-//            $this->email,
-//            $this->campus,
-//            $this->photo,
-//            $this->actif,
-//            ]
-//        );
-//    }
-//
-//    public function unserialize($serialized) {
-//
-//        list (
-//            $this->id,
-//            $this->pseudo,
-//            $this->prenom,
-//            $this->password,
-//            $this->roles,
-//            $this->nom,
-//            $this->telephone,
-//            $this->email,
-//            $this->campus,
-//            $this->photo,
-//            $this->actif,
-//            ) = unserialize($serialized);
-//    }
+    /**
+     * @return string|null
+     */
+    public function getPhotoName(): ?string
+    {
+        return $this->photoName;
+    }
+
+    /**
+     * @param string|null $photoName
+     * @return User
+     */
+    public function setPhotoName(?string $photoName): User
+    {
+        $this->photoName = $photoName;
+        return $this;
+    }
+
+    /**
+     * @return File|null
+     */
+    public function getPhotoFile(): ?File
+    {
+        return $this->photoFile;
+    }
+
+    /**
+     * @param File|null $photoFile
+     * @return User
+     */
+    public function setPhotoFile(?File $photoFile): User
+    {
+        $this->photoFile = $photoFile;
+        return $this;
+    }
+
 
 }
