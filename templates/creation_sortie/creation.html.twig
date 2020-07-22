@@ -2,99 +2,90 @@
 
 {% block title %} {{ parent() }} Creation de Sorties{% endblock %}
 
+{% block creationSortieCss %}
+    <link rel="stylesheet" href="{{ asset('CSS/creation.css') }}">
+{% endblock %}
+
 {% block main %}
 
-    <h1 class="text-center">Créer une sortie</h1>
+    <h2 class="text-center content-creation">Créer une sortie</h2>
 
     {{ form_start(creationSortieForm) }}
 
     <div class="row">
 
-        <div class="col-sm-6"> <!--colone de gauche-->
-            <div class="card">
-                <div class="card-body">
+        <div class="mx-auto col-sm-10 mb-sm-5 col-lg-4 card"> <!--colone de gauche-->
+            <div class="form-group row">
+                {{ form_label(creationSortieForm.nom) }}
+                {{ form_widget(creationSortieForm.nom) }}
+            </div>
 
-                    <div class="form-group row">
-                        {{ form_label(creationSortieForm.nom) }}
-                        {{ form_widget(creationSortieForm.nom) }}
-                    </div>
+            <div class="form-group row">
+                {{ form_label(creationSortieForm.datedebut) }}
+                {{ form_widget(creationSortieForm.datedebut) }}
+            </div>
 
-                    <div class="form-group row">
-                        {{ form_label(creationSortieForm.datedebut) }}
-                        {{ form_widget(creationSortieForm.datedebut) }}
+            <div class="form-group row">
+                {{ form_label(creationSortieForm.datecloture) }}
+                {{ form_widget(creationSortieForm.datecloture) }}
+            </div>
 
-                    </div>
+            <div class="form-group row">
+                {{ form_label(creationSortieForm.nbinscriptionsmax) }}
+                {{ form_widget(creationSortieForm.nbinscriptionsmax) }}
+            </div>
 
-                    <div class="form-group row">
-                        {{ form_label(creationSortieForm.datecloture) }}
-                        {{ form_widget(creationSortieForm.datecloture) }}
-                    </div>
+            <div class="form-group row">
+                {{ form_label(creationSortieForm.duree) }}
+                {{ form_widget(creationSortieForm.duree) }}
+            </div>
 
-                    <div class="form-group row">
-                        {{ form_label(creationSortieForm.nbinscriptionsmax) }}
-                        {{ form_widget(creationSortieForm.nbinscriptionsmax) }}
-                    </div>
-
-                    <div class="form-group row">
-                        {{ form_label(creationSortieForm.duree) }}
-                        {{ form_widget(creationSortieForm.duree) }}
-                        <p>minutes</p>
-                    </div>
-
-                    <div class="form-group row">
-                        {{ form_label(creationSortieForm.descriptioninfos) }}
-                        {{ form_widget(creationSortieForm.descriptioninfos) }}
-                    </div>
-
-                </div>
+            <div class="form-group row">
+                {{ form_label(creationSortieForm.descriptioninfos) }}
+                {{ form_widget(creationSortieForm.descriptioninfos) }}
             </div>
         </div>
 
-        <div class="col-sm-6"> <!--colone de droite-->
-            <div class="card">
-                <div class="card-body">
-
-                    <div class="form-group row">
-                        <p>Campus : {{ app.user.campus }}</p>
-                    </div>
-
-                    <div class="form-group row">
-                        {{ form_label(creationSortieForm.nom_ville) }}
-                        {{ form_widget(creationSortieForm.nom_ville) }}
-                    </div>
-
-                    <div class="form-group row">
-                        {{ form_label(creationSortieForm.noLieu) }}
-                        {{ form_widget(creationSortieForm.noLieu) }}
-                        <!-- bouton "+" -->
-                    </div>
-
-                    <div class="form-group row">
-                        <p>Rue : </p>
-                    </div>
-
-                    <div class="form-group row">
-                        <p>Code postal : </p>
-                    </div>
-
-                    <div class="form-group row">
-                        <p>Latitude : </p>
-                    </div>
-
-                    <div class="form-group row">
-                        <p>Longitude : </p>
-                    </div>
-
-                </div>
+        <div class="mx-auto col-sm-10 col-lg-4 card"> <!--colone de droite-->
+            <div class="form-group row">
+                <p>Campus : {{ app.user.campus }}</p>
             </div>
+
+            <div class="form-group row">
+                {{ form_label(creationSortieForm.nom_ville) }}
+                {{ form_widget(creationSortieForm.nom_ville) }}
+            </div>
+
+            <div class="form-group row">
+                {{ form_label(creationSortieForm.noLieu) }}
+                {{ form_widget(creationSortieForm.noLieu) }}
+                <!-- bouton "+" -->
+            </div>
+
+            <div class="form-group row">
+                <p>Rue : </p>
+            </div>
+
+            <div class="form-group row">
+                <p>Code postal : </p>
+            </div>
+
+            <div class="form-group row">
+                <p>Latitude : </p>
+            </div>
+
+            <div class="form-group row">
+                <p>Longitude : </p>
+            </div>
+
         </div>
 
     </div>
 
     <div class="text-center"> <!--boutons-->
-        <button type="submit" class="btn" name="enregistrer" value="enregistrer">Enregistrer</button>
-        <button type="submit" class="btn" name="publier" value="publier">Publier la sortie</button>
-        <button type="submit" class="btn" name="annuler" value="annuler">Annuler</button>
+        <button type="submit" class="btn btn-violet" name="enregistrer" value="enregistrer">Enregistrer</button>
+        <button type="submit" class="btn btn-violet" name="publier" value="publier">Publier la sortie</button>
+        <button type="submit" class="btn btn-violet" name="annuler" value="annuler">Annuler</button>
     </div>
 
     {{ form_end(creationSortieForm) }}

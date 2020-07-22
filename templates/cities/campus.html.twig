@@ -2,22 +2,29 @@
 
 {% block title %}{{ parent() }} Les campus {% endblock %}
 
+{% block campusVilleCss %}
+    <link rel="stylesheet" href="{{ asset('CSS/campusVille.css') }}">
+{% endblock %}
+
 {% block main %}
 
-<h1 class="text-center">Gérer les campus</h1>
+<h1 class="text-center mt-5">Gérer les campus</h1>
 
-    <div>
-        <h2>Filtrer les sites</h2>
+    <div class="row">
 
-        <form method="get" action="campus.html.twig">
-            <div class="form-group row">
-                <label class="col-4">Le nom contient :</label>
-                <div class="col-4"><input class="form-control" type="text" placeholder="Campus"></div>
-                <div class="col-4"><button type="submit" class="btn btn-primary mb-2">Rechercher</button></div>
-            </div>
-        </form>
+        <div class=" content-recherche">
+            <h2 class="">Filtrer les sites</h2>
 
-    </div>
+            <form method="get" action="campus.html.twig">
+                <div class="form-group row content">
+                    <label class="col-4 my-auto">Le nom contient :</label>
+                    <div class="col-4 my-auto"><input class="form-control" type="text" placeholder="Campus"></div>
+                    <div class="col-4"><button type="submit" class="btn btn-orange mb-2 my-auto">Rechercher</button></div>
+                </div>
+            </form>
+        </div>
+
+        </div>
 
     <div>
         <table class="table table-striped">
@@ -33,7 +40,7 @@
                     {% for campu in campus %}
                 <tr>
                     <td>{{ campu.getNomCampus() }}</td>
-                    <td><a href="">Modifier</a> <a href="">Supprimer</a></td>
+                    <td><a href="">Modifier</a> - <a href="">Supprimer</a></td>
                 </tr>
                     {% endfor %}
             </tbody>
@@ -42,7 +49,7 @@
                 <tr>
                     <form method="get" action="">
                         <td><input name="campus" class="form-control" type="text" placeholder="Nouveau campus"></td>
-                        <td><button type="submit" class="btn btn-primary mb-2">Ajouter</button></td>
+                        <td><button type="submit" class="btn btn-orange mb-2">Ajouter</button></td>
                     </form>
                 </tr>
             </tfoot>

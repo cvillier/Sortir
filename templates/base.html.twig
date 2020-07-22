@@ -13,6 +13,8 @@
     {% block accueilCarouselCss %}{% endblock %}
     {% block connexionCss %}{% endblock %}
     {% block listeAdminCss %}{% endblock %}
+    {% block campusVilleCss %}{% endblock %}
+    {% block creationSortieCss %}{% endblock %}
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 
@@ -128,15 +130,10 @@
                 </ul>
             </div>
         </nav>
-{#        <div>#}
-{#            {% block test %} {% endblock %}#}
-{#        </div>#}
 
         <div class="container-fluid">
             <main>
-                <div class="box container-fluid">
-                    {% block main %}{% endblock %}
-                </div>
+                {% block main %}{% endblock %}
             </main>
             <footer></footer>
         </div>

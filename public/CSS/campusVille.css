@@ -1,0 +1,35 @@
+.btn-rechercher{
+    margin: 32px 0 32px 0;
+}
+
+.btn-violet{
+    background-color: #4A00E0;
+    color: white;
+}
+
+.btn-orange{
+    background-color: #e36414;
+    color: white;
+}
+
+.btn-violet:hover, .btn-orange:hover{
+    color: white;
+}
+
+.form-control:focus {
+    border: 1px solid rgba(74, 0, 224, .8);
+    box-shadow: none;
+}
+
+tfoot{
+    margin-top: 32px;
+}
+
+.content-recherche h2{
+    margin-bottom: 32px;
+}
+
+.content-recherche{
+    padding: 40px 72px 40px 72px;
+    margin: 32px 0 32px 0;
+}
