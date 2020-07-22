@@ -21,8 +21,6 @@ class EditAccountController extends AbstractController
         $repoUser = $this->getDoctrine()->getRepository(User::class);
         $user = $repoUser->find($id);
 
-        $repoPhoto = $this->getDoctrine()->getRepository(Photo::class);
-        $photo = $repoPhoto->find($id); //à corriger : ici on implique que le user 1 ai la photo 1 etc...
 
         // empeche de modifier si l'utilisateur n'est pas celui de la page
         if ($user == $this->getUser() or $this->isGranted("ROLE_ADMIN")) {
@@ -34,6 +32,8 @@ class EditAccountController extends AbstractController
 
             if ($editAccountForm->isSubmitted() && $editAccountForm->isValid()) {
 
+                $photoFile = $editAccountForm['photoFile']->getData();
+
                 //encodage du mdp
                 $user->setPassword(
                     $passwordEncoder->encodePassword(
@@ -42,15 +42,15 @@ class EditAccountController extends AbstractController
                     )
                 );
 
-            if ($photo) {
+            if ($photoFile) {
             // Modification du nom de la photo uploadée
                 $safeFilename = uniqid();
-                $newFilename = $safeFilename.'.'.$photo->guessExtension();
-                $photo->setPhotoName($newFilename);
+                $newFilename = $safeFilename.'.'.$photoFile->guessExtension();
+                $user->setPhotoName($newFilename);
 
                 // Déplacement du fichier dans notre dossier prévu à cet effet
                 try {
-                    $photo->move(
+                    $photoFile->move(
                         $this->getParameter('upload_directory' ),
                         $newFilename
                     );
@@ -58,19 +58,16 @@ class EditAccountController extends AbstractController
                 } catch (FileException $e) {
                     error_log($e->getMessage());
                 }
-
-                $user->setPhoto($photo);
             }
 
 
                 $em = $this->getDoctrine()->getManager();
-                $em->persist($photo);
                 $em->persist($user);
                 $em->flush();
 
                 $this->addFlash("success", "Le profil a bien été mise à jour");
 
-                return $this->redirectToRoute('edit', [
+                return $this->redirectToRoute('detail', [
                     'id' => $user->getId()
                 ]);
 

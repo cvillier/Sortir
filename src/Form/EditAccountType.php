@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -75,9 +76,15 @@ class EditAccountType extends AbstractType
                     'label' => 'Le rôle de cet utilisateur : '
                 ])
 
-                ->add('photo', EditPhotoType::class, [
-                    'label' => 'Ma photo'
+                ->add('photoFile', FileType::class, [
+                    'mapped' => false,
+                    'required' => false,
+                    'label' => 'Ma photo : '
                 ])
+
+//                ->add('photo', EditPhotoType::class, [
+//                    'label' => 'Ma photo'
+//                ])
             ;
     }
 

@@ -2,10 +2,13 @@
 
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\Collection;
 
@@ -82,9 +85,24 @@ class User implements UserInterface
     private $sortieUser;
 
     /**
-     * @ORM\OneToOne(targetEntity=Photo::class, inversedBy="user")
+     * @var string|null
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    protected $photo;
+    private $photoName;
+
+    /**
+     * @var File|null
+     * @Assert\Image(maxSize="4M")
+     */
+    private $photoFile;
+
+
+
+
+//    /**
+//     * @ORM\OneToOne(targetEntity=Photo::class, inversedBy="user")
+//     */
+//    protected $photo;
 
 
     // CONSTRUCTOR
@@ -285,22 +303,62 @@ class User implements UserInterface
     }
 
     /**
-     * @return mixed
+     * @return string|null
      */
-    public function getPhoto()
+    public function getPhotoName(): ?string
     {
-        return $this->photo;
+        return $this->photoName;
     }
 
     /**
-     * @param mixed $photo
+     * @param string|null $photoName
      * @return User
      */
-    public function setPhoto($photo)
+    public function setPhotoName(?string $photoName): User
     {
-        $this->photo = $photo;
+        $this->photoName = $photoName;
         return $this;
     }
+
+    /**
+     * @return File|null
+     */
+    public function getPhotoFile(): ?File
+    {
+        return $this->photoFile;
+    }
+
+    /**
+     * @param File|null $photoFile
+     * @return User
+     */
+    public function setPhotoFile(?File $photoFile): User
+    {
+        $this->photoFile = $photoFile;
+        return $this;
+    }
+
+
+
+
+
+//    /**
+//     * @return mixed
+//     */
+//    public function getPhoto()
+//    {
+//        return $this->photo;
+//    }
+//
+//    /**
+//     * @param mixed $photo
+//     * @return User
+//     */
+//    public function setPhoto($photo)
+//    {
+//        $this->photo = $photo;
+//        return $this;
+//    }
 
 
 

@@ -6,13 +6,19 @@
 
     <h1 class="text-center">Compte de {{ account.pseudo }}</h1>
 
+    {% for label, messages in app.flashes(['success', 'error']) %}
+        {% for message in messages %}
+            <p class="alert-{{ label }}">{{ message }}</p>
+        {% endfor %}
+    {% endfor %}
+
     <div class="row">
 
         <div class="col-sm-4"> <!--colone de gauche-->
             <div class="card">
                 <div class="card-body">
                     <img class="profil-picture"
-                         src="{{ asset('images/profilePicture/'~app.user.photo.photoName) }}"
+                         src="{{ asset('images/profilePicture/'~app.user.photoName) }}"
                          alt="La photo de profil">
                 </div>
             </div>
