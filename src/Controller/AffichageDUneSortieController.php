@@ -23,7 +23,7 @@ class AffichageDUneSortieController extends AbstractController
                 "sortie" => $sortie
             ]);
         } else {
-            $this->addFlash("error", "Accès interdit, veuillez vous conencter !");
+            $this->addFlash("error", "Accès interdit, veuillez vous connecter !");
             return $this->redirectToRoute("app_login");
         }
     }

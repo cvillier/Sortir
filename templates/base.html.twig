@@ -25,10 +25,10 @@
     <title>{% block title %} Sortir | {% endblock %}</title>
 </head>
 <body>
-{% for message in app.flashes('success') %}
-    <div class="alert alert-success">
-        {{ message }}
-    </div>
+{% for label, messages in app.flashes(['success', 'warning']) %}
+    {% for message in messages %}
+        <p class="alert-{{ label }}">{{ message }}</p>
+    {% endfor %}
 {% endfor %}
 <div class="d-flex" id="wrapper">
 

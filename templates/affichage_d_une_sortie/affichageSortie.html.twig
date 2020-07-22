@@ -7,7 +7,11 @@
 {% endblock %}
 
 {% block main %}
-
+    {% for label, messages in app.flashes(['success', 'warning']) %}
+        {% for message in messages %}
+            <p class="alert-{{ label }}">{{ message }}</p>
+        {% endfor %}
+    {% endfor %}
     <h2 class="text-center content-profil mt-5 mb-5">Sortie : {{ sortie.nom }}</h2>
 
     <div class="mx-auto col-sm-10 mb-sm-5 col-lg-6 card">
