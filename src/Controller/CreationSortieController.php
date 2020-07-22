@@ -18,10 +18,6 @@ class CreationSortieController extends AbstractController
      */
     public function createSortie(EntityManagerInterface $em, Request $request)
     {
-        // en attente de pouvoir reussir a utiliser l'utilisateur en session pour eviter la requete
-//        $session = $request->getSession();
-//        $utilisateurConnecte = $session->get('utilisateurConnecte');
-
         if ($this->isGranted("ROLE_ORGANISATEUR") or $this->isGranted("ROLE_ADMIN")) {
 
             $sortie = new Sorties();

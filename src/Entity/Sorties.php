@@ -60,6 +60,10 @@ class Sorties
      */
     private $urlPhoto;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $archivee;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Lieux",inversedBy="sortie")
@@ -256,6 +260,17 @@ class Sorties
     {
         $this->urlPhoto = $urlPhoto;
 
+        return $this;
+    }
+
+    public function getArchivee(): ?bool
+    {
+        return $this->archivee;
+    }
+
+    public function setArchivee(bool $archivee): self
+    {
+        $this->archivee = $archivee;
         return $this;
     }
 

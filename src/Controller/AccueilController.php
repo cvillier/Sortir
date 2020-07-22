@@ -29,6 +29,7 @@ class AccueilController extends AbstractController
 //            $session->set('utilisateurConnecte', $utilisateurConnecte);
 //        }
 
+
         $sorties = $this->getDoctrine()
             ->getRepository(Sorties::class)
             ->findAll();
@@ -70,37 +71,31 @@ class AccueilController extends AbstractController
                 ->setParameter(1, $this->getUser());
 
             // si la case (Dont je suis inscrit)
-        } elseif ($form->get("inscrit")->getData()) {
+        }
+
+        if ($form->get("inscrit")->getData()) {
             // $qb->select(array('i', 's')) au cas ou
-            $qb->Join('s.sortieUser', 'i')
+            $qb->LeftJoin('s.sortieUser', 'i')
+                ->orWhere('i.user = ?9')
+                ->setParameter(9, $this->getUser());
+
+        }
+        //      si la case (Dont je ne suis pas inscrit) -> j'y arrive pas :(
+        if ($form->get("nonInscrit")->getData()) {
+            $inscrit = $em->createQueryBuilder();
+
+            $inscrit->select(array('i', 's'))
+                ->from('App:Sorties', 's')
+                ->Join('s.sortieUser', 'i')
                 ->where('i.user = ?1')
                 ->setParameter(1, $this->getUser());
 
-
-            // si la case (Dont je ne suis pas inscrit) -> j'y arrive pas :(
-//        } elseif ($form->get("nonInscrit")->getData()) {
-//            $inscrit = $em->createQueryBuilder();
-//
-//            $inscrit->select(array('i', 's'))
-//                ->from('App:Sorties', 's')
-//                ->Join('s.sortieUser', 'i')
-//                ->where('i.user = ?1');
-//
-//                ->getQuery()
-//                ->getArrayResult();
-//
-//
-//            $qb->select(array('ii', 'ss'))
-//                ->from('App:Sorties', 'ss')
-//                ->Join('ss.sortieUser', 'ii')
-//                ->where($qb->expr()->notIn('ii.user', $inscrit->getDQL()))
-//                ->setParameter(1, $this->getUser());
-//            if ($form->get("sortiesPassees")->getData()) {
-//                $qb->andWhere('ss.datedebut < ?2');
-//                $qb->setParameter(2, new \DateTime());
-//            }
-
+            $qb->select(array('ii', 'ss'))
+                ->from('App:Sorties', 'ss')
+                ->Join('ss.sortieUser', 'ii')
+                ->where($qb->expr()->notIn('ss.id', $inscrit->getQuery()->getResult()));
         }
+
         if ($form->get("sortiesPassees")->getData()) {
             $qb->andWhere('s.datedebut < ?2');
             $qb->setParameter(2, new \DateTime());
@@ -135,8 +130,7 @@ class AccueilController extends AbstractController
     /**
      * @Route("/desister/{id}", name="desister", requirements={"id":"\d+"})
      */
-    public
-    function seDesister($id, EntityManagerInterface $em)
+    public function seDesister($id, EntityManagerInterface $em)
     {
         // recupere la sortie
         $sortiesRepo = $this->getDoctrine()->getRepository(Sorties::class);
@@ -163,8 +157,7 @@ class AccueilController extends AbstractController
     /**
      * @Route("/publier/{id}", name="publier", requirements={"id":"\d+"})
      */
-    public
-    function publier($id, EntityManagerInterface $em)
+    public function publier($id, EntityManagerInterface $em)
     {
         // recupere la sortie
         $sortiesRepo = $this->getDoctrine()->getRepository(Sorties::class);
@@ -188,8 +181,7 @@ class AccueilController extends AbstractController
     /**
      * @Route("/inscrire/{id}", name="inscrire", requirements={"id":"\d+"})
      */
-    public
-    function inscrire($id, EntityManagerInterface $em)
+    public function inscrire($id, EntityManagerInterface $em)
     {
         // recupere la sortie
         $sortiesRepo = $this->getDoctrine()->getRepository(Sorties::class);
@@ -218,8 +210,57 @@ class AccueilController extends AbstractController
     /**
      * @Route("/test", name="test")
      */
-    public function home()
+    public function home(EntityManagerInterface $em)
     {
+        // changement d'etat des sorties selon la date
+        $etatRepo = $this->getDoctrine()->getRepository(Etats::class);
+        $cloturee = $etatRepo->find(3);
+        $enCours = $etatRepo->find(4);
+        $passee = $etatRepo->find(5);
+
+        $qbCloture = $em->createQueryBuilder();
+        $qbCloture->update('App:Sorties', 's')
+            ->set('s.etat', '?1')
+            // si entre la date de cloture et la date du debut -> etat : cloturée
+            ->where(':now BETWEEN  s.datecloture AND s.datedebut')
+            ->setParameter(1, $cloturee)
+            ->setParameter('now', new \DateTime())
+            ->getQuery()
+            ->execute();
+
+        $qbEnCours = $em->createQueryBuilder();
+        $qbEnCours->update('App:Sorties', 's')
+            ->set('s.etat', '?2')
+            // si entre la date du debut de la sortie et sa fin -> etat : En cours
+            ->where(':now BETWEEN  s.datedebut AND (s.datedebut + s.duree)')
+            ->setParameter(2, $enCours)
+            ->setParameter('now', new \DateTime())
+            ->getQuery()
+            ->execute();
+
+        $qbPasse = $em->createQueryBuilder();
+        $qbPasse->update('App:Sorties', 's')
+            ->set('s.etat', '?3')
+            // si apres la fin de la sortie -> etat : passée
+            ->where('s.datedebut < :now')
+            ->setParameter(3, $passee)
+            ->setParameter('now', new \DateTime())
+            ->getQuery()
+            ->execute();
+
+
+        $dansUnMois = new \DateTime();
+        $dansUnMois->modify('-1 month');
+
+        $qbArchive = $em->createQueryBuilder();
+        $qbArchive->update('App:Sorties', 's')
+            ->set('s.archivee', 1)
+            //  si un mois apres la fin de la sortie -> archivée = true
+            ->where('s.datedebut < :unMois')
+            ->setParameter('unMois', $dansUnMois)
+            ->getQuery()
+            ->execute();
+
         return $this->render('accueil/accueilfront.html.twig', []);
     }
 
