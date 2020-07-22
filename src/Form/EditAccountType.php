@@ -7,7 +7,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -40,6 +39,9 @@ class EditAccountType extends AbstractType
                 ])
                 //->add('button', SubmitType::class)
 
+//            ->add('password', PasswordType::class, [
+//                'label' => 'Mot de passe : '
+//            ])
                 ->add('plainPassword', RepeatedType::class, [
                     'type' => PasswordType::class,
                     // instead of being set onto the object directly,
@@ -88,6 +90,7 @@ class EditAccountType extends AbstractType
             ;
     }
 
+//    }
 
     public function configureOptions(OptionsResolver $resolver)
     {
