@@ -1,15 +1,7 @@
-body{
-    color: white;
-}
-
-.btn-rechercher{
-    margin: 32px 0 32px 0;
-}
-
 .btn-orange{
     background-color: #e36414;
     color: white;
-    margin: 40px;
+    margin: 0 40px 0 40px;
 }
 
 .btn-orange:hover{
@@ -21,7 +13,7 @@ body{
     box-shadow: none;
 }
 
-.content-creation{
+.content-annulation{
     margin: 32px 0 32px 0;
 }
 
@@ -36,5 +28,6 @@ h2{
 .card{
     background-color: #4A00E0;
     padding: 40px 72px 40px 72px;
-    min-height: 70vh;
+    color: white;
+    border-radius: 20px;
 }
