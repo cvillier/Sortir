@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Controller;
-
-use App\Entity\Photo;
+;
 use App\Entity\User;
 use App\Form\EditAccountType;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
