@@ -12,6 +12,8 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -70,7 +72,7 @@ class EditAccountType extends AbstractType
 //                'label' => 'Ma photo : '
 //            ])
 
-//            ->add('actif')
+            ->add('actif')
                 ->add('roles', ChoiceType::class, [
                     'choices' => [
                         'Admin' => 'ROLE_ADMIN',
@@ -82,6 +84,7 @@ class EditAccountType extends AbstractType
                     'multiple' => true, // choix multiple
                     'label' => 'Le rôle de cet utilisateur : '
                 ]);
+
 
     }
 

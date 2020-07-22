@@ -106,19 +106,19 @@ class AccueilController extends AbstractController
             $qb->setParameter(2, new \DateTime());
         }
 
-        if ( $request->get('inputRecherche') != "") {
+        if ($request->get('inputRecherche') != "") {
             $word = $request->get('inputRecherche');
             $qb->andWhere('s.nom LIKE :word')
                 ->orWhere('s.descriptioninfos LIKE :word')
-                ->setParameter('word', '%'.$word.'%');
+                ->setParameter('word', '%' . $word . '%');
         }
 
-        if ( $request->get('inputDateDebut') != "") {
+        if ($request->get('inputDateDebut') != "") {
             $qb->andWhere('s.datedebut > ?4')
                 ->setParameter(4, $request->get('inputDateDebut'));
         }
 
-        if ( $request->get('inputDateFin') != "") {
+        if ($request->get('inputDateFin') != "") {
             $qb->andWhere('s.datedebut < ?5')
                 ->setParameter(5, $request->get('inputDateFin'));
         }
@@ -222,4 +222,5 @@ class AccueilController extends AbstractController
     {
         return $this->render('accueil/accueilfront.html.twig', []);
     }
+
 }
