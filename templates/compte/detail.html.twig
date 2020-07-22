@@ -2,32 +2,26 @@
 
 {% block title %} {{ parent() }} Compte Utilisateur {% endblock %}
 
+{% block editProfilCss %}
+    <link rel="stylesheet" href="{{ asset('CSS/editProfil.css') }}">
+{% endblock %}
+
 {% block main %}
 
-    <h1 class="text-center">Compte de {{ account.pseudo }}</h1>
+    <div class="container">
 
-    {% for label, messages in app.flashes(['success', 'error']) %}
-        {% for message in messages %}
-            <p class="alert-{{ label }}">{{ message }}</p>
-        {% endfor %}
-    {% endfor %}
+    <h1 class="text-center content-profil">Compte de {{ account.pseudo }}</h1>
 
-    <div class="row">
+    <div class="d-flex justify-content-around row">
 
-        <div class="col-sm-4"> <!--colone de gauche-->
-            <div class="card">
-                <div class="card-body">
-                    <img class="profil-picture"
-                         src="{{ asset('images/profilePicture/'~app.user.photoName) }}"
-                         alt="La photo de profil">
-                </div>
-            </div>
+        <div class="col-sm-8 col-lg-3 image">
+            <img class="profil-picture"
+                 src="{{ asset('images/profilePicture/' ~ account.photoName) }}"
+                 alt="La photo de profil">
         </div>
 
 
-        <div class="col-sm-8"> <!--colone de droite-->
-            <div class="card">
-                <div class="card-body">
+        <div class="col-sm-8 col-lg-6 card">
 
                     <div class="form-group row">
                         <p>Prénom : {{ account.prenom }}</p>
@@ -48,15 +42,19 @@
                     <div class="form-group row">
                         <p>Campus : {{ account.campus.getNomCampus() }}</p>
                     </div>
-
-                </div>
-            </div>
         </div>
 
 
     </div>
 
-    <a href="{{ path('edit', {'id': account.id})  }}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" value="edit">Modifier profil</a>
+    <div class="d-flex justify-content-center row mt-5">
+        <a href="{{ path('edit', {'id': account.id})  }}" class="btn btn-orange" role="button" aria-pressed="true" value="edit">Modifier profil</a>
+        <a href="{{ path('edit', {'id': account.id})  }}" class="btn btn-orange" role="button" aria-pressed="true" value="edit">Retour</a>
+    </div>
+
+
+    </div>
+
 {#        {% elseif {{ path('accueil') }} %}#}
 {#            <h1>You can't access that button fucking nerd</h1>#}
 {#        {% endif %}#}

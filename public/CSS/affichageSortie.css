@@ -1,0 +1,46 @@
+.btn-orange{
+    background-color: #e36414;
+    color: white;
+    margin: 40px;
+}
+
+.btn-orange:hover{
+    color: white;
+}
+
+.form-control:focus {
+    border: 1px solid rgba(74, 0, 224, .8);
+    box-shadow: none;
+}
+
+.content-creation{
+    margin: 32px 0 32px 0;
+}
+
+h2{
+    color: #4A00E0;
+}
+
+.content-recherche{
+    padding: 32px;
+}
+
+.card{
+    background-color: #4A00E0;
+    padding: 40px 72px 40px 72px;
+    min-height: 60vh;
+    color: white;
+    border-radius: 20px;
+}
+
+ul{
+    list-style-type: none;
+}
+
+li{
+    margin: 16px;
+}
+
+.bold{
+    font-weight: 600;
+}
