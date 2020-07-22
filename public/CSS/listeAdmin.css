@@ -1,6 +1,6 @@
 #utilisateurs {
     text-align: center;
-    color: #000000;
+    color: #4A00E0;
     font-family: Montserrat;
     margin: 32px;
 }
@@ -32,22 +32,14 @@
 /*}*/
 
 .cardUtilisateur {
-    /*flex-wrap: nowrap;*/
     background-color: #4A00E0;
-    height: 16em;
-    width: 24em;
+    padding: 48px 80px 48px 80px;
     border-radius: 20px;
-    margin-bottom: 8em;
-    margin-left: 4em;
+    margin-bottom: 80px;
 }
-/*.row {*/
-/*    justify-content: center;*/
-/*}*/
 .userPseudo {
     color: #f1f2f3;
-    /*text-align: center;*/
-    font-size: 2.2em;
-    /*margin: 48px;*/
+    font-size: 1.5em;
 }
 .photo {
     height: 100px;
@@ -55,18 +47,16 @@
     border-radius: 50px;
     background-color: #f1f2f3;
     justify-content: center;
-    /*margin-top: 10px;*/
-    margin: 32px auto 32px auto;
+    margin: 0 auto 64px auto;
 }
-.voir {
-    text-decoration: none;
-    text-align: center;
-    color: #f1f2f3;
-}
+
 #nono {
     text-decoration: none;
     color: #e36414;
-    /*font-weight: bolder;*/
     font-family:Montserrat;
-    font-size: 1.2em;
+    font-size: 1em;
+}
+
+#nono:hover {
+    color: white;
 }
