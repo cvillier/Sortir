@@ -18,13 +18,18 @@
     {% block annulationSortieCss %}{% endblock %}
     {% block formRegistratinoCss %}{% endblock %}
     {% block editProfilCss %}{% endblock %}
+    {% block editFormCss %}{% endblock %}
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 
     <title>{% block title %} Sortir | {% endblock %}</title>
 </head>
 <body>
-
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
 <div class="d-flex" id="wrapper">
 
     <!-- Sidebar -->

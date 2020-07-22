@@ -34,18 +34,21 @@ class RegistrationController extends AbstractController
             );
 
             $user->setPhotoName('defaultPicture.png');
-
+            $this->addFlash('success', 'Profil crée avec succès');
+            $this->addFlash('error', 'Problème  pour créer le compte');
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
             // do anything else you need here, like send an email
 
-//            return $guardHandler->authenticateUserAndHandleSuccess(
-//                $user,
-//                $request,
-//                $authenticator,
-//                'main' // firewall name in security.yaml
-//            );
+
+//                return $guardHandler->authenticateUserAndHandleSuccess(
+//                    $user,
+//                    $request,
+//                    $authenticator,
+//                    'main' // firewall name in security.yaml
+//                );
+
         }
 
         return $this->render('registration/register.html.twig', [

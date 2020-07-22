@@ -229,14 +229,14 @@ class AccueilController extends AbstractController
             ->execute();
 
         $qbEnCours = $em->createQueryBuilder();
-        $qbEnCours->update('App:Sorties', 's')
-            ->set('s.etat', '?2')
-            // si entre la date du debut de la sortie et sa fin -> etat : En cours
-            ->where(':now BETWEEN  s.datedebut AND (s.datedebut + s.duree)')
-            ->setParameter(2, $enCours)
-            ->setParameter('now', new \DateTime())
-            ->getQuery()
-            ->execute();
+//        $qbEnCours->update('App:Sorties', 's')
+//            ->set('s.etat', '?2')
+//            // si entre la date du debut de la sortie et sa fin -> etat : En cours
+////            ->where(':now BETWEEN  s.datedebut AND (s.datedebut + s.duree)')
+//            ->setParameter(2, $enCours)
+//            ->setParameter('now', new \DateTime())
+//            ->getQuery()
+//            ->execute();
 
         $qbPasse = $em->createQueryBuilder();
         $qbPasse->update('App:Sorties', 's')
