@@ -10,12 +10,13 @@
     <h1 class="text-center" id="utilisateurs">Les utilisateurs</h1>
     <div class="row">
         {% for accounts in account %}
-            <div class="d-flex justify-content-around col-4">
-                <div class="cardUtilisateur">
+            <div class="d-flex justify-content-around col-sm-6 col-lg-4">
+                <div class="cardUtilisateur text-center">
                     <div class="photo"></div>
-                    <h3 class="text-center align-middle userPseudo">{{ accounts.pseudo | capitalize }}</h3>
-                    <p class="voir align-bottom text-center"><a id="nono" href="{{ path('detail', {'id': accounts.id}) }}"
-                                                                title="{{ accounts.pseudo }}">Voir le profil</a></p>
+                    <h3 class="align-middle userPseudo">{{ accounts.pseudo | capitalize }}</h3>
+                    <p class="voir align-bottom">
+                        <a id="nono" href="{{ path('detail', {'id': accounts.id}) }}" title="{{ accounts.pseudo }}">Voir le profil</a>
+                    </p>
                 </div>
             </div>
         {% endfor %}
