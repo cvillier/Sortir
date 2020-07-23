@@ -15,7 +15,6 @@ class AffichageDUneSortieController extends AbstractController
     {
         if ($this->getUser()) {
 
-
             $sortiesRepo = $this->getDoctrine()->getRepository(Sorties::class);
             $sortie = $sortiesRepo->find($id);
 

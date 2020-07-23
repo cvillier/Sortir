@@ -21,20 +21,10 @@ class AccueilController extends AbstractController
      */
     public function index(Request $request, EntityManagerInterface $em)
     {
-        // pour l'instant ne sert a rien , a voir si arrive a faire marcher pour eviter des requetes d'user
-//        $session = new Session();
-//        if (!$session->get('utilisateurConnecte')) {
-//            $repoUser = $this->getDoctrine()->getRepository(User::class);
-//            $utilisateurConnecte = $repoUser->findOneBy(['pseudo' => $this->getUser()->getUsername()]);
-//            $session->set('utilisateurConnecte', $utilisateurConnecte);
-//        }
-
-
-        $sorties = $this->getDoctrine()
+              $sorties = $this->getDoctrine()
             ->getRepository(Sorties::class)
             ->findAll();
         $inscriptions = $this->getDoctrine()->getRepository(Inscriptions::class)->findAll();
-
 
         if (!$sorties) {
             throw $this->createNotFoundException(
@@ -44,7 +34,6 @@ class AccueilController extends AbstractController
 
         $form = $this->createForm(AccueilType::class);
         $form->handleRequest($request);
-
 
         if ($form->isSubmitted() && $form->isValid()) {
             $sorties = $this->recherche($request, $form, $em);
@@ -57,7 +46,12 @@ class AccueilController extends AbstractController
     }
 
     /**
+     * Fonction pour les checkbox
      * @Route("/recherche", name="recherche")
+     * @param Request $request
+     * @param FormInterface $form
+     * @param EntityManagerInterface $em
+     * @return int|mixed|string
      */
     public function recherche(Request $request, FormInterface $form, EntityManagerInterface $em)
     {
@@ -69,31 +63,17 @@ class AccueilController extends AbstractController
         if ($form->get("organisateur")->getData()) {
             $qb->where('s.organisateur = ?1')
                 ->setParameter(1, $this->getUser());
-
-            // si la case (Dont je suis inscrit)
         }
 
+        // si la case (Dont je suis inscrit)
         if ($form->get("inscrit")->getData()) {
-            // $qb->select(array('i', 's')) au cas ou
             $qb->LeftJoin('s.sortieUser', 'i')
                 ->orWhere('i.user = ?9')
                 ->setParameter(9, $this->getUser());
-
         }
+
         //      si la case (Dont je ne suis pas inscrit) -> j'y arrive pas :(
         if ($form->get("nonInscrit")->getData()) {
-            $inscrit = $em->createQueryBuilder();
-
-            $inscrit->select(array('i', 's'))
-                ->from('App:Sorties', 's')
-                ->Join('s.sortieUser', 'i')
-                ->where('i.user = ?1')
-                ->setParameter(1, $this->getUser());
-
-            $qb->select(array('ii', 'ss'))
-                ->from('App:Sorties', 'ss')
-                ->Join('ss.sortieUser', 'ii')
-                ->where($qb->expr()->notIn('ss.id', $inscrit->getQuery()->getResult()));
         }
 
         if ($form->get("sortiesPassees")->getData()) {
@@ -118,17 +98,19 @@ class AccueilController extends AbstractController
                 ->setParameter(5, $request->get('inputDateFin'));
         }
 
-
         $qb->andWhere('s.campus = ?3')
             ->setParameter(3, $form->get('campus')->getData());
         $query = $qb->getQuery();
         $result = $query->getResult();
         return $result;
-
     }
 
     /**
+     * Fonction pour se desinscrire d'une sortie.
      * @Route("/desister/{id}", name="desister", requirements={"id":"\d+"})
+     * @param $id
+     * @param EntityManagerInterface $em
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function seDesister($id, EntityManagerInterface $em)
     {
@@ -150,12 +132,14 @@ class AccueilController extends AbstractController
 
         $this->addFlash("success", "Desinscription réalisée avec succès !");
         return $this->redirectToRoute("accueil");
-
-
     }
 
     /**
+     * Fonction pour publier une fonction crée.
      * @Route("/publier/{id}", name="publier", requirements={"id":"\d+"})
+     * @param $id
+     * @param EntityManagerInterface $em
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function publier($id, EntityManagerInterface $em)
     {
@@ -179,7 +163,11 @@ class AccueilController extends AbstractController
     }
 
     /**
+     * Fonction pour s'inscrire a une sortie publiée.
      * @Route("/inscrire/{id}", name="inscrire", requirements={"id":"\d+"})
+     * @param $id
+     * @param EntityManagerInterface $em
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function inscrire($id, EntityManagerInterface $em)
     {
@@ -208,6 +196,7 @@ class AccueilController extends AbstractController
     }
 
     /**
+     * Pour se rendre sur la page d'après connexion et va checker et changer au besoin l'etat de la sortie selon la date du jour.
      * @Route("/test", name="test")
      */
     public function home(EntityManagerInterface $em)
@@ -228,16 +217,6 @@ class AccueilController extends AbstractController
             ->getQuery()
             ->execute();
 
-        $qbEnCours = $em->createQueryBuilder();
-//        $qbEnCours->update('App:Sorties', 's')
-//            ->set('s.etat', '?2')
-//            // si entre la date du debut de la sortie et sa fin -> etat : En cours
-////            ->where(':now BETWEEN  s.datedebut AND (s.datedebut + s.duree)')
-//            ->setParameter(2, $enCours)
-//            ->setParameter('now', new \DateTime())
-//            ->getQuery()
-//            ->execute();
-
         $qbPasse = $em->createQueryBuilder();
         $qbPasse->update('App:Sorties', 's')
             ->set('s.etat', '?3')
@@ -247,7 +226,6 @@ class AccueilController extends AbstractController
             ->setParameter('now', new \DateTime())
             ->getQuery()
             ->execute();
-
 
         $dansUnMois = new \DateTime();
         $dansUnMois->modify('-1 month');

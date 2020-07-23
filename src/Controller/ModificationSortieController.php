@@ -73,8 +73,6 @@ class ModificationSortieController extends AbstractController
         } else {
             $this->addFlash("error", "Modification interdite vous n'etes pas l'organisateur !");
             return $this->redirectToRoute("accueil");
-
-
         }
     }
 }

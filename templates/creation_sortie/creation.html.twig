@@ -85,7 +85,7 @@
     <div class="text-center"> <!--boutons-->
         <button type="submit" class="btn btn-orange" name="enregistrer" value="enregistrer">Enregistrer</button>
         <button type="submit" class="btn btn-orange" name="publier" value="publier">Publier la sortie</button>
-        <button type="submit" class="btn btn-orange" name="annuler" value="annuler">Annuler</button>
+        <a class="btn btn-orange" href="{{ path('accueil') }}" >Annuler</a>
     </div>
 
     {{ form_end(creationSortieForm) }}

@@ -59,8 +59,6 @@ class EditAccountController extends AbstractController
                     error_log($e->getMessage());
                 }
             }
-
-
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($user);
                 $em->flush();
