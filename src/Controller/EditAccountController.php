@@ -21,7 +21,7 @@ class EditAccountController extends AbstractController
         // pour recuperer la sortie avec l'id et afficher les valeurs dans les placeholder
         $repoUser = $this->getDoctrine()->getRepository(User::class);
         $user = $repoUser->find($id);
-
+        $role = $this->getUser()->getRoles();
 
         // empeche de modifier si l'utilisateur n'est pas celui de la page
         if ($user == $this->getUser() or $this->isGranted("ROLE_ADMIN")) {
@@ -42,7 +42,6 @@ class EditAccountController extends AbstractController
                         $editAccountForm->get('plainPassword')->getData()
                     )
                 );
-
                 if ($photoFile) {
                     // Modification du nom de la photo uploadée
                     $safeFilename = uniqid();
@@ -61,6 +60,7 @@ class EditAccountController extends AbstractController
                     }
                 }
                 $em = $this->getDoctrine()->getManager();
+                $user->setRoles($role);
                 $em->persist($user);
                 $em->flush();
 
