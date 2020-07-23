@@ -72,6 +72,7 @@ class EditAccountController extends AbstractController
             }
 
             return $this->render('edit_account/edit.html.twig', [
+                'account' => $user,
                 'form' => $editAccountForm->createView()
             ]);
 
