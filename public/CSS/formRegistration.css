@@ -1,0 +1,46 @@
+.content-profil, .content-profil h2{
+    margin: 48px auto 48px auto;
+    color: #4A00E0;
+}
+
+.btn-orange{
+    background-color: #e36414;
+    color: white;
+    margin: 40px 40px 16px 40px;
+}
+
+.btn-orange:hover{
+    color: white;
+}
+
+.form-control:focus {
+    border: 1px solid rgba(74, 0, 224, .8);
+    box-shadow: none;
+}
+
+.content-creation{
+    margin: 32px 0 32px 0;
+}
+
+h2{
+    color: #4A00E0;
+}
+
+.content-recherche{
+    padding: 32px;
+}
+
+.card{
+    background-color: #4A00E0;
+    padding: 40px 72px 40px 72px;
+    color: white;
+    border-radius: 20px;
+    min-height: 40vh;
+}
+
+.profil-picture{
+    border-radius: 20px;
+    max-height: 40vh;
+    max-width: 40vh;
+    background-size: cover;
+}
