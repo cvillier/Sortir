@@ -41,7 +41,7 @@
     color: #f1f2f3;
     font-size: 1.5em;
 }
-.photo {
+.photo, .profil-picture {
     height: 100px;
     width: 100px;
     border-radius: 50px;
