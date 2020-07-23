@@ -46,7 +46,7 @@
     width: 120px;
     border-radius: 100px;
     background-color: #f1f2f3;
-    justify-content: center;
+    object-fit: cover;
     margin: 0 auto 64px auto;
 }
 
