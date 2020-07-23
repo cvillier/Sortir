@@ -50,15 +50,13 @@
         <div class="d-flex justify-content-center row mt-5">
             <a href="{{ path('edit', {'id': account.id}) }}" class="btn btn-orange" role="button" aria-pressed="true"
                value="edit">Modifier profil</a>
-            {% for role in app.user.roles %}
-                {% if role == "ROLE_ADMIN" %}
+                {% if app.user.roles == ["ROLE_ADMIN"] %}
                     <a href="{{ path('compte', {'id': account.id}) }}" class="btn btn-orange" role="button"
                        aria-pressed="true" value="edit">Retour</a>
                 {% else %}
                     <a href="{{ path('home', {'id': account.id}) }}" class="btn btn-orange" role="button"
                        aria-pressed="true" value="edit">Retour</a>
                 {% endif %}
-            {% endfor %}
 
         </div>
 
