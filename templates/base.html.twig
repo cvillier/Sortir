@@ -61,7 +61,7 @@
                     </li>
                     <hr>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('detail', {'id': app.user.id}) }}">Mon profil</a>
+                        <a class="nav-link" href="{{ path('show', {'id': app.user.id}) }}">Mon profil</a>
                     </li>
                     <hr>
                     <li class="nav-item">
@@ -70,7 +70,7 @@
                     <hr>
                 {% else %}
                     <li class="nav-item">
-                    <a class="nav-link" href="{{ path('detail', {'id': app.user.id}) }}">Mon profil</a>
+                    <a class="nav-link" href="{{ path('show', {'id': app.user.id}) }}">Mon profil</a>
                     </li>
                     <hr>
                 {% endif %}
