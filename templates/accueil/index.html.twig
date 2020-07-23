@@ -111,7 +111,7 @@
                         {% endfor %}
                     </td>
                     <td>
-                        <a href="{{ path('show', {'id': sortie.organisateur.id}) }}">{{ sortie.organisateur.prenom|capitalize }} {{ sortie.organisateur.nom|first|capitalize }}
+                        <a href="{{ path('detail', {'id': sortie.organisateur.id}) }}">{{ sortie.organisateur.prenom|capitalize }} {{ sortie.organisateur.nom|first|capitalize }}
                             .</a></td>
 
 
