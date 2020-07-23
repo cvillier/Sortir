@@ -57,7 +57,12 @@ class AccueilController extends AbstractController
     }
 
     /**
+     * Fonction pour les checkbox
      * @Route("/recherche", name="recherche")
+     * @param Request $request
+     * @param FormInterface $form
+     * @param EntityManagerInterface $em
+     * @return int|mixed|string
      */
     public function recherche(Request $request, FormInterface $form, EntityManagerInterface $em)
     {
@@ -69,31 +74,17 @@ class AccueilController extends AbstractController
         if ($form->get("organisateur")->getData()) {
             $qb->where('s.organisateur = ?1')
                 ->setParameter(1, $this->getUser());
-
-            // si la case (Dont je suis inscrit)
         }
 
+        // si la case (Dont je suis inscrit)
         if ($form->get("inscrit")->getData()) {
-            // $qb->select(array('i', 's')) au cas ou
             $qb->LeftJoin('s.sortieUser', 'i')
                 ->orWhere('i.user = ?9')
                 ->setParameter(9, $this->getUser());
-
         }
+
         //      si la case (Dont je ne suis pas inscrit) -> j'y arrive pas :(
         if ($form->get("nonInscrit")->getData()) {
-            $inscrit = $em->createQueryBuilder();
-
-            $inscrit->select(array('i', 's'))
-                ->from('App:Sorties', 's')
-                ->Join('s.sortieUser', 'i')
-                ->where('i.user = ?1')
-                ->setParameter(1, $this->getUser());
-
-            $qb->select(array('ii', 'ss'))
-                ->from('App:Sorties', 'ss')
-                ->Join('ss.sortieUser', 'ii')
-                ->where($qb->expr()->notIn('ss.id', $inscrit->getQuery()->getResult()));
         }
 
         if ($form->get("sortiesPassees")->getData()) {
@@ -128,7 +119,11 @@ class AccueilController extends AbstractController
     }
 
     /**
+     * Fonction pour se desinscrire d'une sortie.
      * @Route("/desister/{id}", name="desister", requirements={"id":"\d+"})
+     * @param $id
+     * @param EntityManagerInterface $em
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function seDesister($id, EntityManagerInterface $em)
     {
@@ -150,12 +145,14 @@ class AccueilController extends AbstractController
 
         $this->addFlash("success", "Desinscription réalisée avec succès !");
         return $this->redirectToRoute("accueil");
-
-
     }
 
     /**
+     * Fonction pour publier une fonction crée.
      * @Route("/publier/{id}", name="publier", requirements={"id":"\d+"})
+     * @param $id
+     * @param EntityManagerInterface $em
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function publier($id, EntityManagerInterface $em)
     {
@@ -179,7 +176,11 @@ class AccueilController extends AbstractController
     }
 
     /**
+     * Fonction pour s'inscrire a une sortie publiée.
      * @Route("/inscrire/{id}", name="inscrire", requirements={"id":"\d+"})
+     * @param $id
+     * @param EntityManagerInterface $em
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function inscrire($id, EntityManagerInterface $em)
     {
@@ -208,7 +209,8 @@ class AccueilController extends AbstractController
     }
 
     /**
-     * @Route("/home", name="home")
+     * Pour se rendre sur la page d'après connexion et va checker et changer au besoin l'etat de la sortie selon la date du jour.
+     * @Route("/test", name="test")
      */
     public function home(EntityManagerInterface $em)
     {

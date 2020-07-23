@@ -15,7 +15,6 @@ class AffichageDUneSortieController extends AbstractController
     {
         if ($this->getUser()) {
 
-
             $sortiesRepo = $this->getDoctrine()->getRepository(Sorties::class);
             $sortie = $sortiesRepo->find($id);
 
@@ -23,7 +22,7 @@ class AffichageDUneSortieController extends AbstractController
                 "sortie" => $sortie
             ]);
         } else {
-            $this->addFlash("error", "Accès interdit, veuillez vous conencter !");
+            $this->addFlash("error", "Accès interdit, veuillez vous connecter !");
             return $this->redirectToRoute("app_login");
         }
     }

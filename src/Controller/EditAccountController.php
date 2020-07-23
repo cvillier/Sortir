@@ -38,7 +38,7 @@ class EditAccountController extends AbstractController
                 $user->setPassword(
                     $passwordEncoder->encodePassword(
                         $user,
-                        $editAccountForm->get('Password')->getData()
+                        $editAccountForm->get('plainPassword')->getData()
                     )
                 );
 
@@ -59,13 +59,11 @@ class EditAccountController extends AbstractController
                     error_log($e->getMessage());
                 }
             }
-
-
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($user);
                 $em->flush();
 
-                $this->addFlash("success", "Le profil a bien été mise à jour");
+                $this->addFlash("success", "Le profil a bien été mis à jour");
 
                 return $this->redirectToRoute('detail', [
                     'id' => $user->getId()
@@ -78,7 +76,7 @@ class EditAccountController extends AbstractController
             ]);
 
         } else {
-            $this->addFlash("error", "Modification interdite : ce n'est pas votre compte !");
+            $this->addFlash("danger", "Modification interdite : ce n'est pas votre compte !");
             return $this->redirectToRoute("accueil");
         }
     }

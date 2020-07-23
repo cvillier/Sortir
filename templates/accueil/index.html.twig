@@ -141,9 +141,9 @@
                         {% endif %}
 
                         {# Si la sortie est publiée et que l'user est participant ou admin #}
-                        <td>
+
                             {% if sortie.etat.id == 2 and sortie.organisateur != app.user %}
-                                <a href="{{ path('affichage_sortie', {'id': sortie.id}) }}">Afficher</a>
+                                <td><a href="{{ path('affichage_sortie', {'id': sortie.id}) }}">Afficher</a>
                                 {% set present = false %}
                                 {% if inscriptions is not empty %}
                                     {% set present = false %}
@@ -159,9 +159,9 @@
                                 {% elseif sortie.sortieUser.count < sortie.nbinscriptionsmax and present == false %}
                                     - <a href="{{ path('inscrire', {'id': sortie.id}) }}">S'inscrire</a>
                                 {% endif %}
+                                </td>
 
                             {% endif %}
-                        </td>
 
 
 

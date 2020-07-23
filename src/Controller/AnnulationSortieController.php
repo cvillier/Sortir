@@ -17,7 +17,6 @@ class AnnulationSortieController extends AbstractController
      */
     public function annulerSortie($id, Request $request, EntityManagerInterface $em)
     {
-
         $sortiesRepo = $this->getDoctrine()->getRepository(Sorties::class);
         $sortie = $sortiesRepo->find($id);
 
