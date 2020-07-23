@@ -17,8 +17,8 @@ class AccueilType extends AbstractType
             ->add('campus', EntityType::class, [
                 'class' => Campus::class,
                 'choice_label' => 'nom_campus',
-                'expanded'  => false, // liste déroulante
-                'multiple'  => false, // choix multiple
+                'expanded' => false, // liste déroulante
+                'multiple' => false, // choix multiple
                 'label' => 'Campus : ',
                 'label_attr' => ['class' => 'col-sm-3 col-form-label col-form-label-sm'],
                 'attr' => ['class' => 'form-control form-control-sm col-sm-7'],
@@ -42,8 +42,7 @@ class AccueilType extends AbstractType
                 'label' => 'Sorties passées',
                 'label_attr' => ['class' => 'col-form-label col-form-label-sm'],
                 'required' => false,
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

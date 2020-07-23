@@ -34,27 +34,18 @@ class RegistrationFormType extends AbstractType
                     'Organisateur' => 'ROLE_ORGANISATEUR',
                     'Participant' => 'ROLE_PARTICIPANT',
                 ],
-                'expanded'  => false, // liste déroulante
-                'multiple'  => true, // choix multiple
+                'expanded' => false, // liste déroulante
+                'multiple' => true, // choix multiple
             ])
             ->add("campus", EntityType::class, [
                 'class' => Campus::class,
                 'choice_label' => 'nom_campus'
             ])
-
-//            ->add('agreeTerms', CheckboxType::class, [
-//                'mapped' => false,
-//                'constraints' => [
-//                    new IsTrue([
-//                        'message' => 'You should agree to our terms.',
-//                    ]),
-//                ],
-//            ])
             ->add('plainPassword', RepeatedType::class, [
-                'type'=> PasswordType::class,
+                'type' => PasswordType::class,
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
-                'first_options'  => ['label' => 'Password'],
+                'first_options' => ['label' => 'Password'],
                 'second_options' => ['label' => 'Repeat Password'],
                 'mapped' => false,
                 'constraints' => [
@@ -68,9 +59,7 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
-            ])
-
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

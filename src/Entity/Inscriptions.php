@@ -29,8 +29,6 @@ class Inscriptions
      */
     private $date;
 
-
-
     public function getSortie(): ?Sorties
     {
         return $this->sortie;
@@ -39,7 +37,6 @@ class Inscriptions
     public function setSortie(Sorties $sortie): self
     {
         $this->sortie = $sortie;
-
         return $this;
     }
 

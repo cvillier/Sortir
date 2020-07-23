@@ -42,7 +42,6 @@ class Villes
 
     // GETTERS ET SETTERS
 
-
     public function getId(): ?int
     {
         return $this->id;
@@ -56,7 +55,6 @@ class Villes
     public function setNomVille(string $nom_ville): self
     {
         $this->nom_ville = $nom_ville;
-
         return $this;
     }
 
@@ -68,7 +66,6 @@ class Villes
     public function setCodePostal(string $code_postal): self
     {
         $this->code_postal = $code_postal;
-
         return $this;
     }
 
@@ -87,6 +84,5 @@ class Villes
     {
         $this->lieux = $lieux;
     }
-
 
 }

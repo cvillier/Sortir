@@ -85,14 +85,6 @@ class Sorties
      */
     private $organisateur;
 
-    // methode avec le ManyToMany
-    /* /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User")
-     * @ORM\JoinTable(name="sortie_user")
-
-    private $sortieUser;
-    */
-
     // OneToMany qui va crée la table de pivot avec le OneToMany situé dans User.php
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Inscriptions",mappedBy="sortie")
@@ -105,7 +97,6 @@ class Sorties
     {
         $this->sortieUser = new ArrayCollection();
     }
-
 
     //GETTERS AND SETTERS
 
@@ -146,7 +137,6 @@ class Sorties
         $this->etat = $etat;
     }
 
-
     /**
      * @return mixed
      */
@@ -163,7 +153,6 @@ class Sorties
         $this->campus = $campus;
     }
 
-
     public function getNom(): ?string
     {
         return $this->nom;
@@ -172,7 +161,6 @@ class Sorties
     public function setNom(string $nom): self
     {
         $this->nom = $nom;
-
         return $this;
     }
 
@@ -184,7 +172,6 @@ class Sorties
     public function setDatedebut(\DateTimeInterface $datedebut): self
     {
         $this->datedebut = $datedebut;
-
         return $this;
     }
 
@@ -196,7 +183,6 @@ class Sorties
     public function setDuree(?int $duree): self
     {
         $this->duree = $duree;
-
         return $this;
     }
 
@@ -208,7 +194,6 @@ class Sorties
     public function setDatecloture(\DateTimeInterface $datecloture): self
     {
         $this->datecloture = $datecloture;
-
         return $this;
     }
 
@@ -220,7 +205,6 @@ class Sorties
     public function setNbinscriptionsmax(int $nbinscriptionsmax): self
     {
         $this->nbinscriptionsmax = $nbinscriptionsmax;
-
         return $this;
     }
 
@@ -232,7 +216,6 @@ class Sorties
     public function setDescriptioninfos(?string $descriptioninfos): self
     {
         $this->descriptioninfos = $descriptioninfos;
-
         return $this;
     }
 
@@ -246,7 +229,6 @@ class Sorties
     public function setMotifAnnulation(?string $motifAnnulation): self
     {
         $this->motifAnnulation = $motifAnnulation;
-
         return $this;
     }
 
@@ -259,7 +241,6 @@ class Sorties
     public function setUrlPhoto(?string $urlPhoto): self
     {
         $this->urlPhoto = $urlPhoto;
-
         return $this;
     }
 
@@ -282,7 +263,6 @@ class Sorties
     public function setOrganisateur(User $organisateur): self
     {
         $this->organisateur = $organisateur;
-
         return $this;
     }
 

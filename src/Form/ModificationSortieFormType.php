@@ -46,6 +46,9 @@ class ModificationSortieFormType extends AbstractType
 
             ->add('nbinscriptionsmax', IntegerType::class, [
                 'label'  => 'Nombre de places : ',
+                'label_attr' => [
+                    'class' => 'col-sm-12 col-lg-6 col-form-label'
+                ],
                 'attr' => [
                     'class' => 'form-control'
                 ]
@@ -53,6 +56,9 @@ class ModificationSortieFormType extends AbstractType
 
             ->add('duree', IntegerType::class, [
                 'label'  => 'Durée : ',
+                'label_attr' => [
+                    'class' => 'col-sm-12 col-lg-6 col-form-label'
+                ],
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 90
@@ -72,16 +78,16 @@ class ModificationSortieFormType extends AbstractType
                 'mapped' => false,
                 'label' => 'Ville : ',
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
                 ]
             ])
 
             ->add("noLieu", EntityType::class, [
                 'class' => Lieux::class,
                 'choice_label' => 'nom_lieu',
-                'label' => 'Lieu',
+                'label' => 'Lieu : ',
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
                 ]
             ]);
 

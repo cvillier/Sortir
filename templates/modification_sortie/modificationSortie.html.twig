@@ -2,27 +2,82 @@
 
 {% block title %} {{ parent() }} Modification de Sorties{% endblock %}
 
+{% block creationSortieCss %}
+    <link rel="stylesheet" href="{{ asset('CSS/modificationSortie.css') }}">
+{% endblock %}
+
 {% block main %}
 
 
-<h1>Modification de sorties</h1>
+    <h2 class="text-center content-profil">Modification d'une sortie</h2>
 
-{{ form_start(modificationSortieForm) }}
-    {{ form_row(modificationSortieForm.nom) }}
-    {{ form_row(modificationSortieForm.datedebut) }}
-    {{ form_row(modificationSortieForm.datecloture) }}
-    {{ form_row(modificationSortieForm.nbinscriptionsmax) }}
-    {{ form_row(modificationSortieForm.duree) }}
-    {{ form_row(modificationSortieForm.descriptioninfos) }}
-    {{ app.user.campus }}
-    {{ form_row(modificationSortieForm.nom_ville) }}
-    {{ form_row(modificationSortieForm.noLieu) }}
+    <div class="row">
 
-<button type="submit" class="btn" name="enregistrer" value="enregistrer">Enregistrer</button>
-<button type="submit" class="btn" name="publier" value="publier">Publier la sortie</button>
-<button type="submit" class="btn" name="supprimer" value="supprimer">Supprimer la sortie</button>
-<button type="submit" class="btn" name="annuler" value="annuler">Annuler</button>
 
-{{ form_end(modificationSortieForm) }}
+        <div class="mx-auto col-sm-10 mb-sm-5 col-lg-6 card">
+
+            {{ form_start(modificationSortieForm) }}
+
+            <div class="form-group row">
+                {{ form_label(modificationSortieForm.nom) }}
+                {{ form_widget(modificationSortieForm.nom) }}
+            </div>
+
+            <div class="form-group row">
+                {{ form_label(modificationSortieForm.datedebut) }}
+                {{ form_widget(modificationSortieForm.datedebut) }}
+            </div>
+
+            <div class="form-group row">
+                {{ form_label(modificationSortieForm.datecloture) }}
+                {{ form_widget(modificationSortieForm.datecloture) }}
+            </div>
+
+            <div class="form-group row">
+                {{ form_label(modificationSortieForm.nbinscriptionsmax) }}
+                <div class="col-sm-12 col-lg-8">
+                    {{ form_widget(modificationSortieForm.nbinscriptionsmax) }}
+                </div>
+            </div>
+
+            <div class="form-group row">
+                {{ form_label(modificationSortieForm.duree) }}
+                <div class="col-sm-12 col-lg-8">
+                    {{ form_widget(modificationSortieForm.duree) }}
+                </div>
+            </div>
+
+            <div class="form-group row">
+                {{ form_label(modificationSortieForm.descriptioninfos) }}
+                {{ form_widget(modificationSortieForm.descriptioninfos) }}
+            </div>
+
+            <div class="form-group row">
+                Campus : {{ app.user.campus }}
+            </div>
+
+            <div class="form-group row">
+                {{ form_label(modificationSortieForm.nom_ville) }}
+                {{ form_widget(modificationSortieForm.nom_ville) }}
+            </div>
+
+            <div class="form-group row">
+                {{ form_label(modificationSortieForm.noLieu) }}
+                {{ form_widget(modificationSortieForm.noLieu) }}
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="d-flex justify-content-center row">
+        <button type="submit" class="btn btn-orange" name="enregistrer" value="enregistrer">Enregistrer</button>
+        <button type="submit" class="btn btn-orange" name="publier" value="publier">Publier la sortie</button>
+        <button type="submit" class="btn btn-orange" name="supprimer" value="supprimer">Supprimer la sortie</button>
+        <button type="submit" class="btn btn-orange" name="annuler" value="annuler">Annuler</button>
+    </div>
+
+    {{ form_end(modificationSortieForm) }}
+
 
 {% endblock %}
