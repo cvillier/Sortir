@@ -19,64 +19,79 @@ class ModificationSortieFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom', TextType::class, [
-                'label' => 'Nom de la sortie : ',
+            ->add('nom',TextType::class, [
+                'label'  => 'Nom de la sortie : ',
                 'attr' => [
                     'class' => 'form-control'
                 ]
             ])
+
             ->add('datedebut', DateTimeType::class, [
-                'label' => 'Date et heure de la sortie : ',
+                'label'  => 'Date et heure de la sortie : ',
                 "widget" => 'single_text',
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => ""
                 ]
             ])
+
             ->add('datecloture', DateTimeType::class, [
-                'label' => 'Date limite d inscription : ',
+                'label'  => 'Date limite d inscription : ',
                 "widget" => 'single_text',
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => ""
                 ]
             ])
+
             ->add('nbinscriptionsmax', IntegerType::class, [
-                'label' => 'Nombre de places : ',
+                'label'  => 'Nombre de places : ',
+                'label_attr' => [
+                    'class' => 'col-sm-12 col-lg-6 col-form-label'
+                ],
                 'attr' => [
                     'class' => 'form-control'
                 ]
             ])
+
             ->add('duree', IntegerType::class, [
-                'label' => 'Durée : ',
+                'label'  => 'Durée : ',
+                'label_attr' => [
+                    'class' => 'col-sm-12 col-lg-6 col-form-label'
+                ],
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 90
                 ]
             ])
+
             ->add('descriptioninfos', TextType::class, [
-                'label' => 'Description et infos : ',
+                'label'  => 'Description et infos : ',
                 'attr' => [
                     'class' => 'form-control'
                 ]
             ])
+
             ->add("nom_ville", EntityType::class, [
                 'class' => Villes::class,
                 'choice_label' => 'nom_ville',
                 'mapped' => false,
                 'label' => 'Ville : ',
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
                 ]
             ])
+
             ->add("noLieu", EntityType::class, [
                 'class' => Lieux::class,
                 'choice_label' => 'nom_lieu',
-                'label' => 'Lieu',
+                'label' => 'Lieu : ',
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
                 ]
             ]);
+
+
     }
 
     public function configureOptions(OptionsResolver $resolver)
