@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Campus;
 use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\AbstractType;
@@ -22,57 +24,114 @@ class EditAccountType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('pseudo', TextType::class, [
-                'label' => 'Pseudo : '
-            ])
-            ->add('prenom', TextType::class, [
-                'label' => 'Prénom : '
-            ])
-            ->add('nom', TextType::class, [
-                'label' => 'Nom : '
-            ])
-            ->add('telephone', TextType::class, [
-                'label' => 'Téléphone : '
-            ])
-            ->add('email', EmailType::class, [
-                'label' => 'Email'
-            ])
-            ->add('plainPassword', RepeatedType::class, [
-                'type' => PasswordType::class,
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
-                'first_options' => ['label' => 'Mot de passe : '],
-                'second_options' => ['label' => 'Confirmation : '],
-                'mapped' => false,
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Please enter a password',
-                    ]),
-                    new Length([
-                        'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
-                        // max length allowed by Symfony for security reasons
-                        'max' => 4096,
-                    ]),
-                ],
-            ])
-            ->add('campus')
+            $builder
+                ->add('pseudo', TextType::class, [
+                    'label' => 'Pseudo : ',
+                    'label_attr' => [
+                        'class' => 'col-sm-12 col-lg-4 col-form-label'
+                    ],
+                    'attr' => [
+                        'class' => 'form-control'
+                    ]
+                ])
+                ->add('prenom', TextType::class, [
+                    'label' => 'Prénom : ',
+                    'label_attr' => [
+                        'class' => 'col-sm-12 col-lg-4 col-form-label'
+                    ],
+                    'attr' => [
+                        'class' => 'form-control'
+                    ]
+                ])
+                ->add('nom', TextType::class, [
+                    'label' => 'Nom : ',
+                    'label_attr' => [
+                        'class' => 'col-sm-12 col-lg-4 col-form-label'
+                    ],
+                    'attr' => [
+                        'class' => 'form-control'
+                    ]
+                ])
+                ->add('telephone', TextType::class, [
+                    'label' => 'Téléphone : ',
+                    'label_attr' => [
+                        'class' => 'col-sm-12 col-lg-4 col-form-label'
+                    ],
+                    'attr' => [
+                        'class' => 'form-control'
+                    ]
+                ])
+                ->add('email', EmailType::class, [
+                    'label' => 'Email : ',
+                    'label_attr' => [
+                        'class' => 'col-sm-12 col-lg-4 col-form-label'
+                    ],
+                    'attr' => [
+                        'class' => 'form-control',
+                    ]
+                ])
 
-            //->add('actif')
+                ->add('plainPassword', RepeatedType::class, [
+                    'type' => PasswordType::class,
+                    // instead of being set onto the object directly,
+                    // this is read and encoded in the controller
+                    'first_options' => ['label' => 'Mot de passe : ',
+                        'label_attr' => ['class' => 'col-sm-12 col-lg-4 col-form-label'],
+                        'attr' => ['class' => 'form-control']
+                    ],
+                    'second_options' => ['label' => 'Confirmation : ',
+                        'label_attr' => ['class' => 'col-sm-12 col-lg-4 col-form-label'],
+                        'attr' => ['class' => 'form-control'],
+                    ],
+                    'mapped' => false,
+                    'constraints' => [
+                        new NotBlank([
+                            'message' => 'Please enter a password',
+                        ]),
+                        new Length([
+                            'min' => 6,
+                            'minMessage' => 'Your password should be at least {{ limit }} characters',
+                            // max length allowed by Symfony for security reasons
+                            'max' => 4096,
+                        ]),
+                    ],
+                ])
 
-            ->add('roles', ChoiceType::class, [
-                'choices' => [
-                    'Admin' => 'ROLE_ADMIN',
-                    'User' => 'ROLE_USER',
-                    'Organisateur' => 'ROLE_ORGANISATEUR',
-                    'Participant' => 'ROLE_PARTICIPANT',
-                ],
-                'expanded' => false, // liste déroulante
-                'multiple' => true, // choix multiple
-                'label' => 'Le rôle de cet utilisateur : '
-            ])
+                ->add('campus', EntityType::class, [
+                    'class' => Campus::class,
+                    'label' => 'Campus : ',
+                    'label_attr' => [
+                        'class' => 'col-sm-12 col-lg-4 col-form-label'
+                    ],
+                    'attr' => [
+                        'class' => 'form-control'
+                    ],
+                ])
+
+              //->add('actif')
+
+              ->add('roles', ChoiceType::class, [
+                  'label' => 'Roles : ',
+                  'attr' => [
+                      'class' => 'form-control'
+                  ],
+                  'label_attr' => [
+                      'class' => 'col-sm-12 col-lg-4 col-form-label'
+                  ],
+                  'choices' => [
+                      'Admin' => 'ROLE_ADMIN',
+                      'User' => 'ROLE_USER',
+                      'Organisateur' => 'ROLE_ORGANISATEUR',
+                      'Participant' => 'ROLE_PARTICIPANT',
+                  ],
+                  'multiple' => true,
+              ])
+
             ->add('photoFile', FileType::class, [
+                'label_attr' => [
+                    'class' => 'col-sm-12 col-lg-4 col-form-label'
+                ],
+                'attr' => [ 'class' => 'form-control-file'],
                 'mapped' => false,
                 'required' => false,
                 'label' => 'Ma photo : '
