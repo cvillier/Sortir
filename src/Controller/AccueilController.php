@@ -84,8 +84,8 @@ class AccueilController extends AbstractController
         }
 
         //      si la case (Dont je ne suis pas inscrit) -> j'y arrive pas :(
-        if ($form->get("nonInscrit")->getData()) {
-        }
+//        if ($form->get("nonInscrit")->getData()) {
+//        }
 
         if ($form->get("sortiesPassees")->getData()) {
             $qb->andWhere('s.datedebut < ?2');
@@ -217,7 +217,7 @@ class AccueilController extends AbstractController
         // changement d'etat des sorties selon la date
         $etatRepo = $this->getDoctrine()->getRepository(Etats::class);
         $cloturee = $etatRepo->find(3);
-        $enCours = $etatRepo->find(4);
+        //$enCours = $etatRepo->find(4);
         $passee = $etatRepo->find(5);
 
         $qbCloture = $em->createQueryBuilder();
@@ -229,16 +229,6 @@ class AccueilController extends AbstractController
             ->setParameter('now', new \DateTime())
             ->getQuery()
             ->execute();
-
-        $qbEnCours = $em->createQueryBuilder();
-//        $qbEnCours->update('App:Sorties', 's')
-//            ->set('s.etat', '?2')
-//            // si entre la date du debut de la sortie et sa fin -> etat : En cours
-////            ->where(':now BETWEEN  s.datedebut AND (s.datedebut + s.duree)')
-//            ->setParameter(2, $enCours)
-//            ->setParameter('now', new \DateTime())
-//            ->getQuery()
-//            ->execute();
 
         $qbPasse = $em->createQueryBuilder();
         $qbPasse->update('App:Sorties', 's')

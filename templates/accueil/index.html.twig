@@ -78,7 +78,6 @@
         </div>
     {{ form_end(accueilForm) }}
 
-
     <div>
         <table class="table table-striped">
 
@@ -153,7 +152,7 @@
                                             {% set present = true %}
                                         {% endif %}
                                     {% endfor %}
-                                    {% if present == false %}
+                                    {% if present == false and sortie.sortieUser.count < sortie.nbinscriptionsmax  %}
                                         - <a href="{{ path('inscrire', {'id': sortie.id}) }}">S'inscrire</a>
                                     {% endif %}
                                 {% elseif sortie.sortieUser.count < sortie.nbinscriptionsmax and present == false %}
@@ -162,8 +161,6 @@
                                 </td>
 
                             {% endif %}
-
-
 
                         {% if sortie.etat.id == 3 %}
                             <td><a href="{{ path('affichage_sortie', {'id': sortie.id}) }}">Afficher</a>
