@@ -210,7 +210,7 @@ class AccueilController extends AbstractController
 
     /**
      * Pour se rendre sur la page d'après connexion et va checker et changer au besoin l'etat de la sortie selon la date du jour.
-     * @Route("/test", name="test")
+     * @Route("/home", name="home")
      */
     public function home(EntityManagerInterface $em)
     {
