@@ -48,12 +48,13 @@
         </div>
 
         <div class="d-flex justify-content-center row mt-5">
-            <a href="{{ path('edit', {'id': account.id}) }}" class="btn btn-orange" role="button" aria-pressed="true" value="edit">Modifier profil</a>
+            <a href="{{ path('edit', {'id': account.id}) }}" class="btn btn-orange" role="button" aria-pressed="true"
+               value="edit">Modifier profil</a>
                 {% if app.user.roles == ["ROLE_ADMIN"] %}
                     <a href="{{ path('compte', {'id': account.id}) }}" class="btn btn-orange" role="button"
                        aria-pressed="true" value="edit">Retour</a>
                 {% else %}
-                    <a href="{{ path('accueil', {'id': account.id}) }}" class="btn btn-orange" role="button"
+                    <a href="{{ path('home', {'id': account.id}) }}" class="btn btn-orange" role="button"
                        aria-pressed="true" value="edit">Retour</a>
                 {% endif %}
 
