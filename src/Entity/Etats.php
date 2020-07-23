@@ -18,7 +18,6 @@ class Etats
      */
     private $id;
 
-
     /**
      * @ORM\Column(type="string", length=30)
      */
@@ -40,10 +39,9 @@ class Etats
     public function __toString()
     {
         return $this->id;
-
     }
 
-    // GETTERES ET SETTERS
+    // GETTERS ET SETTERS
 
     public function getId()
     {
@@ -77,6 +75,4 @@ class Etats
     {
         $this->sorties = $sorties;
     }
-
-
 }

@@ -50,7 +50,6 @@ class Lieux
 
 // CONSTRUCTOR
 
-
     public function __construct()
     {
         $this->sortie = new ArrayCollection();
@@ -71,7 +70,6 @@ class Lieux
     public function setNomLieu(string $nom_lieu): self
     {
         $this->nom_lieu = $nom_lieu;
-
         return $this;
     }
 
@@ -83,7 +81,6 @@ class Lieux
     public function setRue(?string $rue): self
     {
         $this->rue = $rue;
-
         return $this;
     }
 
@@ -95,7 +92,6 @@ class Lieux
     public function setLatitude(?float $latitude): self
     {
         $this->latitude = $latitude;
-
         return $this;
     }
 
@@ -107,16 +103,13 @@ class Lieux
     public function setLongitude(?float $longitude): self
     {
         $this->longitude = $longitude;
-
         return $this;
     }
-
 
     public function getVille()
     {
         return $this->ville;
     }
-
 
     public function setVille($ville): void
     {
@@ -138,6 +131,4 @@ class Lieux
     {
         $this->sortie = $sortie;
     }
-
-
 }

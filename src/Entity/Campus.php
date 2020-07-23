@@ -16,6 +16,7 @@ class Campus
     {
         return $this->nom_campus;
     }
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -48,6 +49,7 @@ class Campus
     }
 
     // GETTERS ET SETTERS
+
     /**
      * @return mixed
      */
@@ -109,7 +111,6 @@ class Campus
         $this->sorties = $sorties;
     }
 
-
     // FONCTIONS
 
     public function addUser(User $user): self
@@ -131,9 +132,6 @@ class Campus
                 $user->setCampus(null);
             }
         }
-
         return $this;
     }
-
-
 }

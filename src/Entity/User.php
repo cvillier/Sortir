@@ -13,17 +13,12 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\Collection;
 
 
-
-
-
-
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"pseudo"}, message="There is already an account with this pseudo")
-  */
+ */
 class User implements UserInterface
 {
-
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -102,30 +97,20 @@ class User implements UserInterface
      */
     private $photoFile;
 
-
-
-
-
-
     // CONSTRUCTOR
 
     public function __construct()
     {
-//        $this->roles = ['ROLE_USER'];
         $this->sortieOrganise = new ArrayCollection();;
         $this->sortieUser = new ArrayCollection();;
     }
 
-
     // GETTERS ET SETTERS
-
-
 
     public function getId(): ?int
     {
         return $this->id;
     }
-
 
     /**
      * A visual identifier that represents this user.
@@ -143,16 +128,12 @@ class User implements UserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-//        // guarantee every user at least has ROLE_USER
-//        $roles[] = ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_ORGANISATEUR', 'ROLE_PARTICIPANT'];
-
         return array_unique($roles);
     }
 
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
-
         return $this;
     }
 
@@ -167,7 +148,6 @@ class User implements UserInterface
     public function setPassword(string $password): self
     {
         $this->password = $password;
-
         return $this;
     }
 
@@ -176,7 +156,6 @@ class User implements UserInterface
      */
     public function getSalt()
     {
-        // not needed when using the "bcrypt" algorithm in security.yaml
     }
 
     /**
@@ -184,8 +163,7 @@ class User implements UserInterface
      */
     public function eraseCredentials()
     {
-        // If you store any temporary, sensitive data on the user, clear it here
-//         $this->password = null;
+
     }
 
     public function getPseudo(): ?string
@@ -196,7 +174,6 @@ class User implements UserInterface
     public function setPseudo(string $pseudo): self
     {
         $this->pseudo = $pseudo;
-
         return $this;
     }
 
@@ -208,7 +185,6 @@ class User implements UserInterface
     public function setNom(string $nom): self
     {
         $this->nom = $nom;
-
         return $this;
     }
 
@@ -220,7 +196,6 @@ class User implements UserInterface
     public function setPrenom(string $prenom): self
     {
         $this->prenom = $prenom;
-
         return $this;
     }
 
@@ -232,7 +207,6 @@ class User implements UserInterface
     public function setTelephone(string $telephone): self
     {
         $this->telephone = $telephone;
-
         return $this;
     }
 
@@ -244,7 +218,6 @@ class User implements UserInterface
     public function setEmail(string $email): self
     {
         $this->email = $email;
-
         return $this;
     }
 
@@ -256,7 +229,6 @@ class User implements UserInterface
     public function setActif(bool $actif): self
     {
         $this->actif = $actif;
-
         return $this;
     }
 
@@ -268,7 +240,6 @@ class User implements UserInterface
     public function setCampus(?Campus $campus): self
     {
         $this->campus = $campus;
-
         return $this;
     }
 
