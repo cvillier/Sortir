@@ -7,7 +7,11 @@
 {% block title %} {{ parent() }} Accueil!{% endblock %}
 
 {% block main %}
-
+    {% for label, messages in app.flashes(['success', 'warning', 'danger']) %}
+        {% for message in messages %}
+            <p class="alert-{{ label }}">{{ message }}</p>
+        {% endfor %}
+    {% endfor %}
     <div class="content-recherche">
     <h2>Filtrer les sorties</h2>
 

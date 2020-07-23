@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 ;
+
 use App\Entity\User;
 use App\Form\EditAccountType;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -42,23 +43,23 @@ class EditAccountController extends AbstractController
                     )
                 );
 
-            if ($photoFile) {
-            // Modification du nom de la photo uploadée
-                $safeFilename = uniqid();
-                $newFilename = $safeFilename.'.'.$photoFile->guessExtension();
-                $user->setPhotoName($newFilename);
+                if ($photoFile) {
+                    // Modification du nom de la photo uploadée
+                    $safeFilename = uniqid();
+                    $newFilename = $safeFilename . '.' . $photoFile->guessExtension();
+                    $user->setPhotoName($newFilename);
 
-                // Déplacement du fichier dans notre dossier prévu à cet effet
-                try {
-                    $photoFile->move(
-                        $this->getParameter('upload_directory' ),
-                        $newFilename
-                    );
+                    // Déplacement du fichier dans notre dossier prévu à cet effet
+                    try {
+                        $photoFile->move(
+                            $this->getParameter('upload_directory'),
+                            $newFilename
+                        );
 
-                } catch (FileException $e) {
-                    error_log($e->getMessage());
+                    } catch (FileException $e) {
+                        error_log($e->getMessage());
+                    }
                 }
-            }
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($user);
                 $em->flush();

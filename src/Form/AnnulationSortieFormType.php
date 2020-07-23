@@ -15,7 +15,9 @@ class AnnulationSortieFormType extends AbstractType
         $builder
             ->add('motifAnnulation', TextareaType::class, [
                 'label' => 'Motif annulation : ',
-                'label_attr' => 'class'
+                'label_attr' => [
+                    'class'
+    ]
             ]);
     }
 

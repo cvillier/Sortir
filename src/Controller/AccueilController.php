@@ -21,14 +21,6 @@ class AccueilController extends AbstractController
      */
     public function index(Request $request, EntityManagerInterface $em)
     {
-        // pour l'instant ne sert a rien , a voir si arrive a faire marcher pour eviter des requetes d'user
-//        $session = new Session();
-//        if (!$session->get('utilisateurConnecte')) {
-//            $repoUser = $this->getDoctrine()->getRepository(User::class);
-//            $utilisateurConnecte = $repoUser->findOneBy(['pseudo' => $this->getUser()->getUsername()]);
-//            $session->set('utilisateurConnecte', $utilisateurConnecte);
-//        }
-
 
         $sorties = $this->getDoctrine()
             ->getRepository(Sorties::class)
