@@ -208,7 +208,7 @@ class AccueilController extends AbstractController
     }
 
     /**
-     * @Route("/test", name="test")
+     * @Route("/home", name="home")
      */
     public function home(EntityManagerInterface $em)
     {

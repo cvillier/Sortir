@@ -8,38 +8,39 @@
 
 {% block main %}
 
-<div class="col-12 content-login">
+    <div class="col-12 content-login">
 
-    <form method="post">
-        {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
+        <form method="post">
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
 
-        {% if app.user %}
-            <div class="mb-3">
-                Vous êtes déjà connecté : {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+            {% if app.user %}
+                <div class="mb-3">
+                    Vous êtes déjà connecté : {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                </div>
+            {% endif %}
+
+            <h1 class="text-center">Connectez-vous !</h1>
+            <div class="form-group row row-login">
+                <label for="inputPseudo" class="col-sm-4 col-form-label">Pseudo : </label>
+                <div class="col-sm-8"><input type="text" value="{{ last_username }}" name="pseudo" id="inputPseudo"
+                                             class="form-control" required autofocus></div>
+
+                <label for="inputPassword" class="col-sm-4 col-form-label">Mot de passe : </label>
+                <div class="col-sm-8"><input type="password" name="password" id="inputPassword" class="form-control"
+                                             required></div>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
             </div>
-        {% endif %}
 
-        <h1 class="text-center">Connectez-vous !</h1>
-        <div class="form-group row row-login">
-            <label for="inputPseudo" class="col-sm-4 col-form-label">Pseudo : </label>
-            <div class="col-sm-8"><input type="text" value="{{ last_username }}" name="pseudo" id="inputPseudo" class="form-control" required autofocus></div>
+            <div class="inline-connexion text-center">
+{#                <a href="{{ path('test') }}">Se connecter</a>#}
+                <button class="btn btn-violet" type="submit">Se connecter</button>
+                <a href="{{ path('app_register') }}">Enregistrer utilisateur</a>
+                <div class="checkbox"><label><input type="checkbox" name="_remember_me"> Se rappeler de moi</label>
+                </div>
+            </div>
 
-            <label for="inputPassword" class="col-sm-4 col-form-label">Mot de passe : </label>
-            <div class="col-sm-8"><input type="password" name="password" id="inputPassword" class="form-control" required></div>
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-        </div>
-
-    {#        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.#}
-    {#        See https://symfony.com/doc/current/security/remember_me.html#}
-
-        <div class="inline-connexion text-center">
-            <button class="btn btn-violet" type="submit">Se connecter</button>
-            <a href="{{ path('app_register') }}">Enregistrer utilisateur</a>
-            <div class="checkbox"><label><input type="checkbox" name="_remember_me"> Se rappeler de moi</label></div>
-        </div>
-
-    </form>
-</div>
+        </form>
+    </div>
 {% endblock %}
