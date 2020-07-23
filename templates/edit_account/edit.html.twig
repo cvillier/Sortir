@@ -99,7 +99,11 @@
 
                 <div class="text-center">
                     <button type="submit" class="btn btn-orange">Enregistrer</button>
-                    <button type="reset" class="btn btn-orange">Annuler</button>
+                    {% if app.user.roles == ["ROLE_ADMIN"] %}
+                    <a href="{{ path('compte') }}" class="btn btn-orange">Annuler</a>
+                    {% else %}
+                        <a href="{{ path('detail', {'id': account.id}) }}" class="btn btn-orange">Annuler</a>
+                    {% endif %}
                 </div>
 
                 {{ form_rest(form) }}

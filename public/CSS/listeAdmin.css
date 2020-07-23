@@ -33,18 +33,18 @@
 
 .cardUtilisateur {
     background-color: #4A00E0;
-    padding: 48px 80px 48px 80px;
+    padding: 48px 72px 48px 72px;
     border-radius: 20px;
-    margin-bottom: 80px;
+    margin-bottom: 40px;
 }
 .userPseudo {
     color: #f1f2f3;
     font-size: 1.5em;
 }
-.photo, .profil-picture {
-    height: 100px;
-    width: 100px;
-    border-radius: 50px;
+.photo img{
+    height: 120px;
+    width: 120px;
+    border-radius: 100px;
     background-color: #f1f2f3;
     justify-content: center;
     margin: 0 auto 64px auto;
