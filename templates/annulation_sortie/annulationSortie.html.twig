@@ -16,11 +16,13 @@
 
         <div class="mx-auto col-sm-10 col-lg-6 card">
             <ul>
-                <li>Nom de la sortie : {{ sortie.nom }}</li>
-                <li>Date de la sortie : {{ sortie.datedebut | date("d/m/Y") }}</li>
-                <li>Campus : {{ sortie.campus.nomCampus }}</li>
-                <li>Lieu: {{ sortie.noLieu.nomLieu }} {{ sortie.noLieu.rue }} {{ sortie.noLieu.ville.codePostal }} {{ sortie.noLieu.ville.nomVille }}</li>
-                <li>Motif : {{ form_row(annulationSortieForm.motifAnnulation) }}</li>
+                <li><span class="bold">Nom de la sortie :</span> {{ sortie.nom }}</li>
+                <li><span class="bold">Date de la sortie :</span> {{ sortie.datedebut | date("d/m/Y") }}</li>
+                <li><span class="bold">Campus :</span> {{ sortie.campus.nomCampus }}</li>
+                <li><span class="bold">Lieu :</span> {{ sortie.noLieu.nomLieu }} {{ sortie.noLieu.rue }}<br/> {{ sortie.noLieu.ville.codePostal }} {{ sortie.noLieu.ville.nomVille }}</li>
+                <li><span class="bold">{{ form_row(annulationSortieForm.motifAnnulation) }}</span>
+                    {{ form_widget(annulationSortieForm.motifAnnulation) }}
+                </li>
             </ul>
 
             <div class="d-inline mx-auto">

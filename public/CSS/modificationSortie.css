@@ -1,7 +1,7 @@
 .btn-orange{
     background-color: #e36414;
     color: white;
-    margin: 0 40px 0 40px;
+    margin: 0 32px 0 32px;
 }
 
 .btn-orange:hover{
@@ -13,7 +13,7 @@
     box-shadow: none;
 }
 
-.content-annulation{
+.content-creation{
     margin: 32px 0 32px 0;
 }
 
@@ -28,18 +28,6 @@ h2{
 .card{
     background-color: #4A00E0;
     padding: 40px 72px 40px 72px;
+    min-height: 70vh;
     color: white;
-    border-radius: 20px;
-}
-
-ul{
-    list-style-type: none;
-}
-
-li{
-    margin: 16px;
-}
-
-.bold{
-    font-weight: 600;
 }
