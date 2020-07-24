@@ -41,7 +41,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     {
         $qb = $this->createQueryBuilder('i');
         $qb->andWhere('i.actif = true');
-//        $qb->addOrderBy('i.dateCreated', 'DESC');
         $qb->setMaxResults(50);
         $qb->join('i.campus', 'c');
         $qb->addSelect('c');
@@ -49,16 +48,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $query = $qb->getQuery();
         $paginator = new Paginator($query);
         return $paginator;
-    }
-
-    public function findOneBySomeField($pseudo): ?User
-    {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $pseudo)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
     }
 
 }
